@@ -1,6 +1,8 @@
-import { useState } from 'react'
 import './App.css'
 import { ToastContainer } from 'react-toastify';
+import HomePage from './pages/HomePage'
+import Header from './layout/Header';
+import Footer from './layout/Footer';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,7 +11,9 @@ function App() {
   return (
     <>
     <ToastContainer />
-      <h1 className='font-bold'>E-Commerce</h1>
+      <Header />
+      <HomePage />
+      <Footer />
     </>
   )
 }
