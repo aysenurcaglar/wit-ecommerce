@@ -1,8 +1,8 @@
-
+import Hero from "../components/Hero";
 const HomePage = () => {
     return (
         <div className="w-screen">
-            <span>Home</span>
+            <Hero />
         </div>
     );
 };
