@@ -9,7 +9,7 @@ const Hero = () => {
     return (
             <section className="bg-gray-100 max-w-screen">
         <Swiper
-          spaceBetween={15}
+          spaceBetween={30}
           navigation={true}
           modules={[Navigation]}
           className="mySwiper"
@@ -17,7 +17,7 @@ const Hero = () => {
           <SwiperSlide>
             <div className="flex items-center justify-center bg-blue-600 text-white text-left"
             style={{ backgroundImage: "url('shop-hero-1-product-slide-1.jpg')" }}>
-              <div className='mr-64 my-52'>
+              <div className='mr-64 my-52 object-contain'>
                 <p className='font-bold my-8'>SUMMER 2024</p>
                 <h1 className="text-4xl font-bold">NEW COLLECTION</h1>
                 <p className="my-8">We know how large objects will act, <br />
