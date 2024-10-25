@@ -10,12 +10,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   return (
-    <>
-    <ToastContainer />
+    <div>
+      <ToastContainer />
       <Header />
-      <HomePage />
+
+          <HomePage />
+
       <Footer />
-    </>
+    </ div>
   )
 }
 

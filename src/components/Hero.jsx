@@ -15,21 +15,25 @@ const Hero = () => {
         className="max-w-full"
       >
         <SwiperSlide>
-          <div className="relative flex items-center justify-center w-full overflow-hidden">
+          <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[400px] md:min-h-[700px]">
             <img
               src="shop-hero-1-product-slide-1.jpg"
               alt="New Arrivals"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover absolute inset-0"
             />
-            <div className="absolute inset-0 flex items-center justify-center mr-64 p-6">
-              <div className="text-white text-left">
-                <p className="font-bold my-4 md:my-8 text-lg md:text-xl">SUMMER 2024</p>
-                <h1 className="text-3xl md:text-6xl font-bold">NEW COLLECTION</h1>
-                <p className="my-4 md:my-8 text-sm md:text-base">
+            <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
+              <div className="text-white text-center md:text-left px-4 md:px-0">
+                <p className="font-bold my-2 md:my-8 text-base md:text-xl">
+                  SUMMER 2024
+                </p>
+                <h1 className="text-2xl md:text-6xl font-bold max-w-md">
+                  NEW COLLECTION
+                </h1>
+                <p className="my-2 md:my-8 text-sm md:text-base max-w-md">
                   We know how large objects will act, <br />
                   but things on a small scale.
                 </p>
-                <button className="px-3 py-3 md:px-8 md:py-6 bg-success-color text-white text-xl font-bold rounded-lg">
+                <button className="px-4 py-2 md:px-8 md:py-6 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
                   SHOP NOW
                 </button>
               </div>
@@ -38,21 +42,25 @@ const Hero = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="relative flex items-center justify-center w-full overflow-hidden">
+          <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[400px] md:min-h-[700px]">
             <img
               src="shop-hero-1-product-slide-1.jpg"
               alt="New Arrivals"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover absolute inset-0"
             />
-            <div className="absolute inset-0 flex items-center justify-center mr-64 p-6">
-              <div className="text-white text-left">
-                <p className="font-bold my-4 md:my-8 text-lg md:text-xl">SUMMER 2024</p>
-                <h1 className="text-3xl md:text-6xl font-bold">NEW COLLECTION</h1>
-                <p className="my-4 md:my-8 text-sm md:text-base">
+            <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
+              <div className="text-white text-center md:text-left px-4 md:px-0">
+                <p className="font-bold my-4 md:my-8 text-base md:text-xl">
+                  SUMMER 2024
+                </p>
+                <h1 className="text-2xl md:text-6xl font-bold max-w-md">
+                  NEW COLLECTION
+                </h1>
+                <p className="my-4 md:my-8 text-sm md:text-base max-w-md">
                   We know how large objects will act, <br />
                   but things on a small scale.
                 </p>
-                <button className="px-3 py-3 md:px-8 md:py-6 bg-success-color text-white text-xl font-bold rounded-lg">
+                <button className="px-4 py-2 md:px-8 md:py-6 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
                   SHOP NOW
                 </button>
               </div>
