@@ -5,6 +5,7 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 

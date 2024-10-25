@@ -7,6 +7,7 @@ const ProductCard = ({ title, price, image }) => {
       <h3 className="font-bold">{title}</h3>
       <p className="text-gray-600 mb-4">${price}</p>
       
+      
     </div>
   );
 };

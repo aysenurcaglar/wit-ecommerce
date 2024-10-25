@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import EditorsPick from "../components/EditorsPick";
 import ProductCard from "../components/ProductCard";
+import Hero2 from "../components/Hero2";
 const HomePage = () => {
     const featuredProducts = [
         { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
@@ -28,6 +29,8 @@ const HomePage = () => {
                     ))}
                 </div>
             </section>
+
+            <Hero2 />
         </div>
     );
 };
