@@ -38,3 +38,9 @@
     left: 2%;
   }
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

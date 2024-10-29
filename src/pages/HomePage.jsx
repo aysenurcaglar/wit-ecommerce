@@ -4,24 +4,24 @@ import ProductCard from "../components/ProductCard";
 import Hero2 from "../components/Hero2";
 import FeaturedPosts from "../components/FeaturedPosts";
 const HomePage = () => {
-    const featuredProducts = [
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
-        // change the properties at some point
-    ];
+  const featuredProducts = [
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-5.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-6.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-7.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-8.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-9.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-10.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-11.jpg' },
+    { title: 'Graphic Design Shirt', price: 16.48, image: 'product-cover-12.jpg' },
+    // change the properties at some point
+  ];
 
-    return (
-        <div className="w-screen">
-            <Hero />
-            <EditorsPick />
-            {/* Bestseller Products */}
-            <section className="py-8 md:py-12 px-4 md:px-36 bg-gray-100 object-contain">
+  return (
+    <div className="w-screen">
+      <Hero />
+      <EditorsPick />
+      {/* Bestseller Products */}
+      <section className="py-8 md:py-12 px-4 md:px-36 bg-gray-100 object-contain">
         <h2 className="text-xl md:text-2xl font-semibold text-light-gray text-center mb-2">
           Featured Products
         </h2>
@@ -35,10 +35,10 @@ const HomePage = () => {
         </div>
       </section>
 
-            <Hero2 />
-            <FeaturedPosts />
-        </div>
-    );
+      <Hero2 />
+      <FeaturedPosts />
+    </div>
+  );
 };
 
 export default HomePage;

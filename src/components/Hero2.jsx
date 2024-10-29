@@ -41,7 +41,7 @@ const Hero2 = () => {
                       but things on a small scale.
                     </p>
                     {/* Change 8: Adjusted button sizing and padding for better mobile display */}
-                    <button className="px-4 py-2 md:px-8 md:py-6 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
+                    <button className="p-3 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
                       ADD TO CART
                     </button>
                   </div>
@@ -75,7 +75,7 @@ const Hero2 = () => {
                       but things on a small scale.
                     </p>
                     {/* Change 8: Adjusted button sizing and padding for better mobile display */}
-                    <button className="px-4 py-2 md:px-8 md:py-6 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
+                    <button className="p-3 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
                       ADD TO CART
                     </button>
                   </div>

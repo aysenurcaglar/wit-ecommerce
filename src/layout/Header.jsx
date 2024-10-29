@@ -1,13 +1,14 @@
 import { useState } from "react";
+import { Button } from "../components/ui/button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow w-full">
+    <header className="bg-white shadow w-screen">
       <div className="container mx-auto px-4 py-4 md:py-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl md:text-2xl font-bold">Witty Store</h1>
+          <a href="/" className="text-xl md:text-2xl font-bold">Witty Store</a>
           
           {/* Mobile menu button */}
           <button 
@@ -21,7 +22,7 @@ const Header = () => {
 
           {/* Desktop navigation */}
           <nav className="hidden md:block">
-            <a href="#shop" className="mx-4 text-light-gray font-semibold">Shop</a>
+            <a href="/shop" className="mx-4 text-light-gray font-semibold">Shop</a>
             <a href="#about" className="mx-4 text-light-gray font-semibold">About</a>
             <a href="#blog" className="mx-4 text-light-gray font-semibold">Blog</a>
             <a href="#contact" className="mx-4 text-light-gray font-semibold">Contact</a>
@@ -52,6 +53,7 @@ const Header = () => {
               <a href="#search" className="text-primary-color font-semibold">Search</a>
               <a href="#cart" className="text-primary-color font-semibold">Cart</a>
               <a href="#favorites" className="text-primary-color font-semibold">Favs</a>
+              
             </div>
           </div>
         )}
