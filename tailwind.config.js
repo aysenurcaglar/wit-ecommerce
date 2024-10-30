@@ -25,12 +25,16 @@ export default {
   		'yankees-blue': '#17213C',
   		'squash-orange': '#FCA311',
   		'dark-navy': '#14213D',
-  		sunburst: '#FFA62B',
+  		'sunburst': '#FFA62B',
   		'pacific-blue': '#00A1C1',
   		'sapphire-blue': '#16697A',
   		'success-color': '#2DC071',
   		'light-gray': '#737373',
-  		'primary-color': '#23A6F0'
+  		'primary-color': '#23A6F0',
+		'secondary-color': '#23856D',
+		'alert-color': '#E77C40',
+		'danger-color': '#E74040',
+
   	},
   	extend: {
   		borderRadius: {
