@@ -1,9 +1,23 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { useHistory, withRouter, Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
+
+  const history = useHistory();
+  
+  // Let's add both click handlers for testing
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("Clicked product:", product.id);
+    // Try both methods to see which works
+    window.location.href = `/product/${product.id}`;
+    // history.push(`/product/${product.id}`);
+  };
+
+
   return (
-    <Card className="border-none shadow-none overflow-hidden">
+    <Card className="border-none shadow-none overflow-hidden cursor-pointer" onClick={handleClick}>
       <CardContent className="p-0">
         <div className="aspect-[3/4] mb-4">
           <img 
@@ -35,6 +49,7 @@ const ProductCard = ({ product }) => {
         </div>
       </CardContent>
     </Card>
+
   );
 };
 

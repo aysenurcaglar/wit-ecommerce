@@ -3,81 +3,8 @@ import EditorsPick from "../components/EditorsPick";
 import ProductCard from "../components/ProductCard";
 import Hero2 from "../components/Hero2";
 import FeaturedPosts from "../components/FeaturedPosts";
-const HomePage = () => {
-  const featuredProducts = [
-    {
-      id: 5,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-5.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 6,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-6.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 7,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-7.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 8,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-8.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 9,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-9.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 10,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-10.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 11,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-11.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-      id: 12,
-      name: "Graphic Design",
-      brand: "English Department",
-      price: 6.48,
-      originalPrice: 16.48,
-      image: "product-cover-12.jpg",
-      colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  ];
+const HomePage = ({ featuredProducts }) => {
+  
 
   return (
     <div className="w-screen">
@@ -92,7 +19,7 @@ const HomePage = () => {
           BESTSELLER PRODUCTS
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
-          {featuredProducts.map((product, idx) => (
+          {featuredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
