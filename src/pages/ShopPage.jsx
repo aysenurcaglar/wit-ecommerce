@@ -147,9 +147,9 @@ const ShopPage = () => {
     ];
 
     return (
-        <div className="container max-w-[80vw] md:max-w-75vw mx-auto px-8 py-8 md:py-12">
+        <div className="container max-w-[85vw] md:max-w-75vw mx-auto px-8 py-8 md:py-12">
             {/* Header and Breadcrumb */}
-            <div className="flex flex-row items-center justify-between mb-6">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-6">
                 <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-0">Shop</h3>
                 <Breadcrumb className="flex flex-row">
                     <BreadcrumbItem>
@@ -163,7 +163,7 @@ const ShopPage = () => {
             </div>
 
             {/* Category Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
                 {categories.map((category, index) => (
                     <Card key={index} className="relative overflow-hidden group cursor-pointer">
                         <CardContent className="p-0">

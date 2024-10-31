@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Calendar, ChartArea } from 'lucide-react';
 
 
 const FeaturedPosts = () => {
@@ -39,9 +40,9 @@ const FeaturedPosts = () => {
   ];
 
   return (
-    <div className="max-w-75vw mx-auto my-12">
+    <div className="max-w-[85vw] md:max-w-75vw mx-auto my-12">
       <h2 className="text-sm text-primary-color font-semibold">Practice Advice</h2>
-      <h2 className="text-2xl font-bold text-center my-4">Featured Posts</h2>
+      <h2 className="text-2xl font-bold text-center mt-2">Featured Posts</h2>
       <p className="text-light-gray m-4">
         Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics
       </p>
@@ -62,11 +63,12 @@ const FeaturedPosts = () => {
               <p className="text-gray-600 text-sm">{post.description}</p>
             </CardContent>
             <CardFooter className="p-4 border-t text-sm flex justify-between text-gray-500">
-              <div>
+              <div className="flex items-center space-x-1">
+                <Calendar />
                 <span>{post.date}</span>
               </div>
               <div className="flex items-center space-x-1">
-                <span className="material-icons">comment</span>
+                <ChartArea/>
                 <span>{post.comments} comments</span>
               </div>
             </CardFooter>

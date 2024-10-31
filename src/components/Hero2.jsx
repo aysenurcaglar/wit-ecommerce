@@ -15,7 +15,7 @@ const Hero2 = () => {
             modules={[Navigation]}
             className="max-w-full"
           >
-            <SwiperSlide>
+                        <SwiperSlide>
               {/* Change 1: Added min-height to ensure consistent height on all devices */}
               <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[400px] md:min-h-[700px]">
                 {/* Change 2: Made image absolute positioned to properly fill container */}
@@ -27,7 +27,7 @@ const Hero2 = () => {
                 {/* Change 3: Updated positioning and alignment for better mobile display */}
                 <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
                   {/* Change 4: Improved text container positioning and spacing */}
-                  <div className="text-white text-center md:text-left px-4 md:px-0">
+                  <div className="text-white text-center md:text-left drop-shadow px-4 md:px-0">
                     {/* Change 5: Adjusted text spacing and sizes for mobile */}
                     <p className="font-bold my-4 md:my-8 text-base md:text-xl">
                       SUMMER 2024
@@ -59,7 +59,7 @@ const Hero2 = () => {
                 {/* Change 3: Updated positioning and alignment for better mobile display */}
                 <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
                   {/* Change 4: Improved text container positioning and spacing */}
-                  <div className="text-white text-center md:text-left px-4 md:px-0">
+                  <div className="text-white text-center md:text-left drop-shadow px-4 md:px-0">
                     {/* Change 5: Adjusted text spacing and sizes for mobile */}
                     <p className="font-bold my-4 md:my-8 text-base md:text-xl">
                       SUMMER 2024

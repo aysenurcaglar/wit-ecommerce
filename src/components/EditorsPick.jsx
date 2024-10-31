@@ -9,7 +9,7 @@ const editorsPickCategories = [
 
 const EditorsPick = () => {
   return (
-    <section className="py-8 md:py-12 px-4 max-w-[80vw] md:max-w-75vw mx-auto">
+    <section className="py-8 md:py-12 px-4 max-w-[85vw] md:max-w-75vw mx-auto">
       <h2 className="text-xl md:text-2xl font-bold text-center mb-4">EDITOR'S PICK</h2>
       <p className="text-center text-gray-500 mb-6 px-4">
         Problems trying to resolve the conflict between
