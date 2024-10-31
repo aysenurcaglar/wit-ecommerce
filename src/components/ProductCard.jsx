@@ -3,13 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const ProductCard = ({ product }) => {
   return (
-    <Card className="border-none shadow-none">
+    <Card className="border-none shadow-none overflow-hidden">
       <CardContent className="p-0">
         <div className="aspect-[3/4] mb-4">
           <img 
             src={product.image} 
             alt={product.name} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
         </div>
         <div className="px-2">

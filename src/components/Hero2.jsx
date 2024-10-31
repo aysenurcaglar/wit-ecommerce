@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Button } from '@/components/ui/button';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -41,9 +42,7 @@ const Hero2 = () => {
                       but things on a small scale.
                     </p>
                     {/* Change 8: Adjusted button sizing and padding for better mobile display */}
-                    <button className="p-3 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
-                      ADD TO CART
-                    </button>
+                    <Button variant="secondary" size="lg">ADD TO CART</Button>
                   </div>
                 </div>
               </div>
@@ -75,9 +74,7 @@ const Hero2 = () => {
                       but things on a small scale.
                     </p>
                     {/* Change 8: Adjusted button sizing and padding for better mobile display */}
-                    <button className="p-3 bg-success-color text-white text-lg md:text-xl font-bold rounded-lg">
-                      ADD TO CART
-                    </button>
+                    <Button variant="secondary" size="lg">ADD TO CART</Button>
                   </div>
                 </div>
               </div>

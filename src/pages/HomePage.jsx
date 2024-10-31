@@ -84,7 +84,7 @@ const HomePage = () => {
       <Hero />
       <EditorsPick />
       {/* Bestseller Products */}
-      <section className="py-8 md:py-12 px-4 md:px-36 mx-8 bg-gray-100 object-contain">
+      <section className="py-8 md:py-12 px-4 max-w-[80vw] md:max-w-75vw mx-auto bg-gray-100 object-contain">
         <h2 className="text-xl md:text-2xl font-semibold text-light-gray text-center mb-2">
           Featured Products
         </h2>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { LayoutGrid, List, ChevronRight } from 'lucide-react';
+import { LayoutGrid, List, ChevronRight, Filter } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import {
     Pagination,
@@ -23,12 +23,15 @@ import {
 
 
 const ShopPage = () => {
+
+    const [showMobileFilters, setShowMobileFilters] = useState(false);
+
     const categories = [
-        { name: 'CLOTHES', items: 5, image: '/api/placeholder/240/320', color: 'bg-gray-500' },
-        { name: 'CLOTHES', items: 5, image: '/api/placeholder/240/320', color: 'bg-cyan-500' },
-        { name: 'CLOTHES', items: 5, image: '/api/placeholder/240/320', color: 'bg-rose-300' },
-        { name: 'CLOTHES', items: 5, image: '/api/placeholder/240/320', color: 'bg-rose-400' },
-        { name: 'CLOTHES', items: 5, image: '/api/placeholder/240/320', color: 'bg-rose-500' },
+        { name: 'CLOTHES', items: 5, image: 'card-cover-5.jpg' },
+        { name: 'CLOTHES', items: 5, image: 'card-cover-6.jpg' },
+        { name: 'CLOTHES', items: 5, image: 'card-cover-7.jpg' },
+        { name: 'CLOTHES', items: 5, image: 'card-cover-8.jpg', },
+        { name: 'CLOTHES', items: 5, image: 'card-cover-9.jpg', },
     ];
 
     const products = [
@@ -144,34 +147,35 @@ const ShopPage = () => {
     ];
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            {/* Breadcrumb */}
-            <Breadcrumb className="mb-8">
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator>
+        <div className="container max-w-[80vw] md:max-w-75vw mx-auto px-8 py-8 md:py-12">
+            {/* Header and Breadcrumb */}
+            <div className="flex flex-row items-center justify-between mb-6">
+                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-0">Shop</h3>
+                <Breadcrumb className="flex flex-row">
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
                     <ChevronRight />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                    <BreadcrumbLink>Shop</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </div>
 
             {/* Category Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
                 {categories.map((category, index) => (
                     <Card key={index} className="relative overflow-hidden group cursor-pointer">
                         <CardContent className="p-0">
-                            <div className={`aspect-square relative ${category.color}`}>
+                            <div className="aspect-square relative">
                                 <img
                                     src={category.image}
                                     alt={category.name}
                                     className="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-opacity"
                                 />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                                    <h3 className="font-bold text-xl mb-1">{category.name}</h3>
-                                    <p className="text-sm">{category.items} Items</p>
+                                    <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow">{category.name}</h3>
+                                    <p className="text-xs md:text-sm drop-shadow">{category.items} Items</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -179,8 +183,52 @@ const ShopPage = () => {
                 ))}
             </div>
 
-            {/* Filter Controls */}
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            {/* Filter Controls - Mobile */}
+            <div className="md:hidden flex flex-col gap-4 mb-6">
+                <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500">
+                        Showing all {products.length} results
+                    </span>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowMobileFilters(!showMobileFilters)}
+                    >
+                        <Filter className="h-4 w-4 mr-2" />
+                        Filter
+                    </Button>
+                </div>
+
+                {showMobileFilters && (
+                    <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-lg">
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm">View:</span>
+                            <div className="flex gap-2">
+                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                    <LayoutGrid className="h-4 w-4" />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                    <List className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        </div>
+                        <Select defaultValue="popularity" className="w-full">
+                            <SelectTrigger>
+                                <SelectValue placeholder="Sort by" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="popularity">Popularity</SelectItem>
+                                <SelectItem value="price-low">Price: Low to High</SelectItem>
+                                <SelectItem value="price-high">Price: High to Low</SelectItem>
+                                <SelectItem value="newest">Newest</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                )}
+            </div>
+
+            {/* Filter Controls - Desktop */}
+            <div className="hidden md:flex justify-between items-center mb-8">
                 <div className="text-sm text-gray-500">
                     Showing all {products.length} results
                 </div>
@@ -205,38 +253,41 @@ const ShopPage = () => {
                             <SelectItem value="newest">Newest</SelectItem>
                         </SelectContent>
                     </Select>
-                    <Button variant="default" className="bg-blue-500 hover:bg-blue-600">
+                    <Button variant="outline">
                         Filter
                     </Button>
                 </div>
             </div>
 
             {/* Product Grid */}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-8 md:mb-12">
                 {products.map(product => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 
             {/* Pagination */}
-            <Pagination>
-                <PaginationContent>
-                    <PaginationItem>
-                        <PaginationPrevious href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationEllipsis />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationNext href="#" />
-                    </PaginationItem>
-                </PaginationContent>
-            </Pagination>
-
+            <div className="flex justify-center">
+                <Pagination>
+                    <PaginationContent className="flex flex-wrap justify-center gap-1">
+                        <PaginationItem>
+                            <PaginationPrevious href="#" />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">1</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">2</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationEllipsis />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationNext href="#" />
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination>
+            </div>
         </div>
     );
 };

@@ -39,9 +39,9 @@ const FeaturedPosts = () => {
   ];
 
   return (
-    <div className="mx-12 my-6 md:mx-24 md:my-12">
+    <div className="max-w-75vw mx-auto my-12">
       <h2 className="text-sm text-primary-color font-semibold">Practice Advice</h2>
-      <h2 className="text-2xl font-bold text-center mb-6">Featured Posts</h2>
+      <h2 className="text-2xl font-bold text-center my-4">Featured Posts</h2>
       <p className="text-light-gray m-4">
         Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics
       </p>
