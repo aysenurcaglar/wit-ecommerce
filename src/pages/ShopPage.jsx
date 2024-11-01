@@ -20,6 +20,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import BrandLogos from '../components/BrandLogos';
 
 
 const ShopPage = () => {
@@ -147,73 +148,104 @@ const ShopPage = () => {
     ];
 
     return (
-        <div className="container max-w-[85vw] md:max-w-75vw mx-auto px-8 py-8 md:py-12">
-            {/* Header and Breadcrumb */}
-            <div className="flex flex-col md:flex-row items-center justify-between mb-6">
-                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-0">Shop</h3>
-                <Breadcrumb className="flex flex-row">
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <ChevronRight />
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
-                    </BreadcrumbItem>
-                </Breadcrumb>
-            </div>
-
-            {/* Category Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
-                {categories.map((category, index) => (
-                    <Card key={index} className="relative overflow-hidden group cursor-pointer">
-                        <CardContent className="p-0">
-                            <div className="aspect-square relative">
-                                <img
-                                    src={category.image}
-                                    alt={category.name}
-                                    className="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-opacity"
-                                />
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                                    <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow">{category.name}</h3>
-                                    <p className="text-xs md:text-sm drop-shadow">{category.items} Items</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
-
-            {/* Filter Controls - Mobile */}
-            <div className="md:hidden flex flex-col gap-4 mb-6">
-                <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-500">
-                        Showing all {products.length} results
-                    </span>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowMobileFilters(!showMobileFilters)}
-                    >
-                        <Filter className="h-4 w-4 mr-2" />
-                        Filter
-                    </Button>
+        <>
+            <div className="container max-w-[85vw] md:max-w-75vw mx-auto px-8 py-8 md:py-12">
+                {/* Header and Breadcrumb */}
+                <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-0">Shop</h3>
+                    <Breadcrumb className="flex flex-row">
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <ChevronRight />
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+                        </BreadcrumbItem>
+                    </Breadcrumb>
                 </div>
 
-                {showMobileFilters && (
-                    <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-lg">
-                        <div className="flex items-center justify-between">
-                            <span className="text-sm">View:</span>
-                            <div className="flex gap-2">
-                                <Button variant="ghost" size="icon" className="h-8 w-8">
-                                    <LayoutGrid className="h-4 w-4" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="h-8 w-8">
-                                    <List className="h-4 w-4" />
-                                </Button>
+                {/* Category Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
+                    {categories.map((category, index) => (
+                        <Card key={index} className="relative overflow-hidden group cursor-pointer">
+                            <CardContent className="p-0">
+                                <div className="aspect-square relative">
+                                    <img
+                                        src={category.image}
+                                        alt={category.name}
+                                        className="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-opacity"
+                                    />
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                                        <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow">{category.name}</h3>
+                                        <p className="text-xs md:text-sm drop-shadow">{category.items} Items</p>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+
+                {/* Filter Controls - Mobile */}
+                <div className="md:hidden flex flex-col gap-4 mb-6">
+                    <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-500">
+                            Showing all {products.length} results
+                        </span>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setShowMobileFilters(!showMobileFilters)}
+                        >
+                            <Filter className="h-4 w-4 mr-2" />
+                            Filter
+                        </Button>
+                    </div>
+
+                    {showMobileFilters && (
+                        <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-lg">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm">View:</span>
+                                <div className="flex gap-2">
+                                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                                        <LayoutGrid className="h-4 w-4" />
+                                    </Button>
+                                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                                        <List className="h-4 w-4" />
+                                    </Button>
+                                </div>
                             </div>
+                            <Select defaultValue="popularity" className="w-full">
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Sort by" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="popularity">Popularity</SelectItem>
+                                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                                    <SelectItem value="newest">Newest</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
-                        <Select defaultValue="popularity" className="w-full">
-                            <SelectTrigger>
+                    )}
+                </div>
+
+                {/* Filter Controls - Desktop */}
+                <div className="hidden md:flex justify-between items-center mb-8">
+                    <div className="text-sm text-gray-500">
+                        Showing all {products.length} results
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm">Views:</span>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                                <LayoutGrid className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                                <List className="h-4 w-4" />
+                            </Button>
+                        </div>
+                        <Select defaultValue="popularity">
+                            <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder="Sort by" />
                             </SelectTrigger>
                             <SelectContent>
@@ -223,72 +255,44 @@ const ShopPage = () => {
                                 <SelectItem value="newest">Newest</SelectItem>
                             </SelectContent>
                         </Select>
-                    </div>
-                )}
-            </div>
-
-            {/* Filter Controls - Desktop */}
-            <div className="hidden md:flex justify-between items-center mb-8">
-                <div className="text-sm text-gray-500">
-                    Showing all {products.length} results
-                </div>
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm">Views:</span>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                            <LayoutGrid className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                            <List className="h-4 w-4" />
+                        <Button variant="outline">
+                            Filter
                         </Button>
                     </div>
-                    <Select defaultValue="popularity">
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Sort by" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="popularity">Popularity</SelectItem>
-                            <SelectItem value="price-low">Price: Low to High</SelectItem>
-                            <SelectItem value="price-high">Price: High to Low</SelectItem>
-                            <SelectItem value="newest">Newest</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <Button variant="outline">
-                        Filter
-                    </Button>
+                </div>
+
+                {/* Product Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-8 md:mb-12">
+                    {products.map(product => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
+                </div>
+
+                {/* Pagination */}
+                <div className="flex justify-center mb-2">
+                    <Pagination>
+                        <PaginationContent className="flex flex-wrap justify-center gap-1">
+                            <PaginationItem>
+                                <PaginationPrevious href="#" />
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationLink href="#">1</PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationLink href="#">2</PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationEllipsis />
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationNext href="#" />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
                 </div>
             </div>
-
-            {/* Product Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-8 md:mb-12">
-                {products.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-            </div>
-
-            {/* Pagination */}
-            <div className="flex justify-center">
-                <Pagination>
-                    <PaginationContent className="flex flex-wrap justify-center gap-1">
-                        <PaginationItem>
-                            <PaginationPrevious href="#" />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">1</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">2</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationNext href="#" />
-                        </PaginationItem>
-                    </PaginationContent>
-                </Pagination>
-            </div>
-        </div>
+            <BrandLogos />
+        </>
     );
 };
 

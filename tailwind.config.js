@@ -35,6 +35,7 @@ export default {
 			'alert-color': '#E77C40',
 			'danger-color': '#E74040',
 			'text-color': '#252B42',
+			'gray': '#FAFAFA',
 
 		},
 		extend: {

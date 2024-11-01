@@ -6,7 +6,6 @@ const ProductCard = ({ product }) => {
 
   const history = useHistory();
   
-  // Let's add both click handlers for testing
   const handleClick = (e) => {
     e.preventDefault();
     console.log("Clicked product:", product.id);

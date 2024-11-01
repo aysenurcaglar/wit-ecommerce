@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { ChevronRight } from "lucide-react";
 import BestsellerProducts from '../components/BestsellerProducts';
+import BrandLogos from '../components/BrandLogos';
 
 const ProductDetail = ({ featuredProducts }) => {
   const { id } = useParams();
@@ -23,6 +24,7 @@ const ProductDetail = ({ featuredProducts }) => {
   };
 
   return (
+    <>
     <div className="max-w-[85vw] md:max-w-75vw mx-auto px-4 py-8">
       <Breadcrumb className="flex flex-row mb-8">
         <BreadcrumbItem>
@@ -162,6 +164,8 @@ const ProductDetail = ({ featuredProducts }) => {
       <BestsellerProducts featuredProducts={featuredProducts} />
 
     </div>
+    <BrandLogos />
+    </>
   );
 };
 
