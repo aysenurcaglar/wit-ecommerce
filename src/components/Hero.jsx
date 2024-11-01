@@ -16,11 +16,11 @@ const Hero = () => {
         className="max-w-full"
       >
         <SwiperSlide>
-          <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[700px]">
+        <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[400px] md:min-h-[700px]">
             <img
               src="shop-hero-1-product-slide-1.jpg"
               alt="New Arrivals"
-              className="w-full h-full object-none object-right absolute inset-0"
+              className="w-full h-full object-cover absolute inset-0"
             />
             <div className="absolute inset-0 flex items-center justify-center md:max-w-75vw mx-auto md:justify-start md:ml-24">
               <div className="text-white text-center md:text-left max-w-[85vw] md:max-w-75vw px-4 md:px-0">

@@ -22,7 +22,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-5.jpg",
+    image: "/product-cover-5.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -31,7 +31,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-6.jpg",
+    image: "/product-cover-6.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -40,7 +40,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-7.jpg",
+    image: "/product-cover-7.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -49,7 +49,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-8.jpg",
+    image: "/product-cover-8.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -58,7 +58,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-9.jpg",
+    image: "/product-cover-9.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -67,7 +67,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-10.jpg",
+    image: "/product-cover-10.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -76,7 +76,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-11.jpg",
+    image: "/product-cover-11.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
   {
@@ -85,7 +85,7 @@ const featuredProducts = [
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
-    image: "product-cover-12.jpg",
+    image: "/product-cover-12.jpg",
     colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
   },
 ];

@@ -40,7 +40,7 @@ const FeaturedPosts = () => {
   ];
 
   return (
-    <div className="max-w-[85vw] md:max-w-75vw mx-auto my-12">
+    <div className="max-w-[80vw] md:max-w-75vw mx-auto my-12">
       <h2 className="text-sm text-primary-color font-semibold">Practice Advice</h2>
       <h2 className="text-2xl font-bold text-center mt-2">Featured Posts</h2>
       <p className="text-light-gray m-4">
