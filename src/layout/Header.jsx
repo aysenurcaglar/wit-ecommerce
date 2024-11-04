@@ -30,7 +30,7 @@ const Header = () => {
 
           {/* Desktop user actions */}
           <div className="hidden md:flex space-x-4">
-            <a href="#login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>
+            <a href="/signup" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>
             <a href="#search" className="text-primary-color font-semibold"><Search /></a>
             <a href="#cart" className="text-primary-color font-semibold"><ShoppingCart /></a>
             <a href="#favorites" className="text-primary-color font-semibold"><Heart /></a>
@@ -48,7 +48,7 @@ const Header = () => {
               <a href="/pages" className="text-light-gray font-semibold">Pages</a>
             </nav>
             <div className="flex flex-col space-y-4 mt-4 pt-4 border-t">
-              <a href="#login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>
+              <a href="/signup" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>
               <a href="#search" className="text-primary-color font-semibold">Search</a>
               <a href="#cart" className="text-primary-color font-semibold">Cart</a>
               <a href="#favorites" className="text-primary-color font-semibold">Favs</a>
