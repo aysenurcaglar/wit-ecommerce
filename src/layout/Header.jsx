@@ -22,8 +22,8 @@ const Header = () => {
           {/* Desktop navigation */}
           <nav className="hidden md:block">
             <a href="/shop" className="mx-4 text-light-gray font-semibold">Shop</a>
-            <a href="#about" className="mx-4 text-light-gray font-semibold">About</a>
-            <a href="#blog" className="mx-4 text-light-gray font-semibold">Blog</a>
+            <a href="/about" className="mx-4 text-light-gray font-semibold">About</a>
+            <a href="/blog" className="mx-4 text-light-gray font-semibold">Blog</a>
             <a href="/contact" className="mx-4 text-light-gray font-semibold">Contact</a>
             <a href="/team" className="mx-4 text-light-gray font-semibold">Team</a>
           </nav>
@@ -41,11 +41,11 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4">
             <nav className="flex flex-col space-y-4">
-              <a href="#shop" className="text-light-gray font-semibold">Shop</a>
-              <a href="#about" className="text-light-gray font-semibold">About</a>
-              <a href="#blog" className="text-light-gray font-semibold">Blog</a>
-              <a href="#contact" className="text-light-gray font-semibold">Contact</a>
-              <a href="#pages" className="text-light-gray font-semibold">Pages</a>
+              <a href="/shop" className="text-light-gray font-semibold">Shop</a>
+              <a href="/about" className="text-light-gray font-semibold">About</a>
+              <a href="/blog" className="text-light-gray font-semibold">Blog</a>
+              <a href="/contact" className="text-light-gray font-semibold">Contact</a>
+              <a href="/pages" className="text-light-gray font-semibold">Pages</a>
             </nav>
             <div className="flex flex-col space-y-4 mt-4 pt-4 border-t">
               <a href="#login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>

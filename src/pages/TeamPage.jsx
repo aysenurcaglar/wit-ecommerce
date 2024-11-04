@@ -1,58 +1,100 @@
 import React from 'react';
+import { Facebook, Instagram, Twitter, Linkedin, ChevronRight } from 'lucide-react';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
 
 const teamMembers = [
-    {
-        name: 'Kristin Watson',
-        role: 'Founder',
-        description: 'the quick fox jumps over the lazy dog',
-        imageUrl: 'https://i.pravatar.cc/500?img=5',
-    },
-    {
-        name: 'Floyd Miles',
-        role: 'Founder',
-        description: 'the quick fox jumps over the lazy dog',
-        imageUrl: 'https://i.pravatar.cc/500?img=6',
-    },
-    {
-        name: 'Eleanor Pena',
-        role: 'Founder',
-        description: 'the quick fox jumps over the lazy dog',
-        imageUrl: 'https://i.pravatar.cc/500?img=7',
-    },
-    {
-        name: 'Jane Cooper',
-        role: 'Founder',
-        description: 'the quick fox jumps over the lazy dog',
-        imageUrl: 'https://i.pravatar.cc/500?img=8',
-    }
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
 ];
 
-const TeamPage = () => {
+const MeetOurTeam = () => {
     return (
-        <div className="bg-gray py-16 px-8">
-            <div className="max-w-75vw mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl font-bold text-dark-gray">Meet Our Team</h1>
-                    <p className="text-light-gray font-semibold mt-4">
-                        Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics
-                    </p>
-                </div>
+        <div className="bg-gray-50">
+            {/* Header Section */}
+            <section className="text-center py-16 max-w-[85vw] md:max-w-75vw mx-auto">
+                <p className="uppercase text-gray-500 font-medium">What we do</p>
+                <h1 className="text-5xl font-bold text-gray-800 my-4">Innovation tailored for you</h1>
+                <Breadcrumb className="flex flex-row justify-center">
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <ChevronRight />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/team">Team</BreadcrumbLink>
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </section>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Image Grid */}
+            <section className="grid gap-2 px-4 py-8
+      grid-cols-2 grid-rows-4
+      md:grid-cols-4 md:grid-rows-4">
+                <div className="col-span-2 row-span-2 
+        md:row-span-4">
+                    <img src="https://placehold.co/600x400/orange/white" alt="Image 1" className="w-full h-full object-cover" />
+                </div>
+                <div className="row-start-3 
+        md:row-span-2 md:col-start-3 md:row-start-1">
+                    <img src="https://placehold.co/300x200/green/white" alt="Image 2" className="w-full h-full object-cover" />
+                </div>
+                <div className="row-start-3 
+        md:row-span-2 md:col-start-4 md:row-start-1">
+                    <img src="https://placehold.co/300x200/blue/white" alt="Image 3" className="w-full h-full object-cover" />
+                </div>
+                <div className="row-start-4 
+        md:row-span-2 md:col-start-3 md:row-start-3">
+                    <img src="https://placehold.co/300x200/red/white" alt="Image 4" className="w-full h-full object-cover" />
+                </div>
+                <div className="row-start-4 
+        md:row-span-2 md:col-start-4 md:row-start-3">
+                    <img src="https://placehold.co/300x200/purple/white" alt="Image 5" className="w-full h-full object-cover" />
+                </div>
+            </section>
+
+            {/* Meet Our Team Section */}
+            <section className="text-center py-16 max-w-75vw mx-auto">
+                <h2 className="text-3xl font-bold text-gray-800">Meet Our Team</h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {teamMembers.map((member, index) => (
-                        <div key={index} className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6">
-                            <div className={`w-24 h-30 rounded-full overflow-hidden flex items-center justify-center`}>
-                                <img src={member.imageUrl} alt={member.name} className="rounded-full" />
+                        <div key={index} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+                            <div className={`flex items-center justify-center object-fill`}>
+                                <img src={member.image} alt={member.name} />
                             </div>
-                            <p className="text-primary-color font-semibold mt-4">{member.role}</p>
-                            <h3 className="text-xl font-bold text-dark-gray">{member.name}</h3>
-                            <p className="text-light-gray font-semibold text-center mt-2">{member.description}</p>
+                            <h3 className="text-xl font-bold mt-4">{member.name}</h3>
+                            <p className="text-gray-500">{member.role}</p>
+                            <div className="flex space-x-4 mt-4">
+                                <Facebook className="text-primary-color cursor-pointer" />
+                                <Instagram className="text-primary-color cursor-pointer" />
+                                <Twitter className="text-primary-color cursor-pointer" />
+                            </div>
                         </div>
                     ))}
                 </div>
-            </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="bg-gray-100 py-16 text-center max-w-75vw mx-auto">
+                <h3 className="text-2xl font-bold">Start your 14 days free trial</h3>
+                <p className="text-gray-600 mt-2 mb-4">Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.</p>
+                <Button>Try it free now</Button>
+                <div className="flex justify-center space-x-6 mt-6">
+                    <Twitter className="text-primary-color cursor-pointer" />
+                    <Facebook className="text-primary-color cursor-pointer" />
+                    <Instagram className="text-primary-color cursor-pointer" />
+                    <Linkedin className="text-primary-color cursor-pointer" />
+                </div>
+            </section>
         </div>
     );
 };
 
-export default TeamPage;
+export default MeetOurTeam;
