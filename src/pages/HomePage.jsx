@@ -3,9 +3,9 @@ import EditorsPick from "../components/EditorsPick";
 import Hero2 from "../components/Hero2";
 import FeaturedPosts from "../components/FeaturedPosts";
 import BestsellerProducts from "../components/BestsellerProducts";
+
 const HomePage = ({ featuredProducts }) => {
   
-
   return (
     <div className="w-screen">
       <Hero />

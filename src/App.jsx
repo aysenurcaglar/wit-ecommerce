@@ -13,11 +13,13 @@ import ContactPage from './pages/ContactPage';
 import TeamPage from './pages/TeamPage';
 import AboutPage from './pages/AboutPage';
 import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LoginPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const featuredProducts = [
   {
@@ -112,6 +114,7 @@ function App() {
           <Route path="/team" component={TeamPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/signup" component={SignupPage} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
         <Footer />
       </ div>
