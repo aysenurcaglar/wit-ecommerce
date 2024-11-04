@@ -9,6 +9,7 @@ import {
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import ProductDetail from './pages/ProductDetail';
+import ContactPage from './pages/ContactPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 
@@ -104,6 +105,7 @@ function App() {
             path="/product/:id"
             render={(props) => <ProductDetail {...props} featuredProducts={featuredProducts} />}
           />
+          <Route path="/contact" component={ContactPage} />
         </Switch>
         <Footer />
       </ div>

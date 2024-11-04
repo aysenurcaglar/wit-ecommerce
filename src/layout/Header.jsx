@@ -24,7 +24,7 @@ const Header = () => {
             <a href="/shop" className="mx-4 text-light-gray font-semibold">Shop</a>
             <a href="#about" className="mx-4 text-light-gray font-semibold">About</a>
             <a href="#blog" className="mx-4 text-light-gray font-semibold">Blog</a>
-            <a href="#contact" className="mx-4 text-light-gray font-semibold">Contact</a>
+            <a href="/contact" className="mx-4 text-light-gray font-semibold">Contact</a>
             <a href="#pages" className="mx-4 text-light-gray font-semibold">Pages</a>
           </nav>
 
