@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import ProductDetail from './pages/ProductDetail';
 import ContactPage from './pages/ContactPage';
+import TeamPage from './pages/TeamPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 
@@ -106,6 +107,7 @@ function App() {
             render={(props) => <ProductDetail {...props} featuredProducts={featuredProducts} />}
           />
           <Route path="/contact" component={ContactPage} />
+          <Route path="/team" component={TeamPage} />
         </Switch>
         <Footer />
       </ div>

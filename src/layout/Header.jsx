@@ -25,7 +25,7 @@ const Header = () => {
             <a href="#about" className="mx-4 text-light-gray font-semibold">About</a>
             <a href="#blog" className="mx-4 text-light-gray font-semibold">Blog</a>
             <a href="/contact" className="mx-4 text-light-gray font-semibold">Contact</a>
-            <a href="#pages" className="mx-4 text-light-gray font-semibold">Pages</a>
+            <a href="/team" className="mx-4 text-light-gray font-semibold">Team</a>
           </nav>
 
           {/* Desktop user actions */}
