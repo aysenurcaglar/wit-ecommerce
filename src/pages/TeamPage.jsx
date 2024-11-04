@@ -4,22 +4,22 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@/components/ui/brea
 import { Button } from '@/components/ui/button';
 
 const teamMembers = [
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
-    { name: 'Username', role: 'Profession', image: 'https://placehold.co/300x200', bgColor: 'bg-blue-100' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
+    { name: 'Username', role: 'Profession', image: 'https://placehold.co/400x250/thistle/white' },
 ];
 
-const MeetOurTeam = () => {
+const TeamPage = () => {
     return (
         <div className="bg-gray-50">
             {/* Header Section */}
-            <section className="text-center py-16 max-w-[85vw] md:max-w-75vw mx-auto">
+            <section className="text-center pt-16 pb-12 max-w-[85vw] md:max-w-75vw mx-auto">
                 <p className="uppercase text-gray-500 font-medium">What we do</p>
                 <h1 className="text-5xl font-bold text-gray-800 my-4">Innovation tailored for you</h1>
                 <Breadcrumb className="flex flex-row justify-center">
@@ -34,39 +34,39 @@ const MeetOurTeam = () => {
             </section>
 
             {/* Image Grid */}
-            <section className="grid gap-2 px-4 py-8
+            <section className="grid gap-2 py-2
       grid-cols-2 grid-rows-4
       md:grid-cols-4 md:grid-rows-4">
                 <div className="col-span-2 row-span-2 
         md:row-span-4">
-                    <img src="https://placehold.co/600x400/orange/white" alt="Image 1" className="w-full h-full object-cover" />
+                    <img src="https://placehold.co/600x400/lightcoral/white" alt="Image 1" className="w-full h-full object-cover" />
                 </div>
                 <div className="row-start-3 
         md:row-span-2 md:col-start-3 md:row-start-1">
-                    <img src="https://placehold.co/300x200/green/white" alt="Image 2" className="w-full h-full object-cover" />
+                    <img src="https://placehold.co/300x200/lightcoral/white" alt="Image 2" className="w-full h-full object-cover" />
                 </div>
                 <div className="row-start-3 
         md:row-span-2 md:col-start-4 md:row-start-1">
-                    <img src="https://placehold.co/300x200/blue/white" alt="Image 3" className="w-full h-full object-cover" />
+                    <img src="https://placehold.co/300x200/lightcoral/white" alt="Image 3" className="w-full h-full object-cover" />
                 </div>
                 <div className="row-start-4 
         md:row-span-2 md:col-start-3 md:row-start-3">
-                    <img src="https://placehold.co/300x200/red/white" alt="Image 4" className="w-full h-full object-cover" />
+                    <img src="https://placehold.co/300x200/lightcoral/white" alt="Image 4" className="w-full h-full object-cover" />
                 </div>
                 <div className="row-start-4 
         md:row-span-2 md:col-start-4 md:row-start-3">
-                    <img src="https://placehold.co/300x200/purple/white" alt="Image 5" className="w-full h-full object-cover" />
+                    <img src="https://placehold.co/300x200/lightcoral/white" alt="Image 5" className="w-full h-full object-cover" />
                 </div>
             </section>
 
             {/* Meet Our Team Section */}
-            <section className="text-center py-16 max-w-75vw mx-auto">
+            <section className="text-center py-12 max-w-75vw mx-auto">
                 <h2 className="text-3xl font-bold text-gray-800">Meet Our Team</h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
                     {teamMembers.map((member, index) => (
-                        <div key={index} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
-                            <div className={`flex items-center justify-center object-fill`}>
+                        <div key={index} className="bg-white rounded-lg pb-6 flex flex-col items-center">
+                            <div className={`flex items-center justify-center object-cover`}>
                                 <img src={member.image} alt={member.name} />
                             </div>
                             <h3 className="text-xl font-bold mt-4">{member.name}</h3>
@@ -97,4 +97,4 @@ const MeetOurTeam = () => {
     );
 };
 
-export default MeetOurTeam;
+export default TeamPage;

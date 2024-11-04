@@ -40,6 +40,7 @@ export default {
 				'danger-color': '#E74040',
 				'text-color': '#252B42',
 				'gray': '#FAFAFA',
+				'hover-color': '#ß2A7CC7',
 			},
 			maxWidth: {
 				'75vw': '75vw', // Custom max-width for 75% of viewport width

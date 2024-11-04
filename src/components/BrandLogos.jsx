@@ -10,7 +10,7 @@ const BrandLogos = () => {
     ];
   
     return (
-      <div className="flex flex-col md:flex-row justify-center items-center gap-16 py-12 bg-gray">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-16 p-12 bg-gray">
         {logos.map((logo, index) => (
           <img
             key={index}
