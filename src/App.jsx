@@ -6,6 +6,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { initializeUser } from './store/actions/clientActions';
+
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import ProductDetail from './pages/ProductDetail';
@@ -97,6 +101,13 @@ const featuredProducts = [
 ];
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Load user data on app start if available
+    dispatch(initializeUser());
+  }, [dispatch]);
 
   return (
     <Router>

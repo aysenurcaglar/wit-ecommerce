@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from "../components/ui/button";
 import { AlignRight, Heart, Search, ShoppingCart, UserRound } from "lucide-react";
 import { setUser } from '../store/actions/clientActions';
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,6 +18,9 @@ const Header = () => {
     localStorage.removeItem('authToken'); // Remove token from localStorage
     // Redirect user to home page or login page if necessary
     window.location.href = '/';
+    toast.success('Logout successful!', {
+      autoClose: 5000,
+    });
   };
 
   return (
@@ -46,10 +50,8 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
           {user.name ? (
               <div className="flex items-center space-x-4">
-                <div className="flex flex-col items-center">
                 <img src={user.avatarUrl} alt="User Avatar" className="w-8 h-8 rounded-full" />
                 <span className="text-primary-color font-semibold">{user.name}</span>
-                </div>
                 <span onClick={handleLogout} className="text-primary-color font-semibold cursor-pointer">Logout</span>
               </div>
             ) : (
