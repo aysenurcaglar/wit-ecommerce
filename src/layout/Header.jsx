@@ -1,9 +1,23 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from "../components/ui/button";
 import { AlignRight, Heart, Search, ShoppingCart, UserRound } from "lucide-react";
+import { setUser } from '../store/actions/clientActions';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  // Get user data from Redux store
+  const user = useSelector(state => state.client.user);
+
+  // Logout function
+  const handleLogout = () => {
+    dispatch(setUser({})); // Clear user data in Redux
+    localStorage.removeItem('authToken'); // Remove token from localStorage
+    // Redirect user to home page or login page if necessary
+    window.location.href = '/';
+  };
 
   return (
     <header className="bg-white shadow w-screen">
@@ -29,8 +43,18 @@ const Header = () => {
           </nav>
 
           {/* Desktop user actions */}
-          <div className="hidden md:flex space-x-4">
-            <a href="/signup" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>
+          <div className="hidden md:flex items-center space-x-4">
+          {user.name ? (
+              <div className="flex items-center space-x-4">
+                <div className="flex flex-col items-center">
+                <img src={user.avatarUrl} alt="User Avatar" className="w-8 h-8 rounded-full" />
+                <span className="text-primary-color font-semibold">{user.name}</span>
+                </div>
+                <span onClick={handleLogout} className="text-primary-color font-semibold cursor-pointer">Logout</span>
+              </div>
+            ) : (
+              <a href="/login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Signup</a>
+            )}
             <a href="#search" className="text-primary-color font-semibold"><Search /></a>
             <a href="#cart" className="text-primary-color font-semibold"><ShoppingCart /></a>
             <a href="#favorites" className="text-primary-color font-semibold"><Heart /></a>
@@ -48,7 +72,15 @@ const Header = () => {
               <a href="/pages" className="text-light-gray font-semibold">Pages</a>
             </nav>
             <div className="flex flex-col space-y-4 mt-4 pt-4 border-t">
-              <a href="/signup" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Register</a>
+            {user.name ? (
+                <div className="flex flex-col items-center space-y-2">
+                  <img src={user.avatarUrl} alt="User Avatar" className="w-8 h-8 rounded-full" />
+                  <span className="text-primary-color font-semibold">{user.name}</span>
+                  <span onClick={handleLogout} className="text-primary-color font-semibold cursor-pointer">Logout</span>
+                </div>
+              ) : (
+                <a href="/login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Signup</a>
+              )}
               <a href="#search" className="text-primary-color font-semibold">Search</a>
               <a href="#cart" className="text-primary-color font-semibold">Cart</a>
               <a href="#favorites" className="text-primary-color font-semibold">Favs</a>

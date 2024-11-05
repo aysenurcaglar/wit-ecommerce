@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import api from '../api/axios';
 import { Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -57,7 +57,7 @@ export default function SignupForm() {
 
   return (
     <div className="max-w-75vw md:max-w-sm mx-auto mt-8 text-left">
-      <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
+      <h1 className="text-2xl font-bold mb-4">Signup</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <Label htmlFor="name">Name</Label>
@@ -213,6 +213,9 @@ export default function SignupForm() {
           )}
         </Button>
       </form>
+      <p className="text-center mt-4">
+        Already have an account? <Link to="/login" className="underline text-primary-color">Login</Link>
+      </p>
     </div>
   );
 }

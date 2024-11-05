@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../api/axios';
@@ -75,12 +75,13 @@ const LoginPage = () => {
   };
 
   return (
-        <form onSubmit={handleSubmit(onSubmit)} className="mx-auto my-12 max-w-75vw md:max-w-md text-left space-y-4">
+    <>
+        <form onSubmit={handleSubmit(onSubmit)} className="mx-auto my-8 max-w-75vw md:max-w-sm text-left space-y-4">
             <h2 className="text-xl md:text-2xl font-bold text-dark-gray mb-4">
               Login
             </h2>
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-medium">
+            <Label htmlFor="email" className="font-medium">
               Email
             </Label>
             <Input
@@ -102,7 +103,7 @@ const LoginPage = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-medium">
+            <Label htmlFor="password" className="font-medium">
               Password
             </Label>
             <Input
@@ -127,7 +128,7 @@ const LoginPage = () => {
             />
             <Label
               htmlFor="rememberMe"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className="font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               Remember me
             </Label>
@@ -147,6 +148,10 @@ const LoginPage = () => {
           )}
           </Button>
         </form>
+        <p className="text-center mt-4">
+        Don't have an account yet? <Link to="/signup" className="underline text-primary-color">Signup</Link>
+      </p>
+      </>
   );
 };
 
