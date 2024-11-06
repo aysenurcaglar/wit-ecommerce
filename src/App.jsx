@@ -6,9 +6,11 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeUser } from './store/actions/clientActions';
+import { setUser, initializeUser } from './store/actions/clientActions';
+import PrivateRoute from './components/PrivateRoute';
 
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
@@ -104,13 +106,14 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   const { isLoading, error } = useSelector(state => state.client);
 
   useEffect(() => {
     console.log('App useEffect running');
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
     if (token) {
-      console.log('Token found, dispatching initializeUser');
       dispatch(initializeUser());
     }
   }, [dispatch]);
@@ -123,9 +126,9 @@ function App() {
         {isLoading && <div className="bg-white">Loading...</div>}
         {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/" render={() => <HomePage featuredProducts={featuredProducts} />} />
-          <Route
+          <PrivateRoute path="/shop" component={ShopPage} />
+          <PrivateRoute exact path="/" render={() => <HomePage featuredProducts={featuredProducts} />} />
+          <PrivateRoute
             path="/product/:id"
             render={(props) => <ProductDetail {...props} featuredProducts={featuredProducts} />}
           />

@@ -16,6 +16,9 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(setUser({})); // Clear user data in Redux
     localStorage.removeItem('authToken'); // Remove token from localStorage
+    localStorage.removeItem('user'); // Remove user data from localStorage
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('user');
     // Redirect user to home page or login page if necessary
     window.location.href = '/';
     toast.success('Logout successful!', {
