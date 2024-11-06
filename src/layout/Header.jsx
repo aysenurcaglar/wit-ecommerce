@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { AlignRight, Heart, Search, ShoppingCart, UserRound } from "lucide-react";
 import { setUser } from '../store/actions/clientActions';
@@ -8,6 +9,7 @@ import { toast } from "react-toastify";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // Get user data from Redux store
   const user = useSelector(state => state.client.user);
@@ -20,9 +22,9 @@ const Header = () => {
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('user');
     // Redirect user to home page or login page if necessary
-    window.location.href = '/login';
+    history.push('/login');
     toast.success('Logout successful!', {
-      autoClose: 5000,
+      autoClose: 3000,
     });
   };
 

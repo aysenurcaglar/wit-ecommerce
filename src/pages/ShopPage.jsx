@@ -38,7 +38,7 @@ const ShopPage = () => {
     const products = [
         {
             id: 1,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -47,7 +47,7 @@ const ShopPage = () => {
         },
         {
             id: 2,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -56,7 +56,7 @@ const ShopPage = () => {
         },
         {
             id: 3,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -65,7 +65,7 @@ const ShopPage = () => {
         },
         {
             id: 4,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -74,7 +74,7 @@ const ShopPage = () => {
         },
         {
             id: 5,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -83,7 +83,7 @@ const ShopPage = () => {
         },
         {
             id: 6,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -92,7 +92,7 @@ const ShopPage = () => {
         },
         {
             id: 7,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -101,7 +101,7 @@ const ShopPage = () => {
         },
         {
             id: 8,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -110,7 +110,7 @@ const ShopPage = () => {
         },
         {
             id: 9,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -119,7 +119,7 @@ const ShopPage = () => {
         },
         {
             id: 10,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -128,7 +128,7 @@ const ShopPage = () => {
         },
         {
             id: 11,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,
@@ -137,7 +137,7 @@ const ShopPage = () => {
         },
         {
             id: 12,
-            name: "Graphic Design",
+            name: "Graphic Design T-Shirt",
             brand: "English Department",
             price: 6.48,
             originalPrice: 16.48,

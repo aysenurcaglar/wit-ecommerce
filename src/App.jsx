@@ -1,7 +1,7 @@
 import './App.css'
 import { ToastContainer } from 'react-toastify';
 import {
-  BrowserRouter as Router,
+  
   Switch,
   Route,
   Link
@@ -32,7 +32,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const featuredProducts = [
   {
     id: 5,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -41,7 +41,7 @@ const featuredProducts = [
   },
   {
     id: 6,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -50,7 +50,7 @@ const featuredProducts = [
   },
   {
     id: 7,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -59,7 +59,7 @@ const featuredProducts = [
   },
   {
     id: 8,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -68,7 +68,7 @@ const featuredProducts = [
   },
   {
     id: 9,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -77,7 +77,7 @@ const featuredProducts = [
   },
   {
     id: 10,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -86,7 +86,7 @@ const featuredProducts = [
   },
   {
     id: 11,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -95,7 +95,7 @@ const featuredProducts = [
   },
   {
     id: 12,
-    name: "Graphic Design",
+    name: "Graphic Design T-Shirt",
     brand: "English Department",
     price: 6.48,
     originalPrice: 16.48,
@@ -108,8 +108,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const history = useHistory();
-
   const { isLoading, error } = useSelector(state => state.client);
 
   useEffect(() => {
@@ -121,12 +119,11 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
       <div>
         <ToastContainer />
         <Header />
         {isLoading && <div className="bg-white">
-          <Loader2 className="mr-2 h-4 w-4 text-black animate-spin" />
+          <Loader2 className="mr-2 h-4 w-4 inline animate-spin" />
           Loading...</div>}
         {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
@@ -144,7 +141,7 @@ function App() {
         </Switch>
         <Footer />
       </ div>
-    </ Router>
+
   )
 }
 

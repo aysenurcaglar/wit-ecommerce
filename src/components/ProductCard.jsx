@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { useHistory, withRouter, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
 
@@ -10,8 +10,8 @@ const ProductCard = ({ product }) => {
     e.preventDefault();
     console.log("Clicked product:", product.id);
     // Try both methods to see which works
-    window.location.href = `/product/${product.id}`;
-    // history.push(`/product/${product.id}`);
+    //window.location.href = `/product/${product.id}`;
+    history.push(`/product/${product.id}`);
   };
 
 
