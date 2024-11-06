@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initializeUser } from './store/actions/clientActions';
 
 import HomePage from './pages/HomePage'
@@ -104,9 +104,15 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const { isLoading, error } = useSelector(state => state.client);
+
   useEffect(() => {
-    // Load user data on app start if available
-    dispatch(initializeUser());
+    console.log('App useEffect running');
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      console.log('Token found, dispatching initializeUser');
+      dispatch(initializeUser());
+    }
   }, [dispatch]);
 
   return (
@@ -114,6 +120,8 @@ function App() {
       <div>
         <ToastContainer />
         <Header />
+        {isLoading && <div className="bg-white">Loading...</div>}
+        {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/" render={() => <HomePage featuredProducts={featuredProducts} />} />

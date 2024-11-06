@@ -5,39 +5,13 @@ import { useHistory, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../api/axios';
+import { getGravatarUrl } from '../utils/gravatarUtils';
 import { setUser, loginUser } from '../store/actions/clientActions';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Loader2 } from 'lucide-react';
-
-
-// Function to convert string to buffer for hashing
-const stringToBuffer = (str) => {
-  const encoder = new TextEncoder();
-  return encoder.encode(str);
-};
-
-// Function to convert buffer to hexadecimal string
-const bufferToHex = (buffer) => {
-  return Array.from(new Uint8Array(buffer))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
-};
-
-const getGravatarUrl = async (email) => {
-  try {
-    const cleanEmail = email.trim().toLowerCase();
-    const msgBuffer = stringToBuffer(cleanEmail);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashHex = bufferToHex(hashBuffer);
-    return `https://www.gravatar.com/avatar/${hashHex}?d=mp`;
-  } catch (error) {
-    console.error('Error generating Gravatar URL:', error);
-    return `https://www.gravatar.com/avatar/default?d=mp`;
-  }
-};
 
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
@@ -57,15 +31,6 @@ const LoginPage = () => {
         avatarUrl: gravatarUrl
       };
 
-      {/*
-      dispatch(setUser(userWithAvatar));
-
-
-        if (rememberMe) {
-        localStorage.setItem('authToken', userData.token);
-        localStorage.setItem('user', JSON.stringify(userWithAvatar));
-      }
-        */}
       dispatch(loginUser(userWithAvatar, rememberMe));
 
       toast.success(`Welcome, ${userData.name}!`);
