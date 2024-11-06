@@ -23,6 +23,8 @@ import LoginPage from './pages/LoginPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 
+import { Loader2 } from 'lucide-react';
+
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -123,7 +125,9 @@ function App() {
       <div>
         <ToastContainer />
         <Header />
-        {isLoading && <div className="bg-white">Loading...</div>}
+        {isLoading && <div className="bg-white">
+          <Loader2 className="mr-2 h-4 w-4 text-black animate-spin" />
+          Loading...</div>}
         {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
           <PrivateRoute path="/shop" component={ShopPage} />

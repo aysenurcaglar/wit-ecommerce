@@ -20,7 +20,7 @@ const Header = () => {
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('user');
     // Redirect user to home page or login page if necessary
-    window.location.href = '/';
+    window.location.href = '/login';
     toast.success('Logout successful!', {
       autoClose: 5000,
     });
