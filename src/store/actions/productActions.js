@@ -48,23 +48,13 @@ export const fetchCategories = () => async (dispatch) => {
   };
   
   export const changePage = (page) => (dispatch, getState) => {
-     // Calculate the limit based on the page number
-     const { total } = getState().product;
-  
-     // Calculate the limit based on the page number
-     const limit = page <= 2 ? 25 : 25 * (page - 1);
-     
+     const { limit } = getState().product;     
      
      // Calculate the offset based on the new limit
-     const offset = (page - 1) * 25;  // Keep offset calculation consistent
-
-      // Ensure that we don't fetch more products than available
-  const remainingProducts = total - offset;
-  const adjustedLimit = Math.min(limit, remainingProducts);
+     const offset = (page - 1) * limit;  // Keep offset calculation consistent
      
      // Dispatch actions to update the current page, limit, and offset
      dispatch(setCurrentPage(page));
-     dispatch(setLimit(adjustedLimit));
      dispatch(setOffset(offset));
      dispatch(fetchProducts());
   };

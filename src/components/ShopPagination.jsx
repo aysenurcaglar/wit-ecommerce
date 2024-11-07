@@ -14,7 +14,7 @@ import {
 export function ShopPagination() {
     const dispatch = useDispatch()
     const { total, limit, currentPage } = useSelector((state) => state.product)
-    const totalPages = Math.ceil(total / 25)
+    const totalPages = Math.ceil(total / limit)
   
     const handlePageChange = (page) => {
       dispatch(changePage(page))

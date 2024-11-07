@@ -11,23 +11,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { LayoutGrid, List, ChevronRight, Filter, Loader } from 'lucide-react';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
+import { LayoutGrid, List, ChevronRight, Filter} from 'lucide-react';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
+
 import BrandLogos from '../components/BrandLogos';
-import { fetchProducts } from '../store/actions/productActions';
-import { useEffect } from 'react';
+
 import { Loader2 } from 'lucide-react';
-import { SET_OFFSET, SET_LIMIT } from '../store/actions/productActions';
-import { setOffset, setLimit } from '../store/actions/productActions';
 import {ShopPagination} from '../components/ShopPagination';
 
 
@@ -178,33 +167,6 @@ const ShopPage = () => {
                 {/* Pagination */}
                 <div className="flex justify-center mb-2">
                     <ShopPagination />
-
-                    {/*<Pagination>
-                        <PaginationContent className="flex flex-wrap justify-center gap-1">
-                            <PaginationItem>
-                                <PaginationPrevious
-                                    onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-                                    disabled={currentPage === 1}
-                                />
-                            </PaginationItem>
-                            {[...Array(totalPages)].map((_, index) => (
-                                <PaginationItem key={index}>
-                                    <PaginationLink
-                                        onClick={() => handlePageChange(index + 1)}
-                                        active={currentPage === index + 1}
-                                    >
-                                        {index + 1}
-                                    </PaginationLink>
-                                </PaginationItem>
-                            ))}
-                            <PaginationItem>
-                                <PaginationNext
-                                    onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-                                    disabled={currentPage === totalPages}
-                                />
-                            </PaginationItem>
-                        </PaginationContent>
-                    </Pagination>*/}
                 </div>
             </div>
             <BrandLogos />

@@ -14,7 +14,7 @@ const initialState = {
   categories: [],
   productList: [],
   total: 0,
-  limit: 25, // Default limit for pagination
+  limit: 20, // Default limit for pagination is 25
   offset: 0, // Default offset for pagination
   filter: '',
   fetchState: 'NOT_FETCHED', // Can be 'NOT_FETCHED', 'FETCHING', 'FETCHED', 'FAILED'
@@ -25,11 +25,11 @@ export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CATEGORIES:
       return { ...state, categories: action.payload };
-    case SET_PRODUCT_LIST:
-      return {
-        ...state,
-        productList: [...state.productList, ...action.payload],
-      };
+      case SET_PRODUCT_LIST:
+        return {
+          ...state,
+          productList: action.payload,  // Replace existing products with new ones
+        };
     case SET_TOTAL:
       return { ...state, total: action.payload };
     case SET_FETCH_STATE:
