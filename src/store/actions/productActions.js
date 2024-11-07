@@ -9,6 +9,7 @@ export const SET_LIMIT = 'SET_LIMIT';
 export const SET_OFFSET = 'SET_OFFSET';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_SORT = 'SET_SORT';
 
 // Action Creators
 export const setCategories = (categories) => ({ type: SET_CATEGORIES, payload: categories });
@@ -19,6 +20,7 @@ export const setLimit = (limit) => ({ type: SET_LIMIT, payload: limit });
 export const setOffset = (offset) => ({ type: SET_OFFSET, payload: offset });
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter });
 export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, payload: page });
+export const setSort = (sort) => ({ type: SET_SORT, payload: sort });
 
 export const fetchCategories = () => async (dispatch) => {
     dispatch(setFetchState('FETCHING'));
@@ -33,10 +35,22 @@ export const fetchCategories = () => async (dispatch) => {
   };
 
   export const fetchProducts = () => async (dispatch, getState) => {
-    const { limit, offset } = getState().product;
+    const { limit, offset, filter, sort } = getState().product;
+    
+    let query = `/products?limit=${limit}&offset=${offset}`;
+    
+    if (filter) {
+      query += `&filter=${encodeURIComponent(filter)}`;
+    }
+    
+    if (sort) {
+      query += `&sort=${sort}`;
+    }
+  
     dispatch(setFetchState('FETCHING'));
+  
     try {
-      const response = await api.get(`/products?limit=${limit}&offset=${offset}`);
+      const response = await api.get(query);
       const data = response.data;
       dispatch(setProductList(data.products));
       dispatch(setTotal(data.total));
@@ -46,6 +60,23 @@ export const fetchCategories = () => async (dispatch) => {
       dispatch(setFetchState('FAILED'));
     }
   };
+
+  export const updateFilter = (newFilter) => (dispatch) => {
+    dispatch(setFilter(newFilter));
+    dispatch(fetchProducts());
+  };
+
+  export const updateSort = (newSort) => (dispatch) => {
+    dispatch(setSort(newSort));
+    dispatch(fetchProducts());
+  };
+
+  export const updateCategory = (categoryId) => (dispatch) => {
+    dispatch(setOffset(0));  // Reset offset if category changes
+    dispatch(setCurrentPage(1));  // Reset to page 1 on category change
+    dispatch(fetchProducts());  // Fetch products with the new category
+  };
+  
   
   export const changePage = (page) => (dispatch, getState) => {
      const { limit } = getState().product;     
