@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import ProductCard from '../components/ProductCard';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,13 +29,10 @@ const ShopPage = () => {
 
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
-    const categories = [
-        { name: 'CLOTHES', items: 5, image: 'card-cover-5.jpg' },
-        { name: 'CLOTHES', items: 5, image: 'card-cover-6.jpg' },
-        { name: 'CLOTHES', items: 5, image: 'card-cover-7.jpg' },
-        { name: 'CLOTHES', items: 5, image: 'card-cover-8.jpg', },
-        { name: 'CLOTHES', items: 5, image: 'card-cover-9.jpg', },
-    ];
+    const categories = useSelector(state => state.product.categories);
+
+    // Sort categories by rating and take top 5
+    const topCategories = [...categories].sort((a, b) => b.rating - a.rating).slice(0, 5);
 
     const products = [
         {
@@ -166,18 +165,21 @@ const ShopPage = () => {
 
                 {/* Category Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
-                    {categories.map((category, index) => (
-                        <Card key={index} className="relative overflow-hidden group cursor-pointer">
+                    {topCategories.map((category) => (
+                        <Card key={category.id} className="relative overflow-hidden group cursor-pointer">
                             <CardContent className="p-0">
                                 <div className="aspect-square relative">
                                     <img
-                                        src={category.image}
-                                        alt={category.name}
-                                        className="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-opacity"
+                                        src={category.img}
+                                        alt={category.title}
+                                        className="w-full h-full object-cover object-top transition-opacity"
                                     />
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                                        <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow">{category.name}</h3>
-                                        <p className="text-xs md:text-sm drop-shadow">{category.items} Items</p>
+                                        <Link to={`/shop/${category.gender}/${category.code.split(':')[1]}`}>
+                                        <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.gender === 'k' ? 'KADIN' : 'ERKEK'}</h3>
+                                            <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.title}</h3>
+                                        </Link>
+                                        <p className="text-xs md:text-sm drop-shadow-lg">Rating: {category.rating}</p>
                                     </div>
                                 </div>
                             </CardContent>

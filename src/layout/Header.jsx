@@ -5,6 +5,8 @@ import { Button } from "../components/ui/button";
 import { AlignRight, Heart, Search, ShoppingCart, UserRound } from "lucide-react";
 import { setUser } from '../store/actions/clientActions';
 import { toast } from "react-toastify";
+import CategoryDropdown from "../components/CategoryDropdown";
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,7 +46,7 @@ const Header = () => {
 
           {/* Desktop navigation */}
           <nav className="hidden md:block">
-            <a href="/shop" className="mx-4 text-light-gray font-semibold">Shop</a>
+            <CategoryDropdown />          
             <a href="/about" className="mx-4 text-light-gray font-semibold">About</a>
             <a href="/blog" className="mx-4 text-light-gray font-semibold">Blog</a>
             <a href="/contact" className="mx-4 text-light-gray font-semibold">Contact</a>
@@ -71,8 +73,8 @@ const Header = () => {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4">
-            <nav className="flex flex-col space-y-4">
-              <a href="/shop" className="text-light-gray font-semibold">Shop</a>
+            <nav className="flex flex-col items-center space-y-4">
+              <CategoryDropdown />
               <a href="/about" className="text-light-gray font-semibold">About</a>
               <a href="/blog" className="text-light-gray font-semibold">Blog</a>
               <a href="/contact" className="text-light-gray font-semibold">Contact</a>

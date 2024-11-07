@@ -1,3 +1,5 @@
+import api from "../../api/axios";
+
 // Action Types
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_PRODUCT_LIST = 'SET_PRODUCT_LIST';
@@ -15,3 +17,15 @@ export const setFetchState = (fetchState) => ({ type: SET_FETCH_STATE, payload: 
 export const setLimit = (limit) => ({ type: SET_LIMIT, payload: limit });
 export const setOffset = (offset) => ({ type: SET_OFFSET, payload: offset });
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter });
+
+export const fetchCategories = () => async (dispatch) => {
+    dispatch(setFetchState('FETCHING'));
+    try {
+      const response = await api.get('/categories');
+      dispatch(setCategories(response.data));
+      dispatch(setFetchState('FETCHED'));
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      dispatch(setFetchState('FAILED'));
+    }
+  };
