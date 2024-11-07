@@ -1,7 +1,9 @@
 import ProductCard from "./ProductCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const BestsellerProducts = ({ featuredProducts }) => {
+
   const {productList} = useSelector((state) => state.product);
 
   const list = productList.sort((a, b) => b.rating - a.rating).slice(0, 8);

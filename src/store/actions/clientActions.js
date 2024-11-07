@@ -42,7 +42,7 @@ export const initializeUser = () => async (dispatch) => {
 
     // Merge any additional data from storedUser (like the avatar)
     const parsedUser = JSON.parse(storedUser);
-    const completeUserData = { ...userData, avatarUrl: parsedUser.avatarUrl };
+    const completeUserData = JSON.parse(JSON.stringify({ ...userData, avatarUrl: parsedUser.avatarUrl }));
 
     // Update Redux state with the complete user data
     dispatch(setUser(completeUserData));

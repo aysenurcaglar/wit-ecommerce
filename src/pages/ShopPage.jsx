@@ -26,6 +26,9 @@ import BrandLogos from '../components/BrandLogos';
 import { fetchProducts } from '../store/actions/productActions';
 import { useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
+import { SET_OFFSET, SET_LIMIT } from '../store/actions/productActions';
+import { setOffset, setLimit } from '../store/actions/productActions';
+import {ShopPagination} from '../components/ShopPagination';
 
 
 const ShopPage = () => {
@@ -34,12 +37,13 @@ const ShopPage = () => {
 
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
-    const categories = useSelector(state => state.product.categories);
+    const { productList, total, fetchState, categories, limit, offset } = useSelector((state) => state.product);
+
 
     // Sort categories by rating and take top 5
     const topCategories = [...categories].sort((a, b) => b.rating - a.rating).slice(0, 5);
 
-    const { productList, total, fetchState } = useSelector((state) => state.product);
+
 
     return (
         <>
@@ -173,25 +177,34 @@ const ShopPage = () => {
 
                 {/* Pagination */}
                 <div className="flex justify-center mb-2">
-                    <Pagination>
+                    <ShopPagination />
+
+                    {/*<Pagination>
                         <PaginationContent className="flex flex-wrap justify-center gap-1">
                             <PaginationItem>
-                                <PaginationPrevious href="#" />
+                                <PaginationPrevious
+                                    onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                                    disabled={currentPage === 1}
+                                />
                             </PaginationItem>
+                            {[...Array(totalPages)].map((_, index) => (
+                                <PaginationItem key={index}>
+                                    <PaginationLink
+                                        onClick={() => handlePageChange(index + 1)}
+                                        active={currentPage === index + 1}
+                                    >
+                                        {index + 1}
+                                    </PaginationLink>
+                                </PaginationItem>
+                            ))}
                             <PaginationItem>
-                                <PaginationLink href="#">1</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">2</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationEllipsis />
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationNext href="#" />
+                                <PaginationNext
+                                    onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                                    disabled={currentPage === totalPages}
+                                />
                             </PaginationItem>
                         </PaginationContent>
-                    </Pagination>
+                    </Pagination>*/}
                 </div>
             </div>
             <BrandLogos />

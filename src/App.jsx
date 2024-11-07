@@ -110,6 +110,7 @@ function App() {
   const dispatch = useDispatch();
 
   const { isLoading, error } = useSelector(state => state.client);
+  const { productList, fetchState } = useSelector((state) => state.product);
 
   useEffect(() => {
     console.log('App useEffect running');
@@ -118,7 +119,7 @@ function App() {
       dispatch(initializeUser());
     }
     dispatch(fetchCategories());
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(25, 0));
   }, []);
 
   return (
@@ -131,10 +132,10 @@ function App() {
         {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
           <PrivateRoute path="/shop" component={ShopPage} />
-          <PrivateRoute exact path="/" render={() => <HomePage featuredProducts={featuredProducts} />} />
+          <PrivateRoute exact path="/" render={() => <HomePage />} />
           <PrivateRoute
             path="/product/:id"
-            render={(props) => <ProductDetail {...props} featuredProducts={featuredProducts} />}
+            render={(props) => <ProductDetail {...props} />}
           />
           <Route path="/contact" component={ContactPage} />
           <Route path="/team" component={TeamPage} />
