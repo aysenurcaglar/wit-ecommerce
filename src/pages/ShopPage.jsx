@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../components/ProductCard';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { LayoutGrid, List, ChevronRight, Filter } from 'lucide-react';
+import { LayoutGrid, List, ChevronRight, Filter, Loader } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import {
     Pagination,
@@ -23,9 +23,14 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination"
 import BrandLogos from '../components/BrandLogos';
+import { fetchProducts } from '../store/actions/productActions';
+import { useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 
 
 const ShopPage = () => {
+
+    const dispatch = useDispatch();
 
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -34,117 +39,7 @@ const ShopPage = () => {
     // Sort categories by rating and take top 5
     const topCategories = [...categories].sort((a, b) => b.rating - a.rating).slice(0, 5);
 
-    const products = [
-        {
-            id: 1,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-1.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 2,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-2.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 3,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-3.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 4,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-4.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 5,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-5.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 6,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-6.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 7,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-7.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 8,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-8.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 9,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-9.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 10,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-10.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 11,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-11.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-        {
-            id: 12,
-            name: "Graphic Design T-Shirt",
-            brand: "English Department",
-            price: 6.48,
-            originalPrice: 16.48,
-            image: "product-cover-12.jpg",
-            colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-        },
-
-    ];
+    const { productList, total, fetchState } = useSelector((state) => state.product);
 
     return (
         <>
@@ -176,7 +71,7 @@ const ShopPage = () => {
                                     />
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                                         <Link to={`/shop/${category.gender}/${category.code.split(':')[1]}`}>
-                                        <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.gender === 'k' ? 'KADIN' : 'ERKEK'}</h3>
+                                            <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.gender === 'k' ? 'KADIN' : 'ERKEK'}</h3>
                                             <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.title}</h3>
                                         </Link>
                                         <p className="text-xs md:text-sm drop-shadow-lg">Rating: {category.rating}</p>
@@ -191,7 +86,7 @@ const ShopPage = () => {
                 <div className="md:hidden flex flex-col gap-4 mb-6">
                     <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-500">
-                            Showing all {products.length} results
+                            Showing all {total} results
                         </span>
                         <Button
                             variant="outline"
@@ -234,7 +129,7 @@ const ShopPage = () => {
                 {/* Filter Controls - Desktop */}
                 <div className="hidden md:flex justify-between items-center mb-8">
                     <div className="text-sm text-gray-500">
-                        Showing all {products.length} results
+                        Showing all {total} results
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
@@ -265,9 +160,15 @@ const ShopPage = () => {
 
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-8 md:mb-12">
-                    {products.map(product => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
+                    {fetchState === 'FETCHING' ? (
+                        <div className="col-span-full flex justify-center items-center py-16">
+                            <Loader2 className="w-8 h-8 animate-spin" />
+                        </div>
+                    ) : (
+                        productList.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))
+                    )}
                 </div>
 
                 {/* Pagination */}

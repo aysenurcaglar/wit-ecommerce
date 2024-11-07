@@ -29,3 +29,17 @@ export const fetchCategories = () => async (dispatch) => {
       dispatch(setFetchState('FAILED'));
     }
   };
+
+  export const fetchProducts = () => async (dispatch) => {
+    try {
+      dispatch({ type: SET_FETCH_STATE, payload: 'FETCHING' });
+      const response = await api.get('/products');
+      const data = response.data;
+      dispatch({ type: SET_PRODUCT_LIST, payload: data.products });
+      dispatch({ type: SET_TOTAL, payload: data.total });
+      dispatch({ type: SET_FETCH_STATE, payload: 'FETCHED' });
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      dispatch({ type: SET_FETCH_STATE, payload: 'FAILED' });
+    }
+  };

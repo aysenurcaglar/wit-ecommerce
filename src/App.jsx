@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, initializeUser } from './store/actions/clientActions';
-import { fetchCategories } from './store/actions/productActions';
+import { fetchCategories, fetchProducts } from './store/actions/productActions';
 import PrivateRoute from './components/PrivateRoute';
 
 import HomePage from './pages/HomePage'
@@ -117,8 +117,8 @@ function App() {
     if (token) {
       dispatch(initializeUser());
     }
-
     dispatch(fetchCategories());
+    dispatch(fetchProducts());
   }, []);
 
   return (
