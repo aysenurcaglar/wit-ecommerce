@@ -2,21 +2,46 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { useHistory } from 'react-router-dom';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, category }) => {
 
   const history = useHistory();
+
+  function createSlug(name) {
+    const trToEngMap = {
+      ç: 'c',
+      Ç: 'C',
+      ğ: 'g',
+      Ğ: 'G',
+      ı: 'i',
+      İ: 'I',
+      ö: 'o',
+      Ö: 'O',
+      ş: 's',
+      Ş: 'S',
+      ü: 'u',
+      Ü: 'U'
+    };
+  
+    return name
+      .split('')
+      .map(char => trToEngMap[char] || char) // Replace Turkish chars
+      .join('')
+      .toLowerCase() // Convert to lowercase
+      .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
+      .replace(/^-+|-+$/g, ''); // Remove leading or trailing hyphens
+  }
   
   const handleClick = (e) => {
     e.preventDefault();
     console.log("Clicked product:", product.id);
     // Try both methods to see which works
     //window.location.href = `/product/${product.id}`;
-    history.push(`/product/${product.id}`);
+    history.push(`/shop/${category.gender}/${createSlug(category.title)}/${category.id}/${createSlug(product.name)}/${product.id}`);
   };
 
 
   return (
-    <Card className="border-none shadow-none overflow-hidden cursor-pointer" onClick={handleClick}>
+    <Card className="border-none shadow-none overflow-hidden cursor-pointer hover:scale-105" onClick={handleClick}>
       <CardContent className="p-0">
         <div className="aspect-[3/4] mb-4">
           <img 

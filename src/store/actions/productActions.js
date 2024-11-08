@@ -10,6 +10,7 @@ export const SET_OFFSET = 'SET_OFFSET';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_SORT = 'SET_SORT';
+export const SET_PRODUCT = 'SET_PRODUCT';
 
 // Action Creators
 export const setCategories = (categories) => ({ type: SET_CATEGORIES, payload: categories });
@@ -21,6 +22,7 @@ export const setOffset = (offset) => ({ type: SET_OFFSET, payload: offset });
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter });
 export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, payload: page });
 export const setSort = (sort) => ({ type: SET_SORT, payload: sort });
+export const setProduct = (product) => ({ type: SET_PRODUCT, payload: product });
 
 export const fetchCategories = () => async (dispatch) => {
     dispatch(setFetchState('FETCHING'));
@@ -76,6 +78,19 @@ export const fetchCategories = () => async (dispatch) => {
     dispatch(setCurrentPage(1));  // Reset to page 1 on category change
     dispatch(fetchProducts());  // Fetch products with the new category
   };
+
+  export const fetchProduct = (productId) => async (dispatch) => {
+    dispatch(setFetchState('FETCHING'));
+  
+    try {
+      const response = await api.get(`/products/${productId}`);
+      dispatch(setProduct(response.data));
+      dispatch(setFetchState('FETCHED'));
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      dispatch(setFetchState('FAILED'));
+    }
+  };
   
   
   export const changePage = (page) => (dispatch, getState) => {
@@ -89,3 +104,14 @@ export const fetchCategories = () => async (dispatch) => {
      dispatch(setOffset(offset));
      dispatch(fetchProducts());
   };
+
+  // Function to combine product and category data
+const selectProductsWithCategories = (state) => {
+  const productList = state.product.productList;
+  const categories = state.product.categories;
+
+  return productList.map((product) => ({
+    ...product,
+    category: categories.find((category) => category.id === product.category_id),
+  }));
+};

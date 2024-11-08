@@ -15,13 +15,13 @@ import {
 } from "@/components/ui/select";
 import { LayoutGrid, List, ChevronRight, Filter } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
-import { updateFilter, updateSort, updateCategory, fetchProducts, setCurrentPage } from '../store/actions/productActions';
+import { updateFilter, updateSort, updateCategory, setFilter, fetchProducts, setCurrentPage } from '../store/actions/productActions';
 
 import BrandLogos from '../components/BrandLogos';
 
 import { Loader2 } from 'lucide-react';
 import { ShopPagination } from '../components/ShopPagination';
-
+import { selectProductsWithCategories } from '../store/selectors/selectProductsWithCategories';
 
 const ShopPage = () => {
 
@@ -33,6 +33,8 @@ const ShopPage = () => {
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
     const { productList, total, fetchState, categories, limit, offset, filter, sort, currentPage } = useSelector((state) => state.product);
+
+    const productsWithCategories = selectProductsWithCategories(productList, categories);
 
 
     // Sort categories by rating and take top 5
@@ -200,8 +202,8 @@ const ShopPage = () => {
                             <Loader2 className="w-8 h-8 animate-spin" />
                         </div>
                     ) : (
-                        productList.map((product) => (
-                            <ProductCard key={product.id} product={product} />
+                        productsWithCategories.map((product) => (
+                            <ProductCard key={product.id} product={product} category={product.category} />
                         ))
                     )}
                 </div>

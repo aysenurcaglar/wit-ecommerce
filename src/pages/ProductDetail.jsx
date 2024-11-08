@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../store/actions/productActions';
 import { useParams } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, ShoppingCart, Eye, Star, Heart } from "lucide-react";
+import { Minus, Plus, ShoppingCart, Eye, Star, Heart, Loader2 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { ChevronRight } from "lucide-react";
 import BestsellerProducts from '../components/BestsellerProducts';
 import BrandLogos from '../components/BrandLogos';
 
-const ProductDetail = ({ featuredProducts }) => {
-  const { id } = useParams();
+const ProductDetail = () => {
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector(state => state.product.product);
+
   const [quantity, setQuantity] = useState(1);
-  const product = featuredProducts.find((p) => p.id === parseInt(id));
+
+  useEffect(() => {
+    if (productId) {
+      dispatch(fetchProduct(productId));  // Fetch product data if not already loaded
+      
+  console.log("Product detail page", product);
+    }
+  }, [dispatch, productId]); // Adjust this selector based on your Redux state structure
 
   if (!product) {
-    return <p>Product not found</p>;
+    return <p>
+      <Loader2 className='w-4 h-4 inline animate-spin' />
+      Loading...
+      </p>; // Show a loading state or a spinner
   }
 
-  console.log(product);
 
   const handleQuantityChange = (change) => {
     setQuantity(prev => Math.max(1, prev + change));
@@ -38,11 +52,11 @@ const ProductDetail = ({ featuredProducts }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Product Image */}
-        <div className="overflow-hidden rounded-lg">
+        <div className="overflow-hidden rounded-lg max-h-[500px]">
           <img
-            src={product.image}
+            src={product.images[0]?.url}
             alt={product.name}
-            className="object-none"
+            className="object-cover object-bottom"
           />
         </div>
 
@@ -53,34 +67,32 @@ const ProductDetail = ({ featuredProducts }) => {
 
           {/* Rating */}
           <div className="flex items-center gap-2">
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star
-                  key={star}
-                  className={`w-4 h-4 ${star <= 4 ? "text-sunburst fill-sunburst" : "text-sunburst"
-                    }`}
-                />
-              ))}
+              <div className="flex">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className={`w-4 h-4 ${star <= Math.round(product.rating) ? "text-sunburst fill-sunburst" : "text-sunburst"}`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm text-gray-500">{product.rating}</span>
             </div>
-            <span className="text-sm text-gray-500">0 Reviews</span>
-          </div>
 
           {/* Price */}
           <div className="flex items-center gap-4">
             <span className="text-2xl font-bold text-secondary-color">${product.price}</span>
-            <span className="text-lg text-dark-gray font-bold line-through mb-4">${product.originalPrice}</span>
           </div>
 
           {/* Availability */}
           <div className="flex items-center gap-2 text-sm">
             <span className="font-medium">Availability:</span>
-            <span className="text-primary-color font-semibold">In Stock</span>
+            <span className={`text-primary-color font-semibold`}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span>
           </div>
 
           {/* Description */}
-          <p className="text-gray-600 text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p className="text-gray-600 text-left">{product.description}</p>
 
-          {/* Colors */}
+          {/* Colors 
           <div className="mb-6">
             <div className="flex gap-3">
               {product.colors.map((color, index) => (
@@ -93,6 +105,7 @@ const ProductDetail = ({ featuredProducts }) => {
               ))}
             </div>
           </div>
+          */}
 
           {/* Quantity */}
           <div className="mb-6">
@@ -147,7 +160,7 @@ const ProductDetail = ({ featuredProducts }) => {
         </TabsList>
 
         <TabsContent value="description" className="p-4">
-          <p>Description goes here...</p>
+          <p>{product.description}</p>
         </TabsContent>
 
         <TabsContent value="additional" className="p-4">
@@ -161,7 +174,7 @@ const ProductDetail = ({ featuredProducts }) => {
         </TabsContent>
       </Tabs>
 
-      <BestsellerProducts featuredProducts={featuredProducts} />
+      <BestsellerProducts />
 
     </div>
     <BrandLogos />

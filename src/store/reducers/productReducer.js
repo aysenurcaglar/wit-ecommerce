@@ -9,6 +9,7 @@ import {
   SET_FILTER,
   SET_CURRENT_PAGE,
   SET_SORT,
+  SET_PRODUCT,
 } from '../actions/productActions';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   fetchState: 'NOT_FETCHED', // Can be 'NOT_FETCHED', 'FETCHING', 'FETCHED', 'FAILED'
   currentPage: 1,
   sort: 'rating:desc',
+  product: null,
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -46,6 +48,8 @@ export const productReducer = (state = initialState, action) => {
       return { ...state, currentPage: action.payload };
     case SET_SORT:
       return { ...state, sort: action.payload };
+    case SET_PRODUCT:
+      return { ...state, product: action.payload };
     default:
       return state;
   }

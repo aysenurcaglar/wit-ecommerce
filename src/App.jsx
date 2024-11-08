@@ -119,7 +119,7 @@ function App() {
       dispatch(initializeUser());
     }
     dispatch(fetchCategories());
-    dispatch(fetchProducts(25, 0));
+    dispatch(fetchProducts());
   }, []);
 
   return (
@@ -131,12 +131,11 @@ function App() {
           Loading...</div>}
         {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
-          <PrivateRoute path="/shop" component={ShopPage} />
+          <PrivateRoute exact path="/shop" component={ShopPage} />
           <PrivateRoute exact path="/" render={() => <HomePage />} />
           <PrivateRoute
-            path="/product/:id"
-            render={(props) => <ProductDetail {...props} />}
-          />
+            path="/shop/:gender/:categoryName/:categoryId/:nameSlug/:productId"
+            component={ProductDetail} />
           <Route path="/contact" component={ContactPage} />
           <Route path="/team" component={TeamPage} />
           <Route path="/about" component={AboutPage} />
