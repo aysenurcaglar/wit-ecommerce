@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Scrollbar, Autoplay } from 'swiper/modules';
 
 const Hero2 = () => {
     return (
@@ -12,7 +12,10 @@ const Hero2 = () => {
           <Swiper
             spaceBetween={0}
             navigation={true}
-            modules={[Navigation]}
+            scrollbar={{ draggable: true }}
+            autoplay={{
+              delay: 5000,}}
+            modules={[Navigation, Scrollbar, Autoplay]}
             className="max-w-full"
           >
                         <SwiperSlide>

@@ -1,28 +1,31 @@
 import React from 'react';
-import { Star } from "lucide-react";
+import { Star } from 'lucide-react';
 
-const StarRating = ({ rating }) => {
-  const fullStars = Math.floor(rating); // Number of full stars
-  const hasHalfStar = rating % 1 >= 0.5; // Determine if there's a half star
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // Remaining stars are empty
-
+const StarRating = ({ rating, className = "" }) => {
   return (
     <div className="flex">
-      {[...Array(fullStars)].map((_, index) => (
-        <div key={`full-${index}`} className="star">
-          <Star className="w-4 h-4 text-sunburst fill-sunburst" />
-        </div>
-      ))}
-      {hasHalfStar && (
-        <div className="star" style={{ '--star-width': '50%' }}> {/* Using a custom property to set half width */}
-          <Star className="w-4 h-4 text-sunburst fill-sunburst" style={{ width: '50%' }} /> {/* Use CSS for half filling */}
-        </div>
-      )}
-      {[...Array(emptyStars)].map((_, index) => (
-        <div key={`empty-${index}`} className="star">
-          <Star className="w-4 h-4 text-sunburst" />
-        </div>
-      ))}
+      {[1, 2, 3, 4, 5].map((star) => {
+        const fillPercentage = Math.max(0, Math.min(1, rating - (star - 1)));
+        
+        return (
+          <div key={star} className="relative">
+            {/* Empty star base - shown in slate */}
+            <Star 
+              className="w-5 h-5 text-slate-300" 
+            />
+            
+            {/* Colored star (both outline and fill) with clipping */}
+            <div 
+              className="absolute top-0 left-0 overflow-hidden"
+              style={{ width: `${fillPercentage * 100}%` }}
+            >
+              <Star 
+                className="w-5 h-5 text-sunburst fill-sunburst"
+              />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

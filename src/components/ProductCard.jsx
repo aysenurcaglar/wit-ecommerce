@@ -1,35 +1,12 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { useHistory } from 'react-router-dom';
+import createSlug from '../utils/createSlug';
 
 const ProductCard = ({ product, category }) => {
 
   const history = useHistory();
 
-  function createSlug(name) {
-    const trToEngMap = {
-      ç: 'c',
-      Ç: 'C',
-      ğ: 'g',
-      Ğ: 'G',
-      ı: 'i',
-      İ: 'I',
-      ö: 'o',
-      Ö: 'O',
-      ş: 's',
-      Ş: 'S',
-      ü: 'u',
-      Ü: 'U'
-    };
-  
-    return name
-      .split('')
-      .map(char => trToEngMap[char] || char) // Replace Turkish chars
-      .join('')
-      .toLowerCase() // Convert to lowercase
-      .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
-      .replace(/^-+|-+$/g, ''); // Remove leading or trailing hyphens
-  }
   
   const handleClick = (e) => {
     e.preventDefault();
@@ -54,9 +31,7 @@ const ProductCard = ({ product, category }) => {
           <h3 className="font-bold text-base mb-2">{product.name}</h3>
           <p className="text-gray-500 text-sm mb-2">{product.brand}</p>
           <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-light-gray font-bold line-through text-sm">
-              ${product.price}
-            </span>
+
             <span className="text-secondary-color font-bold">
               ${product.price}
             </span>

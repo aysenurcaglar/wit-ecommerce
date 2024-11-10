@@ -7,6 +7,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react";
+import createSlug from "../utils/createSlug";
 
 const CategoryDropdown = () => {
 
@@ -31,7 +32,7 @@ const CategoryDropdown = () => {
                         <h4 className="font-semibold text-dark-gray mb-2">Kadın</h4>
                         {femaleCategories.map(category => (
                             <DropdownMenuItem key={category.id} asChild>
-                                <Link to={`/shop/${category.gender}/${category.code.split(':')[1]}/${category.id}`} className="text-dark-gray">
+                                <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`} className="text-dark-gray">
                                     {category.title}
                                 </Link>
                             </DropdownMenuItem>
@@ -41,7 +42,7 @@ const CategoryDropdown = () => {
                         <h4 className="font-semibold text-dark-gray mb-2">Erkek</h4>
                         {maleCategories.map(category => (
                             <DropdownMenuItem key={category.id} asChild>
-                                <Link to={`/shop/${category.gender}/${category.code.split(':')[1]}/${category.id}`} className="text-dark-gray">
+                                <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`} className="text-dark-gray">
                                     {category.title}
                                 </Link>
                             </DropdownMenuItem>

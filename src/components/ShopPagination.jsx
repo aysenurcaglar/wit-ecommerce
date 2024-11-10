@@ -21,7 +21,7 @@ export function ShopPagination() {
     }
   
     return (
-      <Pagination>
+      <Pagination className= "flex flex-wrap max-w-75vw mx-auto">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious 

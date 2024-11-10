@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../store/actions/productActions';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingCart, Eye, Star, Heart, Loader2 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -9,9 +9,11 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/brea
 import { ChevronRight } from "lucide-react";
 import BestsellerProducts from '../components/BestsellerProducts';
 import BrandLogos from '../components/BrandLogos';
+import StarRating from '../components/StarRating';
 
 const ProductDetail = () => {
   const { productId } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product.product);
 
@@ -40,7 +42,8 @@ const ProductDetail = () => {
   return (
     <>
     <div className="max-w-[85vw] md:max-w-75vw mx-auto px-4 py-8">
-      <Breadcrumb className="flex flex-row mb-8">
+      <div className='flex justify-between items-center mb-8'>
+      <Breadcrumb className="flex flex-row">
         <BreadcrumbItem>
           <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
         </BreadcrumbItem>
@@ -49,6 +52,16 @@ const ProductDetail = () => {
           <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
+
+      <Button 
+          variant="ghost" 
+          onClick={() => history.goBack()}
+          className="inline-flex items-center gap-1 text-md text-primary-color font-semibold"
+        >
+          <ChevronRight className="w-4 h-4 mt-1 rotate-180" />
+          Back
+        </Button>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Product Image */}
@@ -67,15 +80,8 @@ const ProductDetail = () => {
 
           {/* Rating */}
           <div className="flex items-center gap-2">
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className={`w-4 h-4 ${star <= Math.round(product.rating) ? "text-sunburst fill-sunburst" : "text-sunburst"}`}
-                  />
-                ))}
-              </div>
-              <span className="text-sm text-gray-500">{product.rating}</span>
+              <StarRating rating={product.rating} />
+              <span className="text-lg text-gray-400">{product.rating}</span>
             </div>
 
           {/* Price */}
@@ -85,8 +91,8 @@ const ProductDetail = () => {
 
           {/* Availability */}
           <div className="flex items-center gap-2 text-sm">
-            <span className="font-medium">Availability:</span>
-            <span className={`text-primary-color font-semibold`}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span>
+            <h3 className="text-md font-medium">Availability:</h3>
+            <h3 className={`text-primary-color font-semibold`}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</h3>
           </div>
 
           {/* Description */}
@@ -133,12 +139,12 @@ const ProductDetail = () => {
           <div className="flex gap-4">
             <Button>
               <ShoppingCart className="mr-2 h-5 w-5" />
-              Select Options
+              Add to Cart
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" className= "p-4">
               <Heart className="h-5 w-5" />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" className= "p-4">
               <Eye className="h-5 w-5" />
             </Button>
           </div>
@@ -146,8 +152,8 @@ const ProductDetail = () => {
       </div>
 
       {/* Tabs */}
-      <Tabs defaultValue="description" className="mt-6">
-        <TabsList >
+      <Tabs defaultValue="description" className="flex flex-col justify-center items-center mt-6">
+        <TabsList className="" >
           <TabsTrigger value="description" className="p-2">
             Description
           </TabsTrigger>
@@ -159,16 +165,16 @@ const ProductDetail = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="description" className="p-4">
+        <TabsContent value="description" className="p-4 h-60 flex items-center justify-center">
           <p>{product.description}</p>
         </TabsContent>
 
-        <TabsContent value="additional" className="p-4">
+        <TabsContent value="additional" className="p-4 h-60 flex items-center justify-center">
           {/* Additional Information content */}
           <p>Additional information goes here...</p>
         </TabsContent>
 
-        <TabsContent value="reviews" className="p-4">
+        <TabsContent value="reviews" className="p-4 h-60 flex items-center justify-center">
           {/* Reviews content */}
           <p>Customer reviews go here...</p>
         </TabsContent>

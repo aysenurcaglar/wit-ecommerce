@@ -22,6 +22,7 @@ import BrandLogos from '../components/BrandLogos';
 import { Loader2 } from 'lucide-react';
 import { ShopPagination } from '../components/ShopPagination';
 import { selectProductsWithCategories } from '../store/selectors/selectProductsWithCategories';
+import createSlug from '../utils/createSlug';
 
 const ShopPage = () => {
 
@@ -79,7 +80,7 @@ const ShopPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
                     {topCategories.map((category) => (
                         <Card key={category.id}
-                         onClick={() => handleCategoryChange(category.id)} className="relative overflow-hidden group cursor-pointer">
+                         onClick={() => handleCategoryChange(category.id)} className="relative overflow-hidden group cursor-pointer hover:scale-105">
                             <CardContent className="p-0">
                                 <div className="aspect-square relative">
                                     <img
@@ -88,7 +89,7 @@ const ShopPage = () => {
                                         className="w-full h-full object-cover object-top transition-opacity"
                                     />
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                                        <Link to={`/shop/${category.gender}/${category.code.split(':')[1]}/${category.id}`}>
+                                        <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`}>
                                             <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.gender === 'k' ? 'KADIN' : 'ERKEK'}</h3>
                                             <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.title}</h3>
                                         </Link>
