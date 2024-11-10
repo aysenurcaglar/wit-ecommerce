@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { AlignRight, Heart, Search, ShoppingCart, UserRound } from "lucide-react";
+import { AlignRight, Heart, Search, UserRound } from "lucide-react";
 import { setUser } from '../store/actions/clientActions';
 import { toast } from "react-toastify";
 import CategoryDropdown from "../components/CategoryDropdown";
+import Cart from "../components/Cart";
 
 
 const Header = () => {
@@ -65,7 +66,7 @@ const Header = () => {
               <a href="/login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Signup</a>
             )}
             <a href="#search" className="text-primary-color font-semibold"><Search /></a>
-            <a href="#cart" className="text-primary-color font-semibold"><ShoppingCart /></a>
+            <Cart />
             <a href="#favorites" className="text-primary-color font-semibold"><Heart /></a>
           </div>
         </div>
@@ -91,7 +92,7 @@ const Header = () => {
                 <a href="/login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Signup</a>
               )}
               <a href="#search" className="text-primary-color font-semibold">Search</a>
-              <a href="#cart" className="text-primary-color font-semibold">Cart</a>
+              <Cart />
               <a href="#favorites" className="text-primary-color font-semibold">Favs</a>
               
             </div>

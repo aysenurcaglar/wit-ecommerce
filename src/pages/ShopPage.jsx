@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { LayoutGrid, List, ChevronRight, Filter } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
-import { updateFilter, updateSort, updateCategory, setFilter, fetchProducts, setCurrentPage, setOffset, fetchCategories, initializeShopPage } from '../store/actions/productActions';
+import { updateFilter, updateSort, updateCategory, setFilter, initializeShopPage } from '../store/actions/productActions';
 
 import BrandLogos from '../components/BrandLogos';
 

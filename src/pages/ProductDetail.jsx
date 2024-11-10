@@ -10,6 +10,8 @@ import { ChevronRight } from "lucide-react";
 import BestsellerProducts from '../components/BestsellerProducts';
 import BrandLogos from '../components/BrandLogos';
 import StarRating from '../components/StarRating';
+import { addToCart } from '../store/actions/shoppingCartActions';
+import { toast } from 'react-toastify';
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -33,6 +35,17 @@ const ProductDetail = () => {
       Loading...
       </p>; // Show a loading state or a spinner
   }
+
+  const handleAddToCart = () => {
+    if (product) {
+      // Add to cart quantity times
+      for (let i = 0; i < quantity; i++) {
+        dispatch(addToCart(product));
+      }
+      // Optional: Show some feedback to user
+      toast.success(`${quantity} x ${product.name} added to your cart`);
+    }
+  };
 
 
   const handleQuantityChange = (change) => {
@@ -98,21 +111,6 @@ const ProductDetail = () => {
           {/* Description */}
           <p className="text-gray-600 text-left">{product.description}</p>
 
-          {/* Colors 
-          <div className="mb-6">
-            <div className="flex gap-3">
-              {product.colors.map((color, index) => (
-                <button
-                  key={index}
-                  className="w-8 h-8 rounded-full border-2 border-white ring-2 ring-gray-200 focus:ring-blue-500"
-                  style={{ backgroundColor: color }}
-                  aria-label={`Color ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-          */}
-
           {/* Quantity */}
           <div className="mb-6">
             <h3 className="text-md font-medium text-left mb-4">Quantity</h3>
@@ -137,7 +135,7 @@ const ProductDetail = () => {
 
           {/* Actions */}
           <div className="flex gap-4">
-            <Button>
+            <Button onClick={handleAddToCart}>
               <ShoppingCart className="mr-2 h-5 w-5" />
               Add to Cart
             </Button>
