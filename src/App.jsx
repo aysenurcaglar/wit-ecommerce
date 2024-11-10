@@ -30,81 +30,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const featuredProducts = [
-  {
-    id: 5,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-5.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 6,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-6.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 7,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-7.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 8,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-8.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 9,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-9.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 10,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-10.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 11,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-11.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-  {
-    id: 12,
-    name: "Graphic Design T-Shirt",
-    brand: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    image: "/product-cover-12.jpg",
-    colors: ["#23A6F0", "#23856D", "#E77C40", "#E63946"]
-  },
-];
-
 function App() {
 
   const dispatch = useDispatch();
@@ -119,7 +44,6 @@ function App() {
       dispatch(initializeUser());
     }
     dispatch(fetchCategories());
-    dispatch(fetchProducts());
   }, []);
 
   return (
@@ -131,11 +55,13 @@ function App() {
           Loading...</div>}
         {error && <div className="bg-white">Error: {error}</div>}
         <Switch>
-          <PrivateRoute exact path="/shop" component={ShopPage} />
-          <PrivateRoute exact path="/" render={() => <HomePage />} />
-          <PrivateRoute
+        <PrivateRoute
             path="/shop/:gender/:categoryName/:categoryId/:nameSlug/:productId"
             component={ProductDetail} />
+          <PrivateRoute exact path="/shop/:gender/:categoryName/:categoryId" component={ShopPage} />
+          <PrivateRoute exact path="/shop" component={ShopPage} />
+          <PrivateRoute exact path="/" render={() => <HomePage />} />
+          
           <Route path="/contact" component={ContactPage} />
           <Route path="/team" component={TeamPage} />
           <Route path="/about" component={AboutPage} />

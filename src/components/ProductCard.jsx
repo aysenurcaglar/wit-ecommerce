@@ -33,7 +33,7 @@ const ProductCard = ({ product, category }) => {
           <div className="flex items-center justify-center gap-2 mb-2">
 
             <span className="text-secondary-color font-bold">
-              ${product.price}
+              ${product.price.toFixed(2)}
             </span>
           </div>
           <div className="flex justify-center gap-2 mb-4">

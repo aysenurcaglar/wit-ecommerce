@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
     DropdownMenu,
@@ -8,8 +8,15 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react";
 import createSlug from "../utils/createSlug";
+import { updateCategory } from "../store/actions/productActions";
 
 const CategoryDropdown = () => {
+
+    const dispatch = useDispatch();
+
+    const handleCategoryClick = (categoryId) => {
+        dispatch(updateCategory(categoryId));
+    };
 
     const categories = useSelector(state => state.product.categories);
 
@@ -32,7 +39,10 @@ const CategoryDropdown = () => {
                         <h4 className="font-semibold text-dark-gray mb-2">Kadın</h4>
                         {femaleCategories.map(category => (
                             <DropdownMenuItem key={category.id} asChild>
-                                <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`} className="text-dark-gray">
+                                <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`}
+                                 className="text-dark-gray"
+                                 onClick={() => handleCategoryClick(category.id)}
+                                    >
                                     {category.title}
                                 </Link>
                             </DropdownMenuItem>
@@ -42,7 +52,10 @@ const CategoryDropdown = () => {
                         <h4 className="font-semibold text-dark-gray mb-2">Erkek</h4>
                         {maleCategories.map(category => (
                             <DropdownMenuItem key={category.id} asChild>
-                                <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`} className="text-dark-gray">
+                                <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`} 
+                                className="text-dark-gray"
+                                onClick={() => handleCategoryClick(category.id)}
+                                >
                                     {category.title}
                                 </Link>
                             </DropdownMenuItem>

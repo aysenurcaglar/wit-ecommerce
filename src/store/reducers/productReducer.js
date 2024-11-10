@@ -1,4 +1,4 @@
-import { current } from 'immer';
+import {produce} from 'immer';
 import {
   SET_CATEGORIES,
   SET_PRODUCT_LIST,
@@ -10,6 +10,7 @@ import {
   SET_CURRENT_PAGE,
   SET_SORT,
   SET_PRODUCT,
+  SET_CATEGORY
 } from '../actions/productActions';
 
 const initialState = {
@@ -21,36 +22,47 @@ const initialState = {
   filter: '',
   fetchState: 'NOT_FETCHED', // Can be 'NOT_FETCHED', 'FETCHING', 'FETCHED', 'FAILED'
   currentPage: 1,
-  sort: 'rating:desc',
+  sort: '',
   product: null,
+  category: null
 };
 
-export const productReducer = (state = initialState, action) => {
+export const productReducer = produce((draft, action) => {
   switch (action.type) {
     case SET_CATEGORIES:
-      return { ...state, categories: action.payload };
-      case SET_PRODUCT_LIST:
-        return {
-          ...state,
-          productList: action.payload,  // Replace existing products with new ones
-        };
+      draft.categories = action.payload;
+      break;
+    case SET_PRODUCT_LIST:
+      draft.productList = action.payload;
+      break;
     case SET_TOTAL:
-      return { ...state, total: action.payload };
+      draft.total = action.payload;
+      break;
     case SET_FETCH_STATE:
-      return { ...state, fetchState: action.payload };
+      draft.fetchState = action.payload;
+      break;
     case SET_LIMIT:
-      return { ...state, limit: action.payload };
+      draft.limit = action.payload;
+      break;
     case SET_OFFSET:
-      return { ...state, offset: action.payload };
+      draft.offset = action.payload;
+      break;
     case SET_FILTER:
-      return { ...state, filter: action.payload };
+      draft.filter = action.payload;
+      break;
     case SET_CURRENT_PAGE:
-      return { ...state, currentPage: action.payload };
+      draft.currentPage = action.payload;
+      break;
     case SET_SORT:
-      return { ...state, sort: action.payload };
+      draft.sort = action.payload;
+      break;
     case SET_PRODUCT:
-      return { ...state, product: action.payload };
+      draft.product = action.payload;
+      break;
+    case SET_CATEGORY:
+      draft.category = action.payload;
+      break;
     default:
-      return state;
+      break;
   }
-};
+}, initialState);

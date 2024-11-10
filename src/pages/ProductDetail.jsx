@@ -86,7 +86,7 @@ const ProductDetail = () => {
 
           {/* Price */}
           <div className="flex items-center gap-4">
-            <span className="text-2xl font-bold text-secondary-color">${product.price}</span>
+            <span className="text-2xl font-bold text-secondary-color">${product.price.toFixed(2)}</span>
           </div>
 
           {/* Availability */}

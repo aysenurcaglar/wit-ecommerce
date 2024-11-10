@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { LayoutGrid, List, ChevronRight, Filter } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
-import { updateFilter, updateSort, updateCategory, setFilter, fetchProducts, setCurrentPage } from '../store/actions/productActions';
+import { updateFilter, updateSort, updateCategory, setFilter, fetchProducts, setCurrentPage, setOffset, fetchCategories, initializeShopPage } from '../store/actions/productActions';
 
 import BrandLogos from '../components/BrandLogos';
 
@@ -23,6 +23,7 @@ import { Loader2 } from 'lucide-react';
 import { ShopPagination } from '../components/ShopPagination';
 import { selectProductsWithCategories } from '../store/selectors/selectProductsWithCategories';
 import createSlug from '../utils/createSlug';
+import ProductGrid from '../components/ProductGrid';
 
 const ShopPage = () => {
 
@@ -33,30 +34,71 @@ const ShopPage = () => {
 
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
-    const { productList, total, fetchState, categories, limit, offset, filter, sort, currentPage } = useSelector((state) => state.product);
+    const { productList, total, fetchState, categories, limit, offset, filter, sort, currentPage, category } = useSelector((state) => state.product);
 
     const productsWithCategories = selectProductsWithCategories(productList, categories);
+
+    useEffect(() => {
+        if (location.pathname === '/shop') {
+          // Reset category to null when we're back on /shop
+          dispatch(initializeShopPage()); // Or directly set the state to null if not using Redux
+        }
+      }, [location, dispatch]);
 
 
     // Sort categories by rating and take top 5
     const topCategories = [...categories].sort((a, b) => b.rating - a.rating).slice(0, 5);
 
-     // Handle category selection
-  const handleCategoryChange = (categoryId) => {
-    dispatch(updateCategory(categoryId));
-  };
+    // Handle category selection
+    const handleCategoryChange = async (categoryId, gender, categoryTitle) => {
+        const slug = createSlug(categoryTitle);
+        history.push(`/shop/${gender}/${slug}/${categoryId}`);
+        dispatch(updateCategory(categoryId));
 
-  // Handle filter input
-  const handleFilterChange = (event) => {
-    const newFilter = event.target.value;
-    dispatch(updateFilter(newFilter));
-  };
+    };
 
-  // Handle sort selection
-  const handleSortChange = (event) => {
-    const newSort = event.target.value;
-    dispatch(updateSort(newSort));
-  };
+    // Handle filter input
+    const handleFilterChange = (event) => {
+        const newFilter = event.target.value;
+        dispatch(updateFilter(newFilter));
+    };
+
+    // Handle sort selection
+    const handleSortChange = (value) => {
+        dispatch(updateSort(value));
+        console.log("new sorting criterion: ", value);
+    };
+
+    // Update breadcrumb based on current category
+    const getBreadcrumbItems = () => {
+        const items = [
+            { label: 'Home', href: '/' },
+            { label: 'Shop', href: '/shop' }
+        ];
+
+        if (gender && categoryName) {
+            items.push({
+                label: gender === 'k' ? 'Kadın' : 'Erkek',
+                href: `/shop/${gender}`
+            });
+            items.push({
+                label: categoryName,
+                href: `/shop/${gender}/${categoryName}/${categoryId}`
+            });
+        }
+
+        return items;
+    };
+
+    const breadcrumbItems = getBreadcrumbItems();
+
+    if (fetchState === 'FETCHING') {
+        return <div>Loading...</div>;
+    }
+
+    if (fetchState === 'FAILED') {
+        return <div>Error loading data. Please try again.</div>;
+    }
 
 
     return (
@@ -66,13 +108,19 @@ const ShopPage = () => {
                 <div className="flex flex-col md:flex-row items-center justify-between mb-6">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-0">Shop</h3>
                     <Breadcrumb className="flex flex-row">
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <ChevronRight />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
-                        </BreadcrumbItem>
+                        {breadcrumbItems.map((item, index) => (
+                            <React.Fragment key={item.href}>
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink
+                                        href={item.href}
+                                        className={index === 0 ? "font-bold" : ""}
+                                    >
+                                        {item.label}
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                {index < breadcrumbItems.length - 1 && <ChevronRight />}
+                            </React.Fragment>
+                        ))}
                     </Breadcrumb>
                 </div>
 
@@ -80,7 +128,12 @@ const ShopPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-12">
                     {topCategories.map((category) => (
                         <Card key={category.id}
-                         onClick={() => handleCategoryChange(category.id)} className="relative overflow-hidden group cursor-pointer hover:scale-105">
+                            onClick={() => handleCategoryChange(
+                                category.id,
+                                category.gender,
+                                category.title
+                            )}
+                            className="relative overflow-hidden group cursor-pointer hover:scale-105">
                             <CardContent className="p-0">
                                 <div className="aspect-square relative">
                                     <img
@@ -89,10 +142,8 @@ const ShopPage = () => {
                                         className="w-full h-full object-cover object-top transition-opacity"
                                     />
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                                        <Link to={`/shop/${category.gender}/${createSlug(category.title)}/${category.id}`}>
-                                            <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.gender === 'k' ? 'KADIN' : 'ERKEK'}</h3>
-                                            <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.title}</h3>
-                                        </Link>
+                                        <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.gender === 'k' ? 'KADIN' : 'ERKEK'}</h3>
+                                        <h3 className="font-bold text-lg md:text-xl text-center mb-1 drop-shadow-lg uppercase">{category.title}</h3>
                                         <p className="text-xs md:text-sm drop-shadow-lg">Rating: {category.rating}</p>
                                     </div>
                                 </div>
@@ -107,7 +158,7 @@ const ShopPage = () => {
                         <span className="text-sm text-gray-500">
                             Showing {offset + 1} to {offset + productList.length} of {total} results
                         </span>
-                        
+
                         <Button
                             variant="outline"
                             size="sm"
@@ -131,7 +182,7 @@ const ShopPage = () => {
                                     </Button>
                                 </div>
                             </div>
-                            <Select value={sort} onChange={handleSortChange} className="w-full">
+                            <Select value={sort} onValueChange={handleSortChange} className="w-full">
                                 <SelectTrigger>
                                     <SelectValue placeholder="Sort by" />
                                 </SelectTrigger>
@@ -143,12 +194,12 @@ const ShopPage = () => {
                                 </SelectContent>
                             </Select>
                             <Input
-                            type="text"
-                            placeholder="Filter products..."
-                            value={filter}
-                            onChange={handleFilterChange}
-                            className="border rounded px-2 py-1 w-[200px]"
-                        />
+                                type="text"
+                                placeholder="Filter products..."
+                                value={filter}
+                                onChange={handleFilterChange}
+                                className="border rounded px-2 py-1 w-[200px]"
+                            />
                         </div>
                     )}
                 </div>
@@ -168,7 +219,7 @@ const ShopPage = () => {
                                 <List className="h-4 w-4" />
                             </Button>
                         </div>
-                        <Select value={sort} onChange={handleSortChange}>
+                        <Select value={sort} onValueChange={handleSortChange}>
                             <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder="Sort by" />
                             </SelectTrigger>
@@ -197,17 +248,10 @@ const ShopPage = () => {
                 </div>
 
                 {/* Product Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-8 md:mb-12">
-                    {fetchState === 'FETCHING' ? (
-                        <div className="col-span-full flex justify-center items-center py-16">
-                            <Loader2 className="w-8 h-8 animate-spin" />
-                        </div>
-                    ) : (
-                        productsWithCategories.map((product) => (
-                            <ProductCard key={product.id} product={product} category={product.category} />
-                        ))
-                    )}
-                </div>
+                <ProductGrid
+                    fetchState={fetchState}
+                    productsWithCategories={productsWithCategories}
+                />
 
                 {/* Pagination */}
                 <div className="flex justify-center mb-2">

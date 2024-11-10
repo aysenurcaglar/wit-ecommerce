@@ -1,4 +1,5 @@
 import api from "../../api/axios";
+import { buildQueryString } from "../../utils/buildQueryString";
 
 // Action Types
 export const SET_CATEGORIES = 'SET_CATEGORIES';
@@ -11,6 +12,7 @@ export const SET_FILTER = 'SET_FILTER';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_SORT = 'SET_SORT';
 export const SET_PRODUCT = 'SET_PRODUCT';
+export const SET_CATEGORY = 'SET_CATEGORY';
 
 // Action Creators
 export const setCategories = (categories) => ({ type: SET_CATEGORIES, payload: categories });
@@ -23,6 +25,9 @@ export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter });
 export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, payload: page });
 export const setSort = (sort) => ({ type: SET_SORT, payload: sort });
 export const setProduct = (product) => ({ type: SET_PRODUCT, payload: product });
+export const setCategory = (categoryId) => (console.log('setCategory called with categoryId:', categoryId), 
+{ type: SET_CATEGORY, payload: categoryId }
+);
 
 export const fetchCategories = () => async (dispatch) => {
     dispatch(setFetchState('FETCHING'));
@@ -36,27 +41,29 @@ export const fetchCategories = () => async (dispatch) => {
     }
   };
 
-  export const fetchProducts = () => async (dispatch, getState) => {
-    const { limit, offset, filter, sort } = getState().product;
+  export const fetchProducts = (params = {}) => async (dispatch, getState) => {
+    const { limit, offset, filter, sort, category } = getState().product;
     
-    let query = `/products?limit=${limit}&offset=${offset}`;
-    
-    if (filter) {
-      query += `&filter=${encodeURIComponent(filter)}`;
-    }
-    
-    if (sort) {
-      query += `&sort=${sort}`;
-    }
+    const query = buildQueryString({ 
+      limit, 
+      offset, 
+      category: category || null,
+      filter, 
+      sort: params.sort || sort 
+    });
+  
+    console.log('Current category:', params.category !== undefined ? params.category : category);
+    console.log('Requesting URL: ', `/products${query}`);
   
     dispatch(setFetchState('FETCHING'));
   
     try {
-      const response = await api.get(query);
+      const response = await api.get(`/products${query}`);
       const data = response.data;
       dispatch(setProductList(data.products));
       dispatch(setTotal(data.total));
       dispatch(setFetchState('FETCHED'));
+      console.log('fetched products:', data.products);
     } catch (error) {
       console.error('Error fetching products:', error);
       dispatch(setFetchState('FAILED'));
@@ -68,15 +75,17 @@ export const fetchCategories = () => async (dispatch) => {
     dispatch(fetchProducts());
   };
 
-  export const updateSort = (newSort) => (dispatch) => {
+  export const updateSort = (newSort) => (dispatch, getState) => {
+    const { category } = getState().product;
     dispatch(setSort(newSort));
-    dispatch(fetchProducts());
+    dispatch(fetchProducts({ sort: newSort, category }));
   };
 
   export const updateCategory = (categoryId) => (dispatch) => {
-    dispatch(setOffset(0));  // Reset offset if category changes
-    dispatch(setCurrentPage(1));  // Reset to page 1 on category change
-    dispatch(fetchProducts());  // Fetch products with the new category
+    dispatch(setCategory(categoryId));
+    dispatch(setOffset(0));
+    dispatch(setCurrentPage(1));
+    dispatch(fetchProducts({ category: categoryId }));
   };
 
   export const fetchProduct = (productId) => async (dispatch) => {
@@ -114,4 +123,11 @@ const selectProductsWithCategories = (state) => {
     ...product,
     category: categories.find((category) => category.id === product.category_id),
   }));
+};
+
+export const initializeShopPage = (categoryId = null) => (dispatch) => {
+  dispatch(setCategory(categoryId)); // Use passed categoryId instead of always null
+  dispatch(setOffset(0));
+  dispatch(setCurrentPage(1));
+  dispatch(fetchProducts());
 };
