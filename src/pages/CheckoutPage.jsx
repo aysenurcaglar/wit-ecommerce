@@ -25,8 +25,8 @@ const CheckoutPage = () => {
         .filter(item => item.checked)
         .reduce((sum, item) => sum + item.product.price * item.count, 0);
 
-    let shipping = 0;
-    let discount = 0;
+    let shipping = subtotal > 0 ? 5 : 0;
+    let discount = subtotal > 0 ? 10 : 0;
     const total = subtotal + shipping - discount;
 
     const handleQuantityChange = (productId, currentCount, change) => {
@@ -63,15 +63,16 @@ const CheckoutPage = () => {
     }
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container max-w-[85vw] md:max-w-75vw mx-auto py-8">
             <h1 className="text-2xl font-bold mb-6">Checkout</h1>
             <div className="grid md:grid-cols-3 gap-6">
                 <div className="md:col-span-2">
                     <div className="grid gap-4">
                         {cartItems.map((item) => (
                             <Card key={item.product.id}>
-                                <CardContent className="p-4">
-                                    <div className="flex items-center space-x-4">
+                                <CardContent className="p-4 md:p-8">
+                                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 space-x-4">
+                                        <div className='flex flex-row items-center space-x-4'>
                                         <Checkbox
                                             id={`product-${item.product.id}`}
                                             checked={item.checked}
@@ -84,7 +85,7 @@ const CheckoutPage = () => {
                                             <img
                                                 src={item.product.images[0].url}
                                                 alt={item.product.name}
-                                                className="w-12 h-12 rounded-md object-cover"
+                                                className="w-16 h-16 rounded-md object-cover object-top"
                                             />
                                             <div className="flex-1 text-left">
                                                 <p className="font-medium">{item.product.name}</p>
@@ -93,6 +94,8 @@ const CheckoutPage = () => {
                                                 </p>
                                             </div>
                                         </label>
+                                        </div>
+                                        <div className='flex flex-row space-x-4'>
                                         <div className="flex items-center space-x-2">
                                             <Button
                                                 variant="outline"
@@ -117,6 +120,7 @@ const CheckoutPage = () => {
                                         >
                                             <Trash2 className="h-4 w-4" />
                                         </Button>
+                                        </div>
                                     </div>
                                 </CardContent>
                             </Card>
