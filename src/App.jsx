@@ -22,6 +22,7 @@ import AboutPage from './pages/AboutPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import CheckoutPage from './pages/CheckoutPage';
+import OrderPage from './pages/OrderPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 
@@ -64,6 +65,7 @@ function App() {
           <PrivateRoute exact path="/" render={() => <HomePage />} />
 
           <Route path="/checkout" component={CheckoutPage} />
+          <PrivateRoute path="/order" component={OrderPage} />
           
           <Route path="/contact" component={ContactPage} />
           <Route path="/team" component={TeamPage} />
