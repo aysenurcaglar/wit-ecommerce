@@ -5,6 +5,10 @@ import {
   SET_LANGUAGE,
   SET_LOADING,
   SET_ERROR,
+  GET_ADDRESSES,
+  ADD_ADDRESS,
+  UPDATE_ADDRESS,
+  DELETE_ADDRESS
 } from '../actions/clientActions';
 
 const initialState = {
@@ -32,6 +36,14 @@ export const clientReducer = (state = initialState, action) => {
       return { ...state, isLoading: action.payload };
     case SET_ERROR:
       return { ...state, error: action.payload };
+      case GET_ADDRESSES:
+      return { ...state, addressList: action.payload };
+    case ADD_ADDRESS:
+      return { ...state, addressList: [...state.addressList, action.payload] };
+    case UPDATE_ADDRESS:
+      return { ...state, addressList: state.addressList.map((address) => address.id === action.payload.id ? action.payload : address) };
+    case DELETE_ADDRESS:
+      return { ...state, addressList: state.addressList.filter((address) => address.id !== action.payload) };
     default:
       return state;
   }

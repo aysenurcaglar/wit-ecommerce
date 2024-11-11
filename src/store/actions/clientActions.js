@@ -7,6 +7,10 @@ export const SET_THEME = 'SET_THEME';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_ERROR = 'SET_ERROR';
+export const GET_ADDRESSES = 'GET_ADDRESSES';
+export const ADD_ADDRESS = 'ADD_ADDRESS';
+export const UPDATE_ADDRESS = 'UPDATE_ADDRESS';
+export const DELETE_ADDRESS = 'DELETE_ADDRESS';
 
 
 // Action Creators
@@ -19,6 +23,10 @@ export const setTheme = (theme) => ({ type: SET_THEME, payload: theme });
 export const setLanguage = (language) => ({ type: SET_LANGUAGE, payload: language });
 export const setLoading = (isLoading) => ({ type: SET_LOADING, payload: isLoading });
 export const setError = (error) => ({ type: SET_ERROR, payload: error });
+export const getAddresses = (addresses) => ({ type: GET_ADDRESSES, payload: addresses });
+export const addAddress = (address) => ({ type: ADD_ADDRESS, payload: address });
+export const updateAddress = (address) => ({ type: UPDATE_ADDRESS, payload: address });
+export const deleteAddress = (addressId) => ({ type: DELETE_ADDRESS, payload: addressId });
 
 // Action to initialize user state from localStorage on app startup
 export const initializeUser = () => async (dispatch) => {
@@ -77,13 +85,51 @@ export const loginUser = (userData, rememberMe) => (dispatch) => {
 };
 
 // Thunk action to fetch roles
-export const fetchRolesIfNeeded = () => (dispatch, getState) => {
+export const fetchRolesIfNeeded = () => async (dispatch, getState) => {
   const { roles } = getState().client;
   if (roles.length === 0) {
-    // Fetch roles if not already fetched
-    fetch('/api/roles')
-      .then((res) => res.json())
-      .then((data) => dispatch(setRoles(data)))
-      .catch((error) => console.error('Failed to fetch roles:', error));
+    try {
+      // Fetch roles if not already fetched
+      const response = await api.get('/roles');
+      dispatch(setRoles(response.data));
+    } catch (error) {
+      console.error('Failed to fetch roles:', error);
+    }
+  }
+};
+
+export const fetchAddresses = () => async (dispatch) => {
+  try {
+    const response = await api.get('/user/address');
+    dispatch(getAddresses(response.data));
+  } catch (error) {
+    console.error('Error fetching addresses:', error);
+  }
+};
+
+export const addNewAddress = (addressData) => async (dispatch) => {
+  try {
+    const response = await api.post('/user/address', addressData);
+    dispatch(addAddress(response.data));
+  } catch (error) {
+    console.error('Error adding new address:', error);
+  }
+};
+
+export const updateExistingAddress = (addressId, addressData) => async (dispatch) => {
+  try {
+    const response = await api.put(`/user/address/${addressId}`, addressData);
+    dispatch(updateAddress(response.data));
+  } catch (error) {
+    console.error('Error updating address:', error);
+  }
+};
+
+export const deleteExistingAddress = (addressId) => async (dispatch) => {
+  try {
+    await api.delete(`/user/address/${addressId}`);
+    dispatch(deleteAddress(addressId));
+  } catch (error) {
+    console.error('Error deleting address:', error);
   }
 };

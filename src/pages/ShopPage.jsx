@@ -24,6 +24,7 @@ import { ShopPagination } from '../components/ShopPagination';
 import { selectProductsWithCategories } from '../store/selectors/selectProductsWithCategories';
 import createSlug from '../utils/createSlug';
 import ProductGrid from '../components/ProductGrid';
+import DynamicBreadcrumb from '../components/DynamicBreadcrumb';
 
 const ShopPage = () => {
 
@@ -69,28 +70,7 @@ const ShopPage = () => {
         console.log("new sorting criterion: ", value);
     };
 
-    // Update breadcrumb based on current category
-    const getBreadcrumbItems = () => {
-        const items = [
-            { label: 'Home', href: '/' },
-            { label: 'Shop', href: '/shop' }
-        ];
 
-        if (gender && categoryName) {
-            items.push({
-                label: gender === 'k' ? 'Kadın' : 'Erkek',
-                href: `/shop/${gender}`
-            });
-            items.push({
-                label: categoryName,
-                href: `/shop/${gender}/${categoryName}/${categoryId}`
-            });
-        }
-
-        return items;
-    };
-
-    const breadcrumbItems = getBreadcrumbItems();
 
     if (fetchState === 'FETCHING') {
         return <div>Loading...</div>;
@@ -107,21 +87,8 @@ const ShopPage = () => {
                 {/* Header and Breadcrumb */}
                 <div className="flex flex-col md:flex-row items-center justify-between mb-6">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-0">Shop</h3>
-                    <Breadcrumb className="flex flex-row">
-                        {breadcrumbItems.map((item, index) => (
-                            <React.Fragment key={item.href}>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink
-                                        href={item.href}
-                                        className={index === 0 ? "font-bold" : ""}
-                                    >
-                                        {item.label}
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                {index < breadcrumbItems.length - 1 && <ChevronRight />}
-                            </React.Fragment>
-                        ))}
-                    </Breadcrumb>
+
+                    <DynamicBreadcrumb gender={gender} categoryId={categoryId} />
                 </div>
 
                 {/* Category Cards */}

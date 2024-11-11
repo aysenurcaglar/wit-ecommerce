@@ -12,9 +12,10 @@ import BrandLogos from '../components/BrandLogos';
 import StarRating from '../components/StarRating';
 import { addToCart } from '../store/actions/shoppingCartActions';
 import { toast } from 'react-toastify';
+import DynamicBreadcrumb from '../components/DynamicBreadcrumb';
 
 const ProductDetail = () => {
-  const { productId } = useParams();
+  const { productId, gender, categoryId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product.product);
@@ -58,15 +59,7 @@ const ProductDetail = () => {
     <>
     <div className="max-w-[85vw] md:max-w-75vw mx-auto px-4 py-8">
       <div className='flex justify-between items-center mb-8'>
-      <Breadcrumb className="flex flex-row">
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        <ChevronRight />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <DynamicBreadcrumb gender={gender} categoryId={categoryId} />
 
       <Button 
           variant="ghost" 

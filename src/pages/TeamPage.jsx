@@ -24,11 +24,11 @@ const TeamPage = () => {
                 <h1 className="text-5xl font-bold text-gray-800 my-4">Innovation tailored for you</h1>
                 <Breadcrumb className="flex flex-row justify-center">
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/" className="font-bold">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/" >Home</BreadcrumbLink>
                     </BreadcrumbItem>
                     <ChevronRight />
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/team">Team</BreadcrumbLink>
+                        <BreadcrumbLink href="/team" className="font-bold">Team</BreadcrumbLink>
                     </BreadcrumbItem>
                 </Breadcrumb>
             </section>
