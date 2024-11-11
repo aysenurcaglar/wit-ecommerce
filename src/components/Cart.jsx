@@ -9,10 +9,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useSelector, useDispatch } from "react-redux"
 import { removeFromCart, updateItemCount, getCartItems, getCartTotal } from "../store/actions/shoppingCartActions"
 import { Minus, Plus, Trash2 } from "lucide-react"
+import { useHistory } from "react-router-dom";
 
 const Cart = () => {
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const cartItems = useSelector(getCartItems);
   const cartTotal = useSelector(getCartTotal);
 

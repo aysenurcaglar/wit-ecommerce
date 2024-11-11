@@ -21,6 +21,7 @@ import TeamPage from './pages/TeamPage';
 import AboutPage from './pages/AboutPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
+import CheckoutPage from './pages/CheckoutPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 
@@ -61,6 +62,8 @@ function App() {
           <PrivateRoute exact path="/shop/:gender/:categoryName/:categoryId" component={ShopPage} />
           <PrivateRoute exact path="/shop" component={ShopPage} />
           <PrivateRoute exact path="/" render={() => <HomePage />} />
+
+          <Route path="/checkout" component={CheckoutPage} />
           
           <Route path="/contact" component={ContactPage} />
           <Route path="/team" component={TeamPage} />

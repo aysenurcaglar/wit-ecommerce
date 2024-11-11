@@ -42,8 +42,10 @@ const ProductDetail = () => {
       for (let i = 0; i < quantity; i++) {
         dispatch(addToCart(product));
       }
-      // Optional: Show some feedback to user
-      toast.success(`${quantity} x ${product.name} added to your cart`);
+      // Show some feedback to user
+      toast.success(`${quantity} x ${product.name} added to your cart`, {
+        position: "bottom-right",
+      });
     }
   };
 
