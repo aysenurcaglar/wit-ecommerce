@@ -1,8 +1,43 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import React, { useState, useCallback } from "react";
+
+const footerSections = {
+  'Company Info': [
+    { label: 'About Us', href: '#' },
+    { label: 'Career', href: '#' },
+    { label: 'We are hiring', href: '#' },
+    { label: 'Blog', href: '#' },
+  ],
+  'Legal': [
+    { label: 'Privacy Policy', href: '#' },
+    { label: 'Terms of Service', href: '#' },
+    { label: 'Disclaimer', href: '#' },
+    { label: 'Cookie Policy', href: '#' },
+  ],
+  'Features': [
+    { label: 'Business Marketing', href: '#' },
+    { label: 'User Analytics', href: '#' },
+    { label: 'Live Chat', href: '#' },
+    { label: 'Unlimited Support', href: '#' },
+  ],
+  'Resources': [
+    { label: 'iOS & Android', href: '#' },
+    { label: 'Watch a Demo', href: '#' },
+    { label: 'Customers', href: '#' },
+    { label: 'API Documentation', href: '#' },
+  ],
+};
 
 function Footer() {
+
+  const [expanded, setExpanded] = useState({})
+
+  const toggleSection = useCallback((section) => {
+    setExpanded(prev => ({ ...prev, [section]: !prev[section] }))
+  }, [])
+
   return (
     <footer className=" py-4">
       <div className="container max-w-[85vw] md:max-w-75vw mx-auto">
@@ -24,56 +59,32 @@ function Footer() {
 
         {/* Links and Newsletter Signup */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 py-8 text-left">
-          {/* Company Info */}
-          <div>
-            <h3 className="text-lg text-text-color font-bold mt-4">Company Info</h3>
-            <ul className="mt-4 space-y-2 font-semibold text-light-gray">
-              <li><a href="#" className="hover:underline">About Us</a></li>
-              <li><a href="#" className="hover:underline">Career</a></li>
-              <li><a href="#" className="hover:underline">We are hiring</a></li>
-              <li><a href="#" className="hover:underline">Blog</a></li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="text-lg text-text-color font-bold mt-4">Legal</h3>
-            <ul className="mt-4 space-y-2 font-semibold text-light-gray">
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="#" className="hover:underline">Terms of Service</a></li>
-              <li><a href="#" className="hover:underline">Disclaimer</a></li>
-              <li><a href="#" className="hover:underline">Cookie Policy</a></li>
-            </ul>
-          </div>
-
-          {/* Features */}
-          <div>
-            <h3 className="text-lg text-text-color font-bold mt-4">Features</h3>
-            <ul className="mt-4 space-y-2 font-semibold text-light-gray">
-              <li><a href="#" className="hover:underline">Business Marketing</a></li>
-              <li><a href="#" className="hover:underline">User Analytics</a></li>
-              <li><a href="#" className="hover:underline">Live Chat</a></li>
-              <li><a href="#" className="hover:underline">Unlimited Support</a></li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="text-lg text-text-color font-bold mt-4">Resources</h3>
-            <ul className="mt-4 space-y-2 font-semibold text-light-gray">
-              <li><a href="#" className="hover:underline">iOS & Android</a></li>
-              <li><a href="#" className="hover:underline">Watch a Demo</a></li>
-              <li><a href="#" className="hover:underline">Customers</a></li>
-              <li><a href="#" className="hover:underline">API Documentation</a></li>
-            </ul>
-          </div>
+          {Object.entries(footerSections).map(([title, links]) => (
+            <div key={title}>
+              <button 
+                className="flex justify-between items-center w-full text-lg text-text-color font-bold mt-4 md:hidden"
+                onClick={() => toggleSection(title)}
+              >
+                {title}
+                {expanded[title] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              </button>
+              <h3 className="hidden md:block text-lg text-text-color font-bold mt-4">{title}</h3>
+              <ul className={`mt-4 space-y-2 font-semibold text-light-gray overflow-hidden transition-all duration-300 ease-in-out ${expanded[title] ? 'max-h-40' : 'max-h-0 md:max-h-none'}`}>
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="hover:underline">{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           {/* Newsletter */}
-          <div className="max-w-md">
+          <div className="max-w-sm">
             <h3 className="text-lg text-text-color font-bold mt-4">Get in Touch</h3>
-            <div className="mt-4 flex flex-row lg:flex-col">
+            <div className="flex flex-row lg:flex-col max-w-sm mt-4">
               <Input placeholder="Your email" className="flex-2 lg:w-auto" />
-              <Button className="flex-1 md:w-auto p-2 md:justify-end">Subscribe</Button>
+              <Button className="flex-1 lg:w-auto p-2">Subscribe</Button>
             </div>
           </div>
         </div>

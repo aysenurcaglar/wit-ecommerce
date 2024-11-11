@@ -149,7 +149,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Tabs */}
-      <Tabs defaultValue="description" className="flex flex-col justify-center items-center mt-6">
+      <Tabs defaultValue="description" className="flex flex-col justify-center items-center mt-8">
         <TabsList className="" >
           <TabsTrigger value="description" className="p-2">
             Description

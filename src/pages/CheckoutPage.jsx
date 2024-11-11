@@ -127,7 +127,7 @@ const CheckoutPage = () => {
                         ))}
                     </div>
                 </div>
-                <div>
+                <div className="self-center">
                     <Card>
                         <CardHeader>
                             <CardTitle>Order Summary</CardTitle>

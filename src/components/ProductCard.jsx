@@ -44,20 +44,20 @@ const ProductCard = ({ product, category }) => {
           />
         </div>
         <div className="px-2">
+          <div className="mb-3">
           <h3 className="font-bold text-base mb-2">{product.name}</h3>
-          <p className="text-gray-500 text-sm mb-2">{product.brand}</p>
-          <div className="flex items-center justify-center gap-2 mb-2">
-
             <span className="text-secondary-color font-bold">
               ${product.price.toFixed(2)}
             </span>
-          </div>
-          <div className="flex justify-center items-center gap-2 mb-4">
+            </div>
+          <div className="flex justify-center items-center gap-2 mt-2 mb-4">
           <Button variant="outline" size="icon" className= "p-4"
+          label="Add to cart"
            onClick={handleAddToCart}>
               <ShoppingCart className="h-5 w-5" />
             </Button>
             <Button variant="outline" size="icon" className= "p-4"
+            label="View product"
             onClick={handleClick}
             >
               <Eye className="h-5 w-5" />
