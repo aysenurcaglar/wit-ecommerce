@@ -53,9 +53,9 @@ const CheckoutPage = () => {
 
     if (cartItems.length === 0) {
         return (
-            <div className="container mx-auto p-4 text-center">
-                <h1 className="text-2xl font-bold mb-6">Your Cart is Empty</h1>
-                <Button onClick={() => history.push('/shop')}>
+            <div className="container mx-auto py-12 text-center">
+                <h1 className="text-2xl font-bold mb-8">Your cart is empty</h1>
+                <Button variant="outline" onClick={() => history.push('/shop')}>
                     Continue Shopping
                 </Button>
             </div>
@@ -63,63 +63,63 @@ const CheckoutPage = () => {
     }
 
     return (
-        <div className="container max-w-[85vw] md:max-w-75vw mx-auto py-8">
+        <div className="container max-w-[85vw] md:max-w-75vw mx-auto py-12">
             <h1 className="text-2xl font-bold mb-6">Checkout</h1>
             <div className="grid md:grid-cols-3 gap-6">
                 <div className="md:col-span-2">
                     <div className="grid gap-4">
                         {cartItems.map((item) => (
                             <Card key={item.product.id}>
-                                <CardContent className="p-4 md:p-8">
+                                <CardContent className="p-8">
                                     <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 space-x-4">
-                                        <div className='flex flex-row items-center space-x-4'>
-                                        <Checkbox
-                                            id={`product-${item.product.id}`}
-                                            checked={item.checked}
-                                            onCheckedChange={() => handleToggleCheck(item.product.id)}
-                                        />
-                                        <label
-                                            htmlFor={`product-${item.product.id}`}
-                                            className="flex items-center space-x-4 flex-1 cursor-pointer"
-                                        >
-                                            <img
-                                                src={item.product.images[0].url}
-                                                alt={item.product.name}
-                                                className="w-16 h-16 rounded-md object-cover object-top"
+                                        <div className='flex flex-row flex-1 items-center space-x-4'>
+                                            <Checkbox
+                                                id={`product-${item.product.id}`}
+                                                checked={item.checked}
+                                                onCheckedChange={() => handleToggleCheck(item.product.id)}
                                             />
-                                            <div className="flex-1 text-left">
-                                                <p className="font-medium">{item.product.name}</p>
-                                                <p className="text-sm text-muted-foreground">
-                                                    ${item.product.price.toFixed(2)}
-                                                </p>
-                                            </div>
-                                        </label>
+                                            <label
+                                                htmlFor={`product-${item.product.id}`}
+                                                className="flex items-center space-x-4 flex-1 cursor-pointer"
+                                            >
+                                                <img
+                                                    src={item.product.images[0].url}
+                                                    alt={item.product.name}
+                                                    className="w-16 h-16 rounded-md object-cover object-top"
+                                                />
+                                                <div className="text-left">
+                                                    <p className="font-medium">{item.product.name}</p>
+                                                    <p className="text-sm text-muted-foreground">
+                                                        ${item.product.price.toFixed(2)}
+                                                    </p>
+                                                </div>
+                                            </label>
                                         </div>
                                         <div className='flex flex-row space-x-4'>
-                                        <div className="flex items-center space-x-2">
+                                            <div className="flex items-center space-x-2">
+                                                <Button
+                                                    variant="outline"
+                                                    size="icon"
+                                                    onClick={() => handleQuantityChange(item.product.id, item.count, -1)}
+                                                >
+                                                    <Minus className="h-4 w-4" />
+                                                </Button>
+                                                <span>{item.count}</span>
+                                                <Button
+                                                    variant="outline"
+                                                    size="icon"
+                                                    onClick={() => handleQuantityChange(item.product.id, item.count, 1)}
+                                                >
+                                                    <Plus className="h-4 w-4" />
+                                                </Button>
+                                            </div>
                                             <Button
                                                 variant="outline"
                                                 size="icon"
-                                                onClick={() => handleQuantityChange(item.product.id, item.count, -1)}
+                                                onClick={() => handleRemoveItem(item.product.id)}
                                             >
-                                                <Minus className="h-4 w-4" />
+                                                <Trash2 className="h-4 w-4" />
                                             </Button>
-                                            <span>{item.count}</span>
-                                            <Button
-                                                variant="outline"
-                                                size="icon"
-                                                onClick={() => handleQuantityChange(item.product.id, item.count, 1)}
-                                            >
-                                                <Plus className="h-4 w-4" />
-                                            </Button>
-                                        </div>
-                                        <Button
-                                            variant="outline"
-                                            size="icon"
-                                            onClick={() => handleRemoveItem(item.product.id)}
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
                                         </div>
                                     </div>
                                 </CardContent>
@@ -146,13 +146,13 @@ const CheckoutPage = () => {
                                     <span className='font-semibold'>Discount</span>
                                     <span>-${discount.toFixed(2)}</span>
                                 </div>
-                                <div className="flex justify-between font-bold">
+                                <div className="flex justify-between font-bold border-t pt-2 border-slate-300">
                                     <span>Total</span>
                                     <span>${total.toFixed(2)}</span>
                                 </div>
                             </div>
                             <Button
-                                className="w-full mt-4"
+                                className="w-full mt-3"
                                 onClick={handleCreateOrder}
                             >
                                 Create Order

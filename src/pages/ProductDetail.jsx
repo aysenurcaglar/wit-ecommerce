@@ -144,9 +144,6 @@ const ProductDetail = () => {
             <Button variant="outline" size="icon" className= "p-4">
               <Heart className="h-5 w-5" />
             </Button>
-            <Button variant="outline" size="icon" className= "p-4">
-              <Eye className="h-5 w-5" />
-            </Button>
           </div>
         </div>
       </div>

@@ -38,12 +38,11 @@ const Header = () => {
           <a href="/" className="text-xl md:text-2xl font-bold">Witty Store</a>
           
           {/* Mobile menu button */}
-          <button 
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <div className="md:hidden flex space-x-6">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <AlignRight />
           </button>
+          </div>
 
           {/* Desktop navigation */}
           <nav className="hidden md:block">
@@ -81,20 +80,23 @@ const Header = () => {
               <a href="/contact" className="text-light-gray font-semibold">Contact</a>
               <a href="/pages" className="text-light-gray font-semibold">Pages</a>
             </nav>
-            <div className="flex flex-col space-y-4 mt-4 pt-4 border-t">
+            <div className="flex flex-col items-center space-y-4 mt-4 pt-4 border-t border-slate-300">
+            <div className="flex flex-row items-center space-x-4">
+              <a href="#search" className="text-primary-color font-semibold"><Search /></a>
+              <Cart />              
+              <a href="#favorites" className="text-primary-color font-semibold"><Heart /></a>
+              </div>
             {user.name ? (
                 <div className="flex flex-col items-center space-y-2">
+                  <div className="flex flex-row items-center space-x-4">
                   <img src={user.avatarUrl} alt="User Avatar" className="w-8 h-8 rounded-full" />
                   <span className="text-primary-color font-semibold">{user.name}</span>
+                  </div>
                   <span onClick={handleLogout} className="text-primary-color font-semibold cursor-pointer">Logout</span>
                 </div>
               ) : (
                 <a href="/login" className="text-primary-color font-semibold"><UserRound className="inline" />Login / Signup</a>
-              )}
-              <a href="#search" className="text-primary-color font-semibold">Search</a>
-              <Cart />
-              <a href="#favorites" className="text-primary-color font-semibold">Favs</a>
-              
+              )}              
             </div>
           </div>
         )}

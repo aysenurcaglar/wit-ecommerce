@@ -34,7 +34,7 @@ export default function ProductGrid({ fetchState, productsWithCategories }) {
                 <AlertCircle className="h-4 w-4" />
                 <AlertTitle>No products found</AlertTitle>
                 <AlertDescription>
-                  There are no products matching your criteria at the moment. Please try another category or check back later.
+                  There are no products matching your criteria at the moment. Please check back later.
                 </AlertDescription>
               </Alert>
             </div>

@@ -69,7 +69,7 @@ function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="max-w-md">
             <h3 className="text-lg text-text-color font-bold mt-4">Get in Touch</h3>
             <div className="mt-4 flex flex-row lg:flex-col">
               <Input placeholder="Your email" className="flex-2 lg:w-auto" />
