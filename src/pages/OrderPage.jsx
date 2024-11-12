@@ -13,28 +13,23 @@ import { PlusCircle, Edit, Trash } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { fetchAddresses, addNewAddress, deleteExistingAddress, updateExistingAddress } from '../store/actions/clientActions';
 import { getCartItems, setAddress } from '../store/actions/shoppingCartActions';
+import OrderSummary from '../components/OrderSummary';
 
 const OrderPage = () => {
     const dispatch = useDispatch();
     const addresses = useSelector((state) => state.client.addressList);
-    const cartItems = useSelector(getCartItems);
+
     const [shippingAddress, setShippingAddress] = useState(null)
   const [receiptAddress, setReceiptAddress] = useState(null)
   const [useSameAddress, setUseSameAddress] = useState(false)
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [editingAddress, setEditingAddress] = useState(null)
+  const [activeTab, setActiveTab] = useState('address')
 
     useEffect(() => {
         dispatch(fetchAddresses());
       }, [dispatch]);
 
-      const subtotal = cartItems
-        .filter(item => item.checked)
-        .reduce((sum, item) => sum + item.product.price * item.count, 0);
-
-    let shipping = subtotal > 0 ? 5 : 0;
-    let discount = subtotal > 0 ? 10 : 0;
-    const total = subtotal + shipping - discount;
 
       const handleAddAddress = async (newAddress) => {
         dispatch(addNewAddress(newAddress))
@@ -69,7 +64,7 @@ const OrderPage = () => {
         <div className="container max-w-[85vw] md:max-w-75vw mx-auto p-4">
           <div className="flex flex-col lg:flex-row gap-8">
           <div className="flex-grow">
-          <Tabs defaultValue="address">
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="grid w-full h-16 grid-cols-2">
               <TabsTrigger className="h-12" value="address">Address Info</TabsTrigger>
               <TabsTrigger className="h-12" value="payment">Payment Info</TabsTrigger>
@@ -154,37 +149,7 @@ const OrderPage = () => {
           </Tabs>
           </div>
           <div className="w-full md:w-1/3 self-center">
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className='font-semibold'>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className='font-semibold'>Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className='font-semibold'>Discount</span>
-                  <span>-${discount.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between font-bold border-t pt-2 border-slate-300">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
-                </div>
-              </div>
-              <Button
-                className="w-full mt-3"
-                onClick={() => console.log("Order created")}
-              >
-                Create Order
-              </Button>
-            </CardContent>
-          </Card>
+          <OrderSummary setActiveTab={setActiveTab} />
           </div>
         </div>
         </div>

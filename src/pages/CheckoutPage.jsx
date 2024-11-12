@@ -12,6 +12,7 @@ import {
     getCartItems,
     getCartTotal
 } from '../store/actions/shoppingCartActions';
+import OrderSummary from '../components/OrderSummary';
 
 
 const CheckoutPage = () => {
@@ -20,14 +21,8 @@ const CheckoutPage = () => {
     const cartItems = useSelector(getCartItems);
     const history = useHistory();
 
-    // Calculate order summary values
-    const subtotal = cartItems
-        .filter(item => item.checked)
-        .reduce((sum, item) => sum + item.product.price * item.count, 0);
 
-    let shipping = subtotal > 0 ? 5 : 0;
-    let discount = subtotal > 0 ? 10 : 0;
-    const total = subtotal + shipping - discount;
+    
 
     const handleQuantityChange = (productId, currentCount, change) => {
         const newCount = currentCount + change;
@@ -128,37 +123,7 @@ const CheckoutPage = () => {
                     </div>
                 </div>
                 <div className="self-center">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Order Summary</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="space-y-2">
-                                <div className="flex justify-between">
-                                    <span className='font-semibold'>Subtotal</span>
-                                    <span>${subtotal.toFixed(2)}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className='font-semibold'>Shipping</span>
-                                    <span>${shipping.toFixed(2)}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className='font-semibold'>Discount</span>
-                                    <span>-${discount.toFixed(2)}</span>
-                                </div>
-                                <div className="flex justify-between font-bold border-t pt-2 border-slate-300">
-                                    <span>Total</span>
-                                    <span>${total.toFixed(2)}</span>
-                                </div>
-                            </div>
-                            <Button
-                                className="w-full mt-3"
-                                onClick={handleCreateOrder}
-                            >
-                                Create Order
-                            </Button>
-                        </CardContent>
-                    </Card>
+                    <OrderSummary />
                 </div>
             </div>
         </div>
