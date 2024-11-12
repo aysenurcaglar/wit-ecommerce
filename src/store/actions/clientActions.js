@@ -120,6 +120,7 @@ export const updateExistingAddress = (addressData) => async (dispatch) => {
   try {
     const response = await api.put(`/user/address`, addressData);
     dispatch(updateAddress(response.data));
+    dispatch(fetchAddresses());
   } catch (error) {
     console.error('Error updating address:', error);
   }
