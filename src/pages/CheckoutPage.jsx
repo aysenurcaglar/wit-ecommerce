@@ -41,9 +41,9 @@ const CheckoutPage = () => {
         dispatch(toggleItemCheck(productId));
     };
 
-    const handleCreateOrder = () => {
+    const handleConfirmOrder = () => {
         // TODO: Implement order creation logic
-        console.log('Creating order...');
+        history.push('/order');
     };
 
     if (cartItems.length === 0) {
@@ -123,7 +123,7 @@ const CheckoutPage = () => {
                     </div>
                 </div>
                 <div className="self-center">
-                    <OrderSummary />
+                    <OrderSummary handleConfirmOrder={handleConfirmOrder} />
                 </div>
             </div>
         </div>

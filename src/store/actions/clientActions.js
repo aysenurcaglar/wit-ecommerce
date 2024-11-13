@@ -111,6 +111,7 @@ export const addNewAddress = (addressData) => async (dispatch) => {
   try {
     const response = await api.post('/user/address', addressData);
     dispatch(addAddress(response.data));
+    dispatch(fetchAddresses());
   } catch (error) {
     console.error('Error adding new address:', error);
   }
@@ -130,6 +131,7 @@ export const deleteExistingAddress = (addressId) => async (dispatch) => {
   try {
     await api.delete(`/user/address/${addressId}`);
     dispatch(deleteAddress(addressId));
+    dispatch(fetchAddresses());
   } catch (error) {
     console.error('Error deleting address:', error);
   }

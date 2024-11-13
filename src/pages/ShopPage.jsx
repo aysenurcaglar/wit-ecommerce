@@ -40,13 +40,7 @@ const ShopPage = () => {
 
     const productsWithCategories = selectProductsWithCategories(productList, categories);
 
-    const debounce = (func, delay) => {
-        let timeoutId
-        return (...args) => {
-          clearTimeout(timeoutId)
-          timeoutId = setTimeout(() => func(...args), delay)
-        }
-      }
+    
 
     useEffect(() => {
         if (location.pathname === '/shop') {
@@ -68,6 +62,14 @@ const ShopPage = () => {
     };
 
     // Handle filter input
+    const debounce = (func, delay) => {
+        let timeoutId
+        return (...args) => {
+          clearTimeout(timeoutId)
+          timeoutId = setTimeout(() => func(...args), delay)
+        }
+      }
+      
    const debouncedUpdateFilter = useCallback(
         debounce((newFilter) => {
           dispatch(updateFilter(newFilter))

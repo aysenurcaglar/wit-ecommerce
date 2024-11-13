@@ -20,7 +20,7 @@ const OrderPage = () => {
     const addresses = useSelector((state) => state.client.addressList);
 
     const [shippingAddress, setShippingAddress] = useState(null)
-  const [receiptAddress, setReceiptAddress] = useState(null)
+  const [billingAddress, setBillingAddress] = useState(null)
   const [useSameAddress, setUseSameAddress] = useState(false)
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [editingAddress, setEditingAddress] = useState(null)
@@ -50,12 +50,12 @@ const OrderPage = () => {
           setShippingAddress(address)
           dispatch(setAddress({ type: 'shipping', address }))
           if (useSameAddress) {
-            setReceiptAddress(address)
-            dispatch(setAddress({ type: 'receipt', address }))
+            setBillingAddress(address)
+            dispatch(setAddress({ type: 'billing', address }))
           }
         } else {
-          setReceiptAddress(address)
-          dispatch(setAddress({ type: 'receipt', address }))
+          setBillingAddress(address)
+          dispatch(setAddress({ type: 'billing', address }))
         }
       }
 
@@ -117,12 +117,12 @@ const OrderPage = () => {
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold mb-2">Billing Addresses</h2>
-                  <RadioGroup value={receiptAddress?.id} onValueChange={(value) => handleSelectAddress('receipt', addresses.find(a => a.id === value))} disabled={useSameAddress}>
+                  <RadioGroup value={billingAddress?.id} onValueChange={(value) => handleSelectAddress('billing', addresses.find(a => a.id === value))} disabled={useSameAddress}>
                     {addresses.map(address => (
                       <AddressCard
                         key={address.id}
                         address={address}
-                        isSelected={receiptAddress?.id === address.id}
+                        isSelected={billingAddress?.id === address.id}
                         onEdit={() => setEditingAddress(address)}
                         onDelete={() => handleDeleteAddress(address.id)}
                         disabled={useSameAddress}
@@ -149,7 +149,7 @@ const OrderPage = () => {
           </Tabs>
           </div>
           <div className="w-full md:w-1/3 self-center">
-          <OrderSummary setActiveTab={setActiveTab} />
+          <OrderSummary setActiveTab={setActiveTab} shippingAddress={shippingAddress} billingAddress={billingAddress} />
           </div>
         </div>
         </div>

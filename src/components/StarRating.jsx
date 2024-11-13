@@ -1,10 +1,11 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 
-const StarRating = ({ rating, className = "" }) => {
+const StarRating = ({ rating }) => {
   return (
     <div className="flex">
       {[1, 2, 3, 4, 5].map((star) => {
+        {/* Calculate the fill percentage for each star, no more than 1 and no less than 0 */}
         const fillPercentage = Math.max(0, Math.min(1, rating - (star - 1)));
         
         return (
