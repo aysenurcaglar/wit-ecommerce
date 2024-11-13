@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,6 +25,7 @@ import { selectProductsWithCategories } from '../store/selectors/selectProductsW
 import createSlug from '../utils/createSlug';
 import ProductGrid from '../components/ProductGrid';
 import DynamicBreadcrumb from '../components/DynamicBreadcrumb';
+import { set } from 'react-hook-form';
 
 const ShopPage = () => {
 
@@ -38,6 +39,14 @@ const ShopPage = () => {
     const { productList, total, fetchState, categories, limit, offset, filter, sort, currentPage, category } = useSelector((state) => state.product);
 
     const productsWithCategories = selectProductsWithCategories(productList, categories);
+
+    const debounce = (func, delay) => {
+        let timeoutId
+        return (...args) => {
+          clearTimeout(timeoutId)
+          timeoutId = setTimeout(() => func(...args), delay)
+        }
+      }
 
     useEffect(() => {
         if (location.pathname === '/shop') {
@@ -59,10 +68,18 @@ const ShopPage = () => {
     };
 
     // Handle filter input
-    const handleFilterChange = (event) => {
-        const newFilter = event.target.value;
-        dispatch(updateFilter(newFilter));
-    };
+   const debouncedUpdateFilter = useCallback(
+        debounce((newFilter) => {
+          dispatch(updateFilter(newFilter))
+        }, 500),
+        []
+      )
+    
+      const handleFilterChange = (event) => {
+        const newFilter = event.target.value
+        dispatch(setFilter(newFilter))
+        debouncedUpdateFilter(newFilter)
+      }
 
     // Handle sort selection
     const handleSortChange = (value) => {
@@ -201,13 +218,13 @@ const ShopPage = () => {
                             type="text"
                             placeholder="Filter products..."
                             value={filter}
-                            onChange={handleFilterChange}
+                            onInput={handleFilterChange}
                             className="border rounded px-2 py-1 w-[200px]"
                         />
                         <Button
                             variant="outline"
                             size="lg"
-                            onClick={() => dispatch(setFilter(''))}
+                            onClick={() => dispatch(updateFilter(''))}
                         >
                             Clear Filter
                         </Button>
