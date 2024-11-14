@@ -18,7 +18,7 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
 
   const createOrder = () => {
     // Extract necessary data from your state
-    const addressId = cart.address.address.id;
+    const addressId = cart.address.id;
     const cardInfo = cart.payment;
     const products = cart.cart.filter(item => item.checked);
 

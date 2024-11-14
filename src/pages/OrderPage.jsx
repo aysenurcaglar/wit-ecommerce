@@ -58,14 +58,15 @@ const OrderPage = () => {
       const handleSelectAddress = (type, address) => {
         if (type === 'shipping') {
           setShippingAddress(address)
-          dispatch(setAddress({ type: 'shipping', address }))
+          dispatch(setAddress(address ))
           if (useSameAddress) {
+            setShippingAddress(address)
             setBillingAddress(address)
-            dispatch(setAddress({ type: 'billing', address }))
+            dispatch(setAddress(address ))
           }
         } else {
           setBillingAddress(address)
-          dispatch(setAddress({ type: 'billing', address }))
+          dispatch(setAddress(address))
         }
       }
 
