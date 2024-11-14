@@ -11,6 +11,10 @@ export const GET_ADDRESSES = 'GET_ADDRESSES';
 export const ADD_ADDRESS = 'ADD_ADDRESS';
 export const UPDATE_ADDRESS = 'UPDATE_ADDRESS';
 export const DELETE_ADDRESS = 'DELETE_ADDRESS';
+export const GET_CARDS = 'GET_CARDS';
+export const ADD_CARD = 'ADD_CARD';
+export const UPDATE_CARD = 'UPDATE_CARD';
+export const DELETE_CARD = 'DELETE_CARD';
 
 
 // Action Creators
@@ -134,5 +138,53 @@ export const deleteExistingAddress = (addressId) => async (dispatch) => {
     dispatch(fetchAddresses());
   } catch (error) {
     console.error('Error deleting address:', error);
+  }
+};
+
+
+export const getCards = () => async (dispatch) => {
+  try {
+    const response = await api.get('/user/card');
+    dispatch({ type: GET_CARDS, payload: response.data });
+  } catch (error) {
+    console.error('Error fetching user cards:', error);
+    // Handle error
+  }
+};
+
+export const addCard = (cardData) => async (dispatch) => {
+  try {
+    const response = await api.post('/user/card', cardData);
+    // Access the card data using the key "0"
+    const card = response.data["0"];
+
+    // Dispatch the action with the correctly accessed card data
+    dispatch({ type: ADD_CARD, payload: card });
+    dispatch(getCards());
+  } catch (error) {
+    console.error('Error adding user card:', error);
+    // Handle error
+  }
+};
+
+export const updateCard = (cardData) => async (dispatch) => {
+  try {
+    const response = await api.put('/user/card', cardData);
+    dispatch({ type: UPDATE_CARD, payload: response.data });
+    dispatch(getCards());
+  } catch (error) {
+    console.error('Error updating user card:', error);
+    // Handle error
+  }
+};
+
+export const deleteCard = (cardId) => async (dispatch) => {
+  try {
+    await api.delete(`/user/card/${cardId}`);
+    dispatch({ type: DELETE_CARD, payload: cardId });
+    dispatch(getCards());
+  } catch (error) {
+    console.error('Error deleting user card:', error);
+    // Handle error
   }
 };

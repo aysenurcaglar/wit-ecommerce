@@ -8,7 +8,11 @@ import {
   GET_ADDRESSES,
   ADD_ADDRESS,
   UPDATE_ADDRESS,
-  DELETE_ADDRESS
+  DELETE_ADDRESS,
+  GET_CARDS,
+  ADD_CARD,
+  UPDATE_CARD,
+  DELETE_CARD
 } from '../actions/clientActions';
 
 const initialState = {
@@ -44,6 +48,14 @@ export const clientReducer = (state = initialState, action) => {
       return { ...state, addressList: state.addressList.map((address) => address.id === action.payload.id ? action.payload : address) };
     case DELETE_ADDRESS:
       return { ...state, addressList: state.addressList.filter((address) => address.id !== action.payload) };
+      case GET_CARDS:
+      return { ...state, creditCards: action.payload };
+    case ADD_CARD:
+      return { ...state, creditCards: [...state.creditCards, action.payload] };
+    case UPDATE_CARD:
+      return { ...state, creditCards: state.creditCards.map((card) => card.id === action.payload.id ? action.payload : card) };
+    case DELETE_CARD:
+      return { ...state, creditCards: state.creditCards.filter((card) => card.id !== action.payload) };
     default:
       return state;
   }
