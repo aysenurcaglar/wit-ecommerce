@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import {Textarea} from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Checkbox } from '@/components/ui/checkbox';
-import { PlusCircle, Edit, Trash } from 'lucide-react';
+import { PlusCircle} from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { fetchAddresses, addNewAddress, deleteExistingAddress, updateExistingAddress } from '../store/actions/clientActions';
 import { getCartItems, setAddress } from '../store/actions/shoppingCartActions';
 import OrderSummary from '../components/OrderSummary';
+import AddressCard from '../components/AddressCard';
+import AddressForm from '../components/AddressForm';
+
 
 const OrderPage = () => {
     const dispatch = useDispatch();
@@ -155,93 +154,6 @@ const OrderPage = () => {
         </div>
         
       )
-    }
-    
-    function AddressCard({ address, isSelected, onEdit, onDelete, disabled }) {
-      return (
-        <div className={`relative p-4 rounded-lg border ${isSelected ? 'border-primary' : 'border-input'} ${disabled ? 'opacity-50' : ''}`}>
-          <div className="flex items-center space-x-2">
-          <RadioGroupItem value={address.id} id={`address-${address.id}`} disabled={disabled} />
-          <Label htmlFor={`address-${address.id}`}>{address.title}</Label>
-        </div>
-          <div className="space-y-1 text-left">
-            <p className="text-sm text-muted-foreground">{address.name} {address.surname}</p>
-            <p className="text-sm text-muted-foreground">{address.phone}</p>
-            <p className="text-sm text-muted-foreground">{address.address}, {address.neighborhood}</p>
-            <p className="text-sm text-muted-foreground">{address.district}, {address.city}</p>
-          </div>
-          <div className="absolute bottom-4 right-4 flex space-x-2">
-            <Button variant="ghost" size="icon" onClick={onEdit} disabled={disabled}>
-              <Edit className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={onDelete} disabled={disabled}>
-              <Trash className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      )
-    }
-    
-    function AddressForm({ address, onSubmit }) {
-      const [formData, setFormData] = useState(address || {
-        title: '',
-        name: '',
-        surname: '',
-        phone: '',
-        city: '',
-        district: '',
-        neighborhood: '',
-        address: '',
-      })
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
-      }
-    
-      const handleSubmit = (e) => {
-        e.preventDefault()
-        onSubmit(formData)
-      }
-    
-      return (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="title">Address Title</Label>
-            <Input id="title" name="title" value={formData.title} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="surname">Surname</Label>
-            <Input id="surname" name="surname" value={formData.surname} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="city">City</Label>
-            <Input id="city" name="city" value={formData.city} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="district">District</Label>
-            <Input id="district" name="district" value={formData.district} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="neighborhood">Neighborhood</Label>
-            <Input id="neighborhood" name="neighborhood" value={formData.neighborhood} onChange={handleChange} required />
-          </div>
-          <div>
-            <Label htmlFor="address">Address</Label>
-            <Textarea id="address" name="address" value={formData.address} onChange={handleChange} required />
-          </div>
-          <Button type="submit">Save Address</Button>
-        </form>
-      )
-    }
-   
+    } 
 
 export default OrderPage;
