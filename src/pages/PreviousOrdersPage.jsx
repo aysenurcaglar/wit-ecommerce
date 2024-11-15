@@ -21,7 +21,12 @@ const PreviousOrdersPage = () => {
     const fetchOrders = async () => {
       try {
         const response = await api.get("/order");
-        setOrders(response.data);
+        // Sort orders by date in descending order (most recent first)
+        const sortedOrders = response.data.sort(
+          (a, b) =>
+            new Date(b.order_date).getTime() - new Date(a.order_date).getTime()
+        );
+        setOrders(sortedOrders);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -44,8 +49,10 @@ const PreviousOrdersPage = () => {
             <CardTitle>Order #{order.id}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>Date: {new Date(order.order_date).toLocaleDateString()}</p>
-            <p>Total: ${order.price.toFixed(2)}</p>
+            <p className="mb-2">
+              Date: {new Date(order.order_date).toLocaleString()}
+            </p>
+            <p className="mb-2">Total: ${order.price.toFixed(2)}</p>
             <Table>
               <TableHeader>
                 <TableRow>
