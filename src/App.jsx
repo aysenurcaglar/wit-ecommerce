@@ -25,6 +25,7 @@ import { Loader2 } from "lucide-react";
 
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import PreviousOrdersPage from "./pages/PreviousOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ function App() {
 
         <Route path="/checkout" component={CheckoutPage} />
         <PrivateRoute path="/order" component={OrderPage} />
+        <PrivateRoute path="/previous-orders" component={PreviousOrdersPage} />
 
         <Route path="/contact" component={ContactPage} />
         <Route path="/team" component={TeamPage} />

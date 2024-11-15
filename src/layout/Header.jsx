@@ -2,11 +2,23 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { AlignRight, Heart, Search, UserRound } from "lucide-react";
+import {
+  AlignRight,
+  Heart,
+  Search,
+  UserRound,
+  ChevronDown,
+} from "lucide-react";
 import { setUser } from "../store/actions/clientActions";
 import { toast } from "react-toastify";
 import CategoryDropdown from "../components/CategoryDropdown";
 import Cart from "../components/Cart";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,7 +75,7 @@ const Header = () => {
           </nav>
 
           {/* Desktop user actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4 text-primary-color font-semibold">
             {user.name ? (
               <div className="flex items-center space-x-4">
                 <img
@@ -71,27 +83,36 @@ const Header = () => {
                   alt="User Avatar"
                   className="w-8 h-8 rounded-full"
                 />
-                <span className="text-primary-color font-semibold">
-                  {user.name}
-                </span>
-                <span
-                  onClick={handleLogout}
-                  className="text-primary-color font-semibold cursor-pointer"
-                >
-                  Logout
-                </span>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div className="inline-flex">
+                      <span className="text-md">{user.name}</span>
+                      <ChevronDown className="ml-1 mt-1 h-5 w-5" />
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="text-primary-color font-semibold">
+                    <DropdownMenuItem
+                      onSelect={() => history.push("/previous-orders")}
+                    >
+                      Previous Orders
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onSelect={handleLogout}>
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
-              <a href="/login" className="text-primary-color font-semibold">
+              <a href="/login">
                 <UserRound className="inline" />
                 Login / Signup
               </a>
             )}
-            <a href="#search" className="text-primary-color font-semibold">
+            <a href="#search">
               <Search />
             </a>
             <Cart />
-            <a href="#favorites" className="text-primary-color font-semibold">
+            <a href="#favorites">
               <Heart />
             </a>
           </div>
@@ -115,16 +136,13 @@ const Header = () => {
                 Pages
               </a>
             </nav>
-            <div className="flex flex-col items-center space-y-4 mt-4 pt-4 border-t border-slate-300">
+            <div className="flex flex-col items-center space-y-4 mt-4 pt-4 border-t border-slate-300 text-primary-color font-semibold">
               <div className="flex flex-row items-center space-x-4">
-                <a href="#search" className="text-primary-color font-semibold">
+                <a href="#search">
                   <Search />
                 </a>
                 <Cart />
-                <a
-                  href="#favorites"
-                  className="text-primary-color font-semibold"
-                >
+                <a href="#favorites">
                   <Heart />
                 </a>
               </div>
@@ -136,16 +154,25 @@ const Header = () => {
                       alt="User Avatar"
                       className="w-8 h-8 rounded-full"
                     />
-                    <span className="text-primary-color font-semibold">
-                      {user.name}
-                    </span>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <div className="p-2 flex">
+                          <span>{user.name}</span>
+                          <ChevronDown className="ml-1 mt-1 h-4 w-4" />
+                        </div>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="text-primary-color font-semibold">
+                        <DropdownMenuItem
+                          onSelect={() => history.push("/previous-orders")}
+                        >
+                          Previous Orders
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onSelect={handleLogout}>
+                          Logout
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
-                  <span
-                    onClick={handleLogout}
-                    className="text-primary-color font-semibold cursor-pointer"
-                  >
-                    Logout
-                  </span>
                 </div>
               ) : (
                 <a href="/login" className="text-primary-color font-semibold">
