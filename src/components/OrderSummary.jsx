@@ -1,8 +1,10 @@
 import {
   getCartItems,
   getCartTotal,
+  clearCart,
+  setPayment,
 } from "../store/actions/shoppingCartActions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../components/ui/button";
 import {
   Card,
@@ -10,72 +12,72 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
+import api from "../api/axios";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { CheckCircle } from "lucide-react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function OrderSummary({
   handleConfirmOrder,
+  activeTab,
   setActiveTab,
   shippingAddress,
   billingAddress,
 }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState("");
+
   const cartItems = useSelector(getCartItems);
-
   const subtotal = useSelector(getCartTotal);
-
   const cart = useSelector((state) => state.cart);
+  const selectedCard = cart.payment;
 
   const shipping = subtotal > 0 ? 5 : 0;
   const discount = subtotal > 0 ? 5 : 0;
   const total = subtotal + shipping - discount;
 
-  const createOrder = () => {
-    // Extract necessary data from your state
+  const createOrder = async () => {
+    setLoading(true);
+    setError("");
+
     const addressId = cart.address.id;
-    const cardInfo = cart.payment;
     const products = cart.cart.filter((item) => item.checked);
-
-    // Calculate total price
-    const totalPrice = products.reduce(
-      (total, item) => total + item.product.price * item.count,
-      0
-    );
-
-    // Map products to required structure
     const orderProducts = products.map((item) => ({
       product_id: item.product.id,
       count: item.count,
-      detail: `${item.product.description}`, // Adjust this to include color and size if needed
+      detail: `${item.product.description}`,
     }));
 
-    // Create payload
     const payload = {
       address_id: addressId,
-      order_date: new Date().toISOString(), // Current date and time
-      card_no: parseInt(cardInfo.card_no, 10),
-      card_name: cardInfo.name_on_card,
-      card_expire_month: cardInfo.expire_month,
-      card_expire_year: cardInfo.expire_year,
-      price: totalPrice,
+      order_date: new Date().toISOString(),
+      card_no: parseInt(selectedCard.card_no, 10),
+      card_name: selectedCard.name_on_card,
+      card_expire_month: selectedCard.expire_month,
+      card_expire_year: selectedCard.expire_year,
+      price: total,
       products: orderProducts,
     };
 
-    console.log("Creating order with payload:", payload);
-
-    {
-      /* Send POST request
-  axios.post('/order', payload)
-    .then(response => {
-      // Congratulate the client
-      alert('Congratulations! Your order has been placed successfully.');
-
-      // Reset cart state
-      // Assume resetCart is a function that clears the cart
-      resetCart();
-    })
-    .catch(error => {
-      console.error('Error creating order:', error);
-      alert('There was an issue placing your order. Please try again.');
-    });
-    */
+    try {
+      await api.post("/order", payload);
+      console.log("Order created with payload:", payload);
+      setShowSuccess(true);
+      dispatch(clearCart());
+      dispatch(setPayment(null));
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to create order");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,10 +86,10 @@ export default function OrderSummary({
     // If not, we're in the order page
     if (handleConfirmOrder) {
       handleConfirmOrder();
+    } else if (activeTab === "payment") {
+      createOrder();
     } else {
       setActiveTab("payment");
-
-      createOrder();
     }
   };
 
@@ -101,42 +103,119 @@ export default function OrderSummary({
       return !shippingAddress || !billingAddress;
     }
 
+    if (activeTab === "payment") {
+      return !selectedCard;
+    }
+
     // If we're on the cart page
     return false;
   };
 
+  const getButtonContent = () => {
+    if (total === 0) {
+      return {
+        buttonText: "No Items Selected",
+        message: "Please select items in your cart to proceed",
+      };
+    }
+
+    if (!handleConfirmOrder) {
+      if (activeTab === "payment") {
+        if (!selectedCard) {
+          return {
+            buttonText: "Place Order",
+            message: "Please select a payment method",
+          };
+        }
+        return {
+          buttonText: loading ? "Processing..." : "Place Order",
+          message: "",
+        };
+      }
+      if (!shippingAddress || !billingAddress) {
+        return {
+          buttonText: "Continue to Payment",
+          message: "Please fill in both shipping and billing addresses",
+        };
+      }
+    }
+
+    return {
+      buttonText: handleConfirmOrder
+        ? "Proceed to Checkout"
+        : "Continue to Payment",
+      message: "",
+    };
+  };
+
+  const { buttonText, message } = getButtonContent();
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Order Summary</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="font-semibold">Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>Order Summary</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span className="font-semibold">Subtotal</span>
+              <span>${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="font-semibold">Shipping</span>
+              <span>${shipping.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="font-semibold">Discount</span>
+              <span>-${discount.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between font-bold border-t pt-2 border-slate-300">
+              <span>Total</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Shipping</span>
-            <span>${shipping.toFixed(2)}</span>
+          <div className="mt-3 space-y-2">
+            <Button
+              className="w-2/3 mt-3"
+              onClick={handleButtonClick}
+              disabled={isDisabled() || loading}
+            >
+              {buttonText}
+            </Button>
+            {message && (
+              <p className="text-sm text-danger-color text-center">{message}</p>
+            )}
+            {error && (
+              <p className="text-sm text-danger-color text-center">{error}</p>
+            )}
           </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Discount</span>
-            <span>-${discount.toFixed(2)}</span>
+        </CardContent>
+      </Card>
+
+      <Dialog
+        open={showSuccess}
+        onOpenChange={(open) => !open && history.push("/")}
+        className="max-w-75vw"
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <CheckCircle className="h-6 w-6 text-green-500" />
+              Order Placed Successfully!
+            </DialogTitle>
+          </DialogHeader>
+          <div className="text-center space-y-4">
+            <p className="mb-2">
+              Thank you for your purchase! Your order has been confirmed.
+            </p>
+
+            <Button onClick={() => history.push("/shop")}>
+              Continue Shopping
+            </Button>
           </div>
-          <div className="flex justify-between font-bold border-t pt-2 border-slate-300">
-            <span>Total</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
-        </div>
-        <Button
-          className="w-2/3 mt-3"
-          onClick={handleButtonClick}
-          disabled={isDisabled()}
-        >
-          {handleConfirmOrder ? "Proceed to Checkout" : "Continue to Payment"}
-        </Button>
-      </CardContent>
-    </Card>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

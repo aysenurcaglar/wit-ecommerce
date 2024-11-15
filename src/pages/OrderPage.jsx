@@ -54,6 +54,7 @@ const OrderPage = () => {
         </div>
         <div className="w-full md:w-1/3 self-center">
           <OrderSummary
+            activeTab={activeTab}
             setActiveTab={setActiveTab}
             shippingAddress={shippingAddress}
             billingAddress={billingAddress}
