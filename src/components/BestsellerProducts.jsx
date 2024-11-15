@@ -1,12 +1,10 @@
 import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
-import {selectProductsWithCategories} from "../store/selectors/selectProductsWithCategories";
+import { selectProductsWithCategories } from "../store/selectors/selectProductsWithCategories";
 import { useEffect } from "react";
 import { fetchProducts } from "../store/actions/productActions";
 
-
 const BestsellerProducts = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,7 +14,10 @@ const BestsellerProducts = () => {
   const productList = useSelector((state) => state.product.productList || []);
   const categories = useSelector((state) => state.product.categories || []);
 
-  const productsWithCategories = selectProductsWithCategories(productList, categories);
+  const productsWithCategories = selectProductsWithCategories(
+    productList,
+    categories
+  );
 
   const bestsellerList = productsWithCategories
     .sort((a, b) => b.rating - a.rating)
@@ -28,8 +29,12 @@ const BestsellerProducts = () => {
         BESTSELLER PRODUCTS
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
-      {bestsellerList.map((product) => (
-          <ProductCard key={product.id} product={product} category={product.category} />
+        {bestsellerList.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            category={product.category}
+          />
         ))}
       </div>
     </section>

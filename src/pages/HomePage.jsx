@@ -5,7 +5,6 @@ import FeaturedPosts from "../components/FeaturedPosts";
 import BestsellerProducts from "../components/BestsellerProducts";
 
 const HomePage = ({ featuredProducts }) => {
-  
   return (
     <div className="w-screen">
       <Hero />

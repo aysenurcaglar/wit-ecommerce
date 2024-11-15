@@ -1,15 +1,26 @@
-import { getCartItems, getCartTotal } from "../store/actions/shoppingCartActions";
+import {
+  getCartItems,
+  getCartTotal,
+} from "../store/actions/shoppingCartActions";
 import { useSelector } from "react-redux";
 import { Button } from "../components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 
-export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippingAddress, billingAddress }) {
-
+export default function OrderSummary({
+  handleConfirmOrder,
+  setActiveTab,
+  shippingAddress,
+  billingAddress,
+}) {
   const cartItems = useSelector(getCartItems);
 
   const subtotal = useSelector(getCartTotal);
 
-  
   const cart = useSelector((state) => state.cart);
 
   const shipping = subtotal > 0 ? 5 : 0;
@@ -20,16 +31,19 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
     // Extract necessary data from your state
     const addressId = cart.address.id;
     const cardInfo = cart.payment;
-    const products = cart.cart.filter(item => item.checked);
+    const products = cart.cart.filter((item) => item.checked);
 
     // Calculate total price
-    const totalPrice = products.reduce((total, item) => total + item.product.price * item.count, 0);
+    const totalPrice = products.reduce(
+      (total, item) => total + item.product.price * item.count,
+      0
+    );
 
     // Map products to required structure
-    const orderProducts = products.map(item => ({
+    const orderProducts = products.map((item) => ({
       product_id: item.product.id,
       count: item.count,
-      detail: `${item.product.description}` // Adjust this to include color and size if needed
+      detail: `${item.product.description}`, // Adjust this to include color and size if needed
     }));
 
     // Create payload
@@ -41,12 +55,13 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
       card_expire_month: cardInfo.expire_month,
       card_expire_year: cardInfo.expire_year,
       price: totalPrice,
-      products: orderProducts
+      products: orderProducts,
     };
 
-    console.log('Creating order with payload:', payload);
+    console.log("Creating order with payload:", payload);
 
-    { /* Send POST request
+    {
+      /* Send POST request
   axios.post('/order', payload)
     .then(response => {
       // Congratulate the client
@@ -60,8 +75,9 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
       console.error('Error creating order:', error);
       alert('There was an issue placing your order. Please try again.');
     });
-    */}
-  }
+    */
+    }
+  };
 
   const handleButtonClick = () => {
     // If handleConfirmOrder exists, we're in the cart page
@@ -69,11 +85,10 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
     if (handleConfirmOrder) {
       handleConfirmOrder();
     } else {
-      setActiveTab('payment');
-      
-    createOrder();
-    }
+      setActiveTab("payment");
 
+      createOrder();
+    }
   };
 
   // Determine if button should be disabled
@@ -90,8 +105,6 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
     return false;
   };
 
-  
-
   return (
     <Card>
       <CardHeader>
@@ -100,15 +113,15 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
       <CardContent>
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className='font-semibold'>Subtotal</span>
+            <span className="font-semibold">Subtotal</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between">
-            <span className='font-semibold'>Shipping</span>
+            <span className="font-semibold">Shipping</span>
             <span>${shipping.toFixed(2)}</span>
           </div>
           <div className="flex justify-between">
-            <span className='font-semibold'>Discount</span>
+            <span className="font-semibold">Discount</span>
             <span>-${discount.toFixed(2)}</span>
           </div>
           <div className="flex justify-between font-bold border-t pt-2 border-slate-300">
@@ -121,9 +134,9 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
           onClick={handleButtonClick}
           disabled={isDisabled()}
         >
-          {handleConfirmOrder ? 'Proceed to Checkout' : 'Continue to Payment'}
+          {handleConfirmOrder ? "Proceed to Checkout" : "Continue to Payment"}
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }

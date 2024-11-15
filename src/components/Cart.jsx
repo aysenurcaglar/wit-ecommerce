@@ -1,18 +1,22 @@
-import { ShoppingCart } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Card, CardContent } from "@/components/ui/card"
-import { useSelector, useDispatch } from "react-redux"
-import { removeFromCart, updateItemCount, getCartItems, getCartTotal } from "../store/actions/shoppingCartActions"
-import { Minus, Plus, Trash2 } from "lucide-react"
+} from "@/components/ui/popover";
+import { Card, CardContent } from "@/components/ui/card";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeFromCart,
+  updateItemCount,
+  getCartItems,
+  getCartTotal,
+} from "../store/actions/shoppingCartActions";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { useHistory } from "react-router-dom";
 
 const Cart = () => {
-
   const dispatch = useDispatch();
   const history = useHistory();
   const cartItems = useSelector(getCartItems);
@@ -31,11 +35,10 @@ const Cart = () => {
     dispatch(removeFromCart(productId));
   };
 
-
   return (
     <Popover>
       <PopoverTrigger asChild>
-      <div className="relative">
+        <div className="relative">
           <ShoppingCart className="text-primary-color font-semibold" />
           {cartItems.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-primary-color text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
@@ -54,9 +57,7 @@ const Cart = () => {
               </p>
             ) : (
               cartItems.map((item) => (
-                <Card 
-                key={item.product.id}
-                className="shadow-none">
+                <Card key={item.product.id} className="shadow-none">
                   <CardContent className="p-3">
                     <div className="flex items-center space-x-4">
                       <img
@@ -76,7 +77,13 @@ const Cart = () => {
                             variant="outline"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => handleUpdateQuantity(item.product.id, item.count, -1)}
+                            onClick={() =>
+                              handleUpdateQuantity(
+                                item.product.id,
+                                item.count,
+                                -1
+                              )
+                            }
                           >
                             <Minus className="h-3 w-3" />
                           </Button>
@@ -85,7 +92,13 @@ const Cart = () => {
                             variant="outline"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => handleUpdateQuantity(item.product.id, item.count, 1)}
+                            onClick={() =>
+                              handleUpdateQuantity(
+                                item.product.id,
+                                item.count,
+                                1
+                              )
+                            }
                           >
                             <Plus className="h-3 w-3" />
                           </Button>
@@ -111,7 +124,10 @@ const Cart = () => {
                 <p className="text-sm font-medium">Total:</p>
                 <p className="text-sm font-medium">${cartTotal.toFixed(2)}</p>
               </div>
-              <Button className="w-full" onClick={() => history.push('/checkout')}>
+              <Button
+                className="w-full"
+                onClick={() => history.push("/checkout")}
+              >
                 Checkout
               </Button>
             </>
@@ -119,7 +135,7 @@ const Cart = () => {
         </div>
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
 export default Cart;

@@ -1,10 +1,10 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Navigation, Scrollbar, Autoplay } from 'swiper/modules';
-import { Button } from '@/components/ui/button';
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
@@ -13,13 +13,14 @@ const Hero = () => {
         spaceBetween={0}
         navigation={true}
         scrollbar={{ draggable: true }}
-            autoplay={{
-              delay: 5000,}}
+        autoplay={{
+          delay: 5000,
+        }}
         modules={[Navigation, Scrollbar, Autoplay]}
         className="max-w-full"
       >
         <SwiperSlide>
-        <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[400px] md:min-h-[700px]">
+          <div className="relative flex items-center justify-center w-full overflow-hidden min-h-[400px] md:min-h-[700px]">
             <img
               src="shop-hero-1-product-slide-1.jpg"
               alt="New Arrivals"
@@ -37,7 +38,9 @@ const Hero = () => {
                   We know how large objects will act, <br />
                   but things on a small scale.
                 </p>
-                <Button variant="secondary" size="lg">SHOP NOW</Button>
+                <Button variant="secondary" size="lg">
+                  SHOP NOW
+                </Button>
               </div>
             </div>
           </div>
@@ -62,7 +65,9 @@ const Hero = () => {
                   We know how large objects will act, <br />
                   but things on a small scale.
                 </p>
-                <Button variant="secondary" size="lg">SHOP NOW</Button>
+                <Button variant="secondary" size="lg">
+                  SHOP NOW
+                </Button>
               </div>
             </div>
           </div>

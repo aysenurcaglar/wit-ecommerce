@@ -1,4 +1,4 @@
-import {produce} from 'immer';
+import { produce } from "immer";
 import {
   SET_CATEGORIES,
   SET_PRODUCT_LIST,
@@ -10,8 +10,8 @@ import {
   SET_CURRENT_PAGE,
   SET_SORT,
   SET_PRODUCT,
-  SET_CATEGORY
-} from '../actions/productActions';
+  SET_CATEGORY,
+} from "../actions/productActions";
 
 const initialState = {
   categories: [],
@@ -19,12 +19,12 @@ const initialState = {
   total: 0,
   limit: 20, // Default limit for pagination is 25
   offset: 0, // Default offset for pagination
-  filter: '',
-  fetchState: 'NOT_FETCHED', // Can be 'NOT_FETCHED', 'FETCHING', 'FETCHED', 'FAILED'
+  filter: "",
+  fetchState: "NOT_FETCHED", // Can be 'NOT_FETCHED', 'FETCHING', 'FETCHED', 'FAILED'
   currentPage: 1,
-  sort: '',
+  sort: "",
   product: null,
-  category: null
+  category: null,
 };
 
 export const productReducer = produce((draft, action) => {

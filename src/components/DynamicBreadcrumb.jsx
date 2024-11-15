@@ -1,32 +1,38 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@/components/ui/breadcrumb'; // Adjust the import based on your actual component
-import { ChevronRight } from 'lucide-react'; // Adjust the icon import as necessary
-import createSlug from '../utils/createSlug';
+import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "@/components/ui/breadcrumb"; // Adjust the import based on your actual component
+import { ChevronRight } from "lucide-react"; // Adjust the icon import as necessary
+import createSlug from "../utils/createSlug";
 
 function DynamicBreadcrumb({ gender, categoryId }) {
   const history = useHistory();
   const categoryTitle = useSelector((state) => {
     // Assuming your category state is structured with an ID and title
-    const category = state.product.categories.find(cat => cat.id === parseInt(categoryId));
-    return category ? category.title : '';
+    const category = state.product.categories.find(
+      (cat) => cat.id === parseInt(categoryId)
+    );
+    return category ? category.title : "";
   });
 
   const getBreadcrumbItems = () => {
     const items = [
-      { label: 'Home', path: '/' },
-      { label: 'Shop', path: '/shop' }
+      { label: "Home", path: "/" },
+      { label: "Shop", path: "/shop" },
     ];
 
     if (gender && categoryTitle) {
       items.push({
-        label: gender === 'k' ? 'Kadın' : 'Erkek',
-        path: `/shop/${gender}`
+        label: gender === "k" ? "Kadın" : "Erkek",
+        path: `/shop/${gender}`,
       });
       items.push({
         label: categoryTitle,
-        path: `/shop/${gender}/${createSlug(categoryTitle)}/${categoryId}`
+        path: `/shop/${gender}/${createSlug(categoryTitle)}/${categoryId}`,
       });
     }
 
@@ -42,7 +48,11 @@ function DynamicBreadcrumb({ gender, categoryId }) {
           <BreadcrumbItem>
             <BreadcrumbLink
               onClick={() => history.push(item.path)}
-              className={index === breadcrumbItems.length - 1 ? "font-bold cursor-pointer" : "cursor-pointer"}
+              className={
+                index === breadcrumbItems.length - 1
+                  ? "font-bold cursor-pointer"
+                  : "cursor-pointer"
+              }
             >
               {item.label}
             </BreadcrumbLink>

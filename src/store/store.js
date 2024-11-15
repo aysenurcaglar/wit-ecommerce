@@ -1,11 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { thunk } from 'redux-thunk';
-import logger from 'redux-logger';
-import { combineReducers } from 'redux';
+import { configureStore } from "@reduxjs/toolkit";
+import { thunk } from "redux-thunk";
+import logger from "redux-logger";
+import { combineReducers } from "redux";
 
-import { clientReducer } from './reducers/clientReducer';
-import { productReducer } from './reducers/productReducer';
-import { shoppingCartReducer } from './reducers/shoppingCartReducer';
+import { clientReducer } from "./reducers/clientReducer";
+import { productReducer } from "./reducers/productReducer";
+import { shoppingCartReducer } from "./reducers/shoppingCartReducer";
 
 const rootReducer = combineReducers({
   client: clientReducer,
@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk, logger),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(thunk, logger),
 });
 
 export default store;
