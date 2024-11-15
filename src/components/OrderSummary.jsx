@@ -12,8 +12,8 @@ export default function OrderSummary({ handleConfirmOrder, setActiveTab, shippin
   
   const cart = useSelector((state) => state.cart);
 
-  const shipping = subtotal > 0 ? 0 : 0;
-  const discount = subtotal > 0 ? 0 : 0;
+  const shipping = subtotal > 0 ? 5 : 0;
+  const discount = subtotal > 0 ? 5 : 0;
   const total = subtotal + shipping - discount;
 
   const createOrder = () => {
