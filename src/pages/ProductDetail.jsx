@@ -58,7 +58,7 @@ const ProductDetail = () => {
   return (
     <>
       <div className="max-w-[85vw] md:max-w-75vw mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-wrap justify-around md:justify-between items-center mb-8">
           <DynamicBreadcrumb gender={gender} categoryId={categoryId} />
 
           <Button
@@ -66,7 +66,7 @@ const ProductDetail = () => {
             onClick={() => history.goBack()}
             className="inline-flex items-center gap-1 text-md text-primary-color font-semibold"
           >
-            <ChevronRight className="w-4 h-4 mt-1 rotate-180" />
+            <ChevronRight className="w-4 h-4 rotate-180" />
             Back
           </Button>
         </div>
@@ -161,28 +161,21 @@ const ProductDetail = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent
-            value="description"
-            className="p-4 h-60 flex items-center justify-center"
-          >
-            <p>{product.description}</p>
-          </TabsContent>
+          <div className="px-4 py-24 h-60 items-center justify-center">
+            <TabsContent value="description">
+              <p>{product.description}</p>
+            </TabsContent>
 
-          <TabsContent
-            value="additional"
-            className="p-4 h-60 flex items-center justify-center"
-          >
-            {/* Additional Information content */}
-            <p>Additional information goes here...</p>
-          </TabsContent>
+            <TabsContent value="additional">
+              {/* Additional Information content */}
+              <p>Additional information goes here...</p>
+            </TabsContent>
 
-          <TabsContent
-            value="reviews"
-            className="p-4 h-60 flex items-center justify-center"
-          >
-            {/* Reviews content */}
-            <p>Customer reviews go here...</p>
-          </TabsContent>
+            <TabsContent value="reviews">
+              {/* Reviews content */}
+              <p>Customer reviews go here...</p>
+            </TabsContent>
+          </div>
         </Tabs>
 
         <BestsellerProducts />

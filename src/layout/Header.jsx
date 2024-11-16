@@ -35,6 +35,9 @@ const Header = () => {
     localStorage.removeItem("user"); // Remove user data from localStorage
     sessionStorage.removeItem("authToken");
     sessionStorage.removeItem("user");
+    localStorage.removeItem("hasVisitedBefore");
+    sessionStorage.removeItem("hasVisitedBefore");
+
     // Redirect user to home page or login page if necessary
     history.push("/login");
     toast.success("Logout successful!", {
@@ -85,7 +88,7 @@ const Header = () => {
                 />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <div className="inline-flex">
+                    <div className="flex cursor-pointer">
                       <span className="text-md">{user.name}</span>
                       <ChevronDown className="ml-1 mt-1 h-5 w-5" />
                     </div>

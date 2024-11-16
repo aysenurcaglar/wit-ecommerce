@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, render, ...rest }) => {
           return Component ? <Component {...props} /> : render(props);
         } else {
           // Show a toast notification when redirecting
-          toast.info("Please log in to start shopping!", {
+          toast.info("Please log in to place an order!", {
             autoClose: 3000,
             theme: "colored",
           });

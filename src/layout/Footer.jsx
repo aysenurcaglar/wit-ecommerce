@@ -103,9 +103,12 @@ function Footer() {
             <h3 className="text-lg text-text-color font-bold mt-4">
               Get in Touch
             </h3>
-            <div className="flex flex-row lg:flex-col max-w-sm mt-4">
+            <div className="flex flex-row lg:flex-col mt-4">
               <Input placeholder="Your email" className="flex-2 lg:w-auto" />
-              <Button className="flex-1 lg:w-auto p-2">Subscribe</Button>
+
+              <Button className="flex-1 lg:w-1/2 lg:ml-auto p-2">
+                Subscribe
+              </Button>
             </div>
           </div>
         </div>

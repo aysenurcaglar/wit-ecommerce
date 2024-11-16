@@ -188,17 +188,6 @@ const ShopPage = () => {
 
           {showMobileFilters && (
             <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-lg">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Views:</span>
-                <div className="flex gap-2">
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <LayoutGrid className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <List className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
               <Select
                 value={sort}
                 onValueChange={handleSortChange}
@@ -223,7 +212,7 @@ const ShopPage = () => {
                 placeholder="Filter products..."
                 value={filter}
                 onChange={handleFilterChange}
-                className="border rounded px-2 py-1 w-[200px]"
+                className="border rounded px-2 py-1"
               />
             </div>
           )}
@@ -236,15 +225,6 @@ const ShopPage = () => {
             results
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <span className="text-sm">Views:</span>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
-                <LayoutGrid className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
-                <List className="h-4 w-4" />
-              </Button>
-            </div>
             <Select value={sort} onValueChange={handleSortChange}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Sort by" />

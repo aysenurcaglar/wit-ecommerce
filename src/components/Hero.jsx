@@ -26,7 +26,7 @@ const Hero = () => {
               alt="New Arrivals"
               className="w-full h-full object-cover absolute inset-0"
             />
-            <div className="absolute inset-0 flex items-center justify-center md:max-w-75vw mx-auto md:justify-start md:ml-24">
+            <div className="absolute inset-0 flex items-center justify-center md:max-w-75vw mx-auto md:justify-start md:px-4">
               <div className="text-white text-center md:text-left max-w-[85vw] md:max-w-75vw px-4 md:px-0">
                 <p className="font-bold my-4 md:my-8 text-base md:text-xl">
                   SUMMER 2024
@@ -53,7 +53,7 @@ const Hero = () => {
               alt="New Arrivals"
               className="w-full h-full object-cover absolute inset-0"
             />
-            <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
+            <div className="absolute inset-0 flex items-center justify-center md:max-w-75vw mx-auto md:justify-start md:px-4">
               <div className="text-white text-center md:text-left px-4 md:px-0">
                 <p className="font-bold my-4 md:my-8 text-base md:text-xl">
                   SUMMER 2024

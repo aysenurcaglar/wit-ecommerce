@@ -29,7 +29,7 @@ const Hero2 = () => {
               className="w-full h-full object-cover absolute inset-0"
             />
             {/* Change 3: Updated positioning and alignment for better mobile display */}
-            <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
+            <div className="absolute inset-0 flex items-center justify-center md:max-w-75vw mx-auto md:justify-start md:px-4">
               {/* Change 4: Improved text container positioning and spacing */}
               <div className="text-white text-center md:text-left drop-shadow px-4 md:px-0">
                 {/* Change 5: Adjusted text spacing and sizes for mobile */}
@@ -63,7 +63,7 @@ const Hero2 = () => {
               className="w-full h-full object-cover absolute inset-0"
             />
             {/* Change 3: Updated positioning and alignment for better mobile display */}
-            <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
+            <div className="absolute inset-0 flex items-center justify-center md:max-w-75vw mx-auto md:justify-start md:px-4">
               {/* Change 4: Improved text container positioning and spacing */}
               <div className="text-white text-center md:text-left drop-shadow px-4 md:px-0">
                 {/* Change 5: Adjusted text spacing and sizes for mobile */}

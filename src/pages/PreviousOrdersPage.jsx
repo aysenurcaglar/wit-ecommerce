@@ -2,7 +2,13 @@ import api from "../api/axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -39,10 +45,17 @@ const PreviousOrdersPage = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+  if (orders.length === 0)
+    return (
+      <div className="flex justify-center items-center my-16">
+        No orders found
+      </div>
+    );
 
   return (
     <div className="container max-w-[85vw] md:max-w-75vw mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Previous Orders</h1>
+      <h1 className="text-2xl font-bold my-4">Previous Orders</h1>
+
       {orders.map((order) => (
         <Card key={order.id} className="mb-4">
           <CardHeader>
@@ -53,10 +66,7 @@ const PreviousOrdersPage = () => {
               <p className="font-semibold">Date:</p>
               <p>{new Date(order.order_date).toLocaleString()}</p>
             </div>
-            <div className="flex items-center justify-center space-x-2 mb-2">
-              <p className="font-semibold">Total:</p>
-              <p>${order.price.toFixed(2)}</p>
-            </div>
+
             <Table>
               <TableHeader>
                 <TableRow>
@@ -85,6 +95,12 @@ const PreviousOrdersPage = () => {
               </TableBody>
             </Table>
           </CardContent>
+          <CardFooter className="flex justify-end mb-2">
+            <div className="flex items-center space-x-2 mr-2 md:mr-16">
+              <p className="font-semibold text-right">Total:</p>
+              <p className="text-right">${order.price.toFixed(2)}</p>
+            </div>
+          </CardFooter>
         </Card>
       ))}
     </div>

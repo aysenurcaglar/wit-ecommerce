@@ -1,7 +1,7 @@
 import "./App.css";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Switch, Route, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, initializeUser } from "./store/actions/clientActions";
@@ -24,11 +24,13 @@ import Footer from "./layout/Footer";
 import { Loader2 } from "lucide-react";
 
 import "react-toastify/dist/ReactToastify.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import PreviousOrdersPage from "./pages/PreviousOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
 
   const { isLoading, error } = useSelector((state) => state.client);
   const { productList, fetchState } = useSelector((state) => state.product);
@@ -37,9 +39,28 @@ function App() {
     console.log("App useEffect running");
     const token =
       localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
+    const hasVisitedBefore =
+      localStorage.getItem("hasVisitedBefore") ||
+      sessionStorage.getItem("hasVisitedBefore");
+
     if (token) {
+      localStorage.setItem("hasVisitedBefore", "true");
       dispatch(initializeUser());
     }
+
+    // If this is the first visit and we're on the home page
+    if (!token && !hasVisitedBefore && location.pathname === "/") {
+      sessionStorage.setItem("hasVisitedBefore", "true");
+      history.push("/login");
+      toast.info(
+        "Welcome visitor! Please log in to make the most of your experience.",
+        { autoClose: 3000, theme: "colored" }
+      );
+    } else {
+      // Mark as visited if coming from any other page
+      localStorage.setItem("hasVisitedBefore", "true");
+    }
+
     dispatch(fetchCategories());
   }, []);
 
@@ -55,17 +76,17 @@ function App() {
       )}
       {error && <div className="bg-white">Error: {error}</div>}
       <Switch>
-        <PrivateRoute
+        <Route
           path="/shop/:gender/:categoryName/:categoryId/:nameSlug/:productId"
           component={ProductDetail}
         />
-        <PrivateRoute
+        <Route
           exact
           path="/shop/:gender/:categoryName/:categoryId"
           component={ShopPage}
         />
-        <PrivateRoute exact path="/shop" component={ShopPage} />
-        <PrivateRoute exact path="/" render={() => <HomePage />} />
+        <Route exact path="/shop" component={ShopPage} />
+        <Route exact path="/" component={HomePage} />
 
         <Route path="/checkout" component={CheckoutPage} />
         <PrivateRoute path="/order" component={OrderPage} />

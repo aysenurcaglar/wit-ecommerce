@@ -119,7 +119,7 @@ export default function OrderSummary({
     if (total === 0) {
       return {
         buttonText: "No Items Selected",
-        message: "Please select items in your cart to proceed",
+        message: "",
       };
     }
 
@@ -199,7 +199,7 @@ export default function OrderSummary({
 
       {/* Success Dialog */}
       <Dialog open={showSuccess} onOpenChange={handleSuccess}>
-        <DialogContent className="mx-auto">
+        <DialogContent className="max-w-75vw mx-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <CheckCircle className="h-6 w-6 text-green-500" />
@@ -215,7 +215,7 @@ export default function OrderSummary({
                 Continue Shopping
               </Button>
               <Button onClick={() => history.push("/previous-orders")}>
-                View Orders
+                View Your Orders
               </Button>
             </div>
           </div>

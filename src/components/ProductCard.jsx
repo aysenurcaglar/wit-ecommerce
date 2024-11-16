@@ -37,7 +37,7 @@ const ProductCard = ({ product, category }) => {
 
   return (
     <Card
-      className="border-none shadow-none overflow-hidden hover:scale-105 cursor-pointer"
+      className="border-slate-200 shadow-none overflow-hidden hover:scale-105 cursor-pointer"
       onClick={handleClick}
     >
       <CardContent className="p-0">
