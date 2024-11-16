@@ -22,6 +22,9 @@ const Cart = () => {
   const cartItems = useSelector(getCartItems);
   const cartTotal = useSelector(getCartTotal);
 
+  // Calculate total quantity of items in cart
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.count, 0);
+
   const handleUpdateQuantity = (productId, currentCount, change) => {
     const newCount = currentCount + change;
     if (newCount < 1) {
@@ -40,9 +43,9 @@ const Cart = () => {
       <PopoverTrigger asChild>
         <div className="relative">
           <ShoppingCart className="text-primary-color font-semibold" />
-          {cartItems.length > 0 && (
+          {totalQuantity > 0 && (
             <span className="absolute -top-2 -right-2 bg-primary-color text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-              {cartItems.length}
+              {totalQuantity}
             </span>
           )}
         </div>

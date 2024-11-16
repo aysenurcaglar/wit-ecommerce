@@ -93,6 +93,11 @@ export default function OrderSummary({
     }
   };
 
+  const handleSuccess = () => {
+    setShowSuccess(false);
+    history.push("/");
+  };
+
   // Determine if button should be disabled
   const isDisabled = () => {
     // Always disable if total is zero
@@ -100,11 +105,10 @@ export default function OrderSummary({
 
     // If we're on the order page (no handleConfirmOrder)
     if (!handleConfirmOrder) {
+      if (activeTab === "payment") {
+        return !selectedCard;
+      }
       return !shippingAddress || !billingAddress;
-    }
-
-    if (activeTab === "payment") {
-      return !selectedCard;
     }
 
     // If we're on the cart page
@@ -193,26 +197,27 @@ export default function OrderSummary({
         </CardContent>
       </Card>
 
-      <Dialog
-        open={showSuccess}
-        onOpenChange={(open) => !open && history.push("/")}
-        className="max-w-75vw"
-      >
-        <DialogContent>
+      {/* Success Dialog */}
+      <Dialog open={showSuccess} onOpenChange={handleSuccess}>
+        <DialogContent className="mx-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <CheckCircle className="h-6 w-6 text-green-500" />
               Order Placed Successfully!
             </DialogTitle>
           </DialogHeader>
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-5 ">
             <p className="mb-2">
               Thank you for your purchase! Your order has been confirmed.
             </p>
-
-            <Button onClick={() => history.push("/shop")}>
-              Continue Shopping
-            </Button>
+            <div className="flex justify-center space-x-4">
+              <Button onClick={() => history.push("/shop")}>
+                Continue Shopping
+              </Button>
+              <Button onClick={() => history.push("/previous-orders")}>
+                View Orders
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

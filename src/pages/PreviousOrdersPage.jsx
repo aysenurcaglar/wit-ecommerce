@@ -49,10 +49,14 @@ const PreviousOrdersPage = () => {
             <CardTitle>Order #{order.id}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-2">
-              Date: {new Date(order.order_date).toLocaleString()}
-            </p>
-            <p className="mb-2">Total: ${order.price.toFixed(2)}</p>
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <p className="font-semibold">Date:</p>
+              <p>{new Date(order.order_date).toLocaleString()}</p>
+            </div>
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <p className="font-semibold">Total:</p>
+              <p>${order.price.toFixed(2)}</p>
+            </div>
             <Table>
               <TableHeader>
                 <TableRow>

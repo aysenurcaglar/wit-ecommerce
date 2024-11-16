@@ -15,16 +15,17 @@ const ProductCard = ({ product, category }) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log("Clicked product:", product.id);
-    // Try both methods to see which works
-    //window.location.href = `/product/${product.id}`;
     history.push(
-      `/shop/${category.gender}/${createSlug(category.title)}/${
-        category.id
-      }/${createSlug(product.name)}/${product.id}`
+      `/shop/${category.gender === "k" ? "kadin" : "erkek"}/${createSlug(
+        category.title
+      )}/${category.id}/${createSlug(product.name)}/${product.id}`
     );
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    // To prevent triggering card click
+    e.stopPropagation();
     if (product) {
       dispatch(addToCart(product));
       // Show some feedback to user
@@ -35,7 +36,10 @@ const ProductCard = ({ product, category }) => {
   };
 
   return (
-    <Card className="border-none shadow-none overflow-hidden hover:scale-105">
+    <Card
+      className="border-none shadow-none overflow-hidden hover:scale-105 cursor-pointer"
+      onClick={handleClick}
+    >
       <CardContent className="p-0">
         <div className="aspect-[3/4] mb-4">
           <img

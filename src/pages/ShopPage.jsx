@@ -78,7 +78,9 @@ const ShopPage = () => {
   // Handle category selection
   const handleCategoryChange = async (categoryId, gender, categoryTitle) => {
     const slug = createSlug(categoryTitle);
-    history.push(`/shop/${gender}/${slug}/${categoryId}`);
+    history.push(
+      `/shop/${gender === "k" ? "kadin" : "erkek"}/${slug}/${categoryId}`
+    );
     dispatch(updateCategory(categoryId));
   };
 

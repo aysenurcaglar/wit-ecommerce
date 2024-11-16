@@ -54,7 +54,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="container max-w-[85vw] md:max-w-75vw mx-auto py-12">
-      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+      <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
       <div className="grid md:grid-cols-3 gap-6">
         <div className="md:col-span-2">
           <div className="grid gap-4">

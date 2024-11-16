@@ -42,7 +42,7 @@ const CategoryDropdown = () => {
             {femaleCategories.map((category) => (
               <DropdownMenuItem key={category.id} asChild>
                 <Link
-                  to={`/shop/${category.gender}/${createSlug(category.title)}/${
+                  to={`/shop/kadin/${createSlug(category.title)}/${
                     category.id
                   }`}
                   className="text-dark-gray"
@@ -58,7 +58,7 @@ const CategoryDropdown = () => {
             {maleCategories.map((category) => (
               <DropdownMenuItem key={category.id} asChild>
                 <Link
-                  to={`/shop/${category.gender}/${createSlug(category.title)}/${
+                  to={`/shop/erkek/${createSlug(category.title)}/${
                     category.id
                   }`}
                   className="text-dark-gray"

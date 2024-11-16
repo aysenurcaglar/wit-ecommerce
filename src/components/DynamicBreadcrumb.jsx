@@ -27,7 +27,7 @@ function DynamicBreadcrumb({ gender, categoryId }) {
 
     if (gender && categoryTitle) {
       items.push({
-        label: gender === "k" ? "Kadın" : "Erkek",
+        label: gender === "kadin" ? "Kadın" : "Erkek",
         path: `/shop/${gender}`,
       });
       items.push({
