@@ -21,53 +21,55 @@ export function ShopPagination() {
   };
 
   return (
-    <Pagination className="flex flex-wrap max-w-75vw mx-auto">
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              if (currentPage > 1) handlePageChange(currentPage - 1);
-            }}
-          />
-        </PaginationItem>
-        {[...Array(totalPages)].map((_, index) => {
-          const page = index + 1;
-          if (
-            page === 1 ||
-            page === totalPages ||
-            (page >= currentPage - 1 && page <= currentPage + 1)
-          ) {
-            return (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(page);
-                  }}
-                  isActive={page === currentPage}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            );
-          } else if (page === currentPage - 2 || page === currentPage + 2) {
-            return <PaginationEllipsis key={page} />;
-          }
-          return null;
-        })}
-        <PaginationItem>
-          <PaginationNext
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              if (currentPage < totalPages) handlePageChange(currentPage + 1);
-            }}
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <div className="w-full max-w-75vw mx-auto">
+      <Pagination>
+        <PaginationContent className="flex flex-wrap justify-center">
+          <PaginationItem>
+            <PaginationPrevious
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPage > 1) handlePageChange(currentPage - 1);
+              }}
+            />
+          </PaginationItem>
+          {[...Array(totalPages)].map((_, index) => {
+            const page = index + 1;
+            if (
+              page === 1 ||
+              page === totalPages ||
+              (page >= currentPage - 1 && page <= currentPage + 1)
+            ) {
+              return (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(page);
+                    }}
+                    isActive={page === currentPage}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            } else if (page === currentPage - 2 || page === currentPage + 2) {
+              return <PaginationEllipsis key={page} />;
+            }
+            return null;
+          })}
+          <PaginationItem>
+            <PaginationNext
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) handlePageChange(currentPage + 1);
+              }}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
   );
 }
