@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply text-[#252B42];
+  }
+}
+
 :root {
   font-family: Montserrat, sans-serif;
   margin: 0 auto;
