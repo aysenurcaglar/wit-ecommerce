@@ -73,11 +73,11 @@ const ProductDetail = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Image */}
-          <div className="overflow-hidden rounded-lg max-h-[500px]">
+          <div className="overflow-hidden rounded-lg max-h-[400px]">
             <img
               src={product.images[0]?.url}
               alt={product.name}
-              className="object-cover object-bottom"
+              className=" object-cover object-center"
             />
           </div>
 
