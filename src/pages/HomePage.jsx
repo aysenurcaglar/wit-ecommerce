@@ -15,7 +15,7 @@ const HomePage = () => {
       </h2>
       <BestsellerProducts />
       <Hero2 />
-      <div className="flex flex-wrap items-center justify-center xl:justify-between max-w-75vw mx-auto">
+      <div className="flex flex-wrap-reverse items-center justify-center xl:justify-between max-w-75vw mx-auto gap-8">
         <img
           src="asian-woman-man-with-winter-clothes 1.png"
           alt="asian woman and man with winter clothes"
