@@ -125,7 +125,7 @@ const PricingPage = () => {
       </section>
 
       <div className="bg-gray">
-        <div className="py-12 max-w-[500px] mx-auto">
+        <div className="py-12 max-w-75vw mx-auto">
           <h2 className="text-center text-text-color text-4xl font-bold mb-6">
             Pricing
           </h2>
@@ -135,7 +135,7 @@ const PricingPage = () => {
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-4 mb-16">
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-16 max-w-75vw mx-auto">
           <span
             className={`text-lg ${!isYearly ? "font-bold" : "font-medium"}`}
           >
@@ -150,7 +150,7 @@ const PricingPage = () => {
           </span>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-2 max-w-75vw mx-auto">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-2 max-w-75vw mx-auto">
           {plans.map((plan, index) => (
             <Card
               key={plan.name}
@@ -204,7 +204,7 @@ const PricingPage = () => {
           ))}
         </div>
 
-        <span className="text-text-color font-semibold text-lg block text-center mt-24 pt-8">
+        <span className="text-text-color max-w-75vw mx-auto font-semibold text-lg block text-center mt-24 pt-8">
           Trusted by Over 4000 Big Companies
         </span>
       </div>
@@ -252,7 +252,7 @@ const PricingPage = () => {
       {/* CTA Section */}
       <section className="bg-gray-100 py-12 text-center max-w-75vw mx-auto">
         <h3 className="text-2xl font-bold">Start your 14 days free trial</h3>
-        <p className="text-gray-600 mt-2 mb-4">
+        <p className="mt-2 mb-4">
           Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
         </p>
         <Button>Try it free now</Button>
