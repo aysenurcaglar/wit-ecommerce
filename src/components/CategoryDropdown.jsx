@@ -27,7 +27,7 @@ const CategoryDropdown = () => {
   );
 
   return (
-    <div className="inline-flex items-center space-x-0 text-light-gray">
+    <div className="inline-flex items-center justify-center text-center space-x-0 text-light-gray">
       <Link to="/shop" className="ml-4 font-semibold">
         Shop
       </Link>

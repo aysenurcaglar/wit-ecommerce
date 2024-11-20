@@ -65,11 +65,11 @@ function Footer() {
         </div>
 
         {/* Links and Newsletter Signup */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 py-8 text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 py-8 gap-4 xl:gap-0 text-left">
           {Object.entries(footerSections).map(([title, links]) => (
             <div key={title}>
               <button
-                className="flex justify-between items-center w-full text-lg text-text-color font-bold mt-4 md:hidden"
+                className="flex justify-between items-center w-full text-lg text-text-color font-bold mt-4 xl:hidden"
                 onClick={() => toggleSection(title)}
               >
                 {title}
@@ -79,12 +79,12 @@ function Footer() {
                   <ChevronDown className="w-5 h-5" />
                 )}
               </button>
-              <h3 className="hidden md:block text-lg text-text-color font-bold mt-4">
+              <h3 className="hidden xl:block text-lg text-text-color font-bold mt-4">
                 {title}
               </h3>
               <ul
                 className={`mt-4 space-y-2 font-semibold text-light-gray overflow-hidden transition-all duration-300 ease-in-out ${
-                  expanded[title] ? "max-h-40" : "max-h-0 md:max-h-none"
+                  expanded[title] ? "max-h-40" : "max-h-0 xl:max-h-none"
                 }`}
               >
                 {links.map((link) => (
@@ -103,10 +103,10 @@ function Footer() {
             <h3 className="text-lg text-text-color font-bold mt-4">
               Get in Touch
             </h3>
-            <div className="flex flex-row lg:flex-col mt-4">
-              <Input placeholder="Your email" className="flex-2 lg:w-auto" />
+            <div className="flex flex-row xl:flex-col mt-4">
+              <Input placeholder="Your email" className="flex-2 xl:w-auto" />
 
-              <Button className="flex-1 lg:w-1/2 lg:ml-auto p-2">
+              <Button className="flex-1 xl:w-1/2 xl:ml-auto p-2">
                 Subscribe
               </Button>
             </div>

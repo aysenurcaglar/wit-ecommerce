@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import {
   AlignRight,
@@ -54,31 +54,24 @@ const Header = () => {
           </a>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex space-x-6">
+          <div className="xl:hidden flex space-x-6">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <AlignRight />
             </button>
           </div>
 
           {/* Desktop navigation */}
-          <nav className="hidden md:block">
+
+          <div className="hidden xl:flex flex-row items-center space-x-2 xl:space-x-4 text-light-gray font-semibold">
             <CategoryDropdown />
-            <a href="/about" className="mx-4 text-light-gray font-semibold">
-              About
-            </a>
-            <a href="/pricing" className="mx-4 text-light-gray font-semibold">
-              Pricing
-            </a>
-            <a href="/contact" className="mx-4 text-light-gray font-semibold">
-              Contact
-            </a>
-            <a href="/team" className="mx-4 text-light-gray font-semibold">
-              Team
-            </a>
-          </nav>
+            <a href="/about">About</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/contact">Contact</a>
+            <a href="/team">Team</a>
+          </div>
 
           {/* Desktop user actions */}
-          <div className="hidden md:flex items-center space-x-4 text-primary-color font-semibold">
+          <div className="hidden xl:flex items-center space-x-4 text-primary-color font-semibold">
             {user.name ? (
               <div className="flex items-center space-x-4">
                 <img
@@ -123,8 +116,8 @@ const Header = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4">
-            <nav className="flex flex-col items-center space-y-4">
+          <div className="xl:hidden mt-4">
+            <nav className="flex flex-col items-center justify-center space-y-4">
               <CategoryDropdown />
               <a href="/about" className="text-light-gray font-semibold">
                 About
