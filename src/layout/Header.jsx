@@ -66,8 +66,8 @@ const Header = () => {
             <a href="/about" className="mx-4 text-light-gray font-semibold">
               About
             </a>
-            <a href="/blog" className="mx-4 text-light-gray font-semibold">
-              Blog
+            <a href="/pricing" className="mx-4 text-light-gray font-semibold">
+              Pricing
             </a>
             <a href="/contact" className="mx-4 text-light-gray font-semibold">
               Contact
@@ -129,14 +129,14 @@ const Header = () => {
               <a href="/about" className="text-light-gray font-semibold">
                 About
               </a>
-              <a href="/blog" className="text-light-gray font-semibold">
-                Blog
+              <a href="/pricing" className="text-light-gray font-semibold">
+                Pricing
               </a>
               <a href="/contact" className="text-light-gray font-semibold">
                 Contact
               </a>
-              <a href="/pages" className="text-light-gray font-semibold">
-                Pages
+              <a href="/team" className="text-light-gray font-semibold">
+                Team
               </a>
             </nav>
             <div className="flex flex-col items-center space-y-4 mt-4 pt-4 border-t border-slate-300 text-primary-color font-semibold">

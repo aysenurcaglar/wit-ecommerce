@@ -26,6 +26,7 @@ import { Loader2 } from "lucide-react";
 import "react-toastify/dist/ReactToastify.css";
 
 import PreviousOrdersPage from "./pages/PreviousOrdersPage";
+import PricingPage from "./pages/PricingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function App() {
       );
     } else {
       // Mark as visited if coming from any other page
-      localStorage.setItem("hasVisitedBefore", "true");
+      sessionStorage.setItem("hasVisitedBefore", "true");
     }
 
     dispatch(fetchCategories());
@@ -92,6 +93,7 @@ function App() {
         <PrivateRoute path="/order" component={OrderPage} />
         <PrivateRoute path="/previous-orders" component={PreviousOrdersPage} />
 
+        <Route path="/pricing" component={PricingPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/team" component={TeamPage} />
         <Route path="/about" component={AboutPage} />
