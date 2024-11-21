@@ -17,47 +17,47 @@ const teamMembers = [
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-1.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-2.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-3.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-4.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-5.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-6.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-7.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-8.jpg",
   },
   {
     name: "Username",
     role: "Profession",
-    image: "https://placehold.co/400x250/thistle/white",
+    image: "/team-1-user-9.jpg",
   },
 ];
 
