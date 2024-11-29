@@ -27,7 +27,25 @@ const ProductDetail = () => {
 
       console.log("Product detail page", product);
     }
-  }, [dispatch, productId]); // Adjust this selector based on your Redux state structure
+  }, [dispatch, productId]);
+
+  // what the hell is happening here????
+  const handleBack = (event) => {
+    event.preventDefault();
+    console.log("Current scroll position:", window.pageYOffset);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    console.log("Scrolled to top");
+
+    setTimeout(() => {
+      history.goBack();
+      console.log("Navigated back");
+    }, 300);
+  };
 
   if (!product) {
     return (
@@ -63,7 +81,7 @@ const ProductDetail = () => {
 
           <Button
             variant="ghost"
-            onClick={() => history.goBack()}
+            onClick={handleBack}
             className="inline-flex items-center gap-1 text-md text-primary-color font-semibold"
           >
             <ChevronRight className="w-4 h-4 rotate-180" />

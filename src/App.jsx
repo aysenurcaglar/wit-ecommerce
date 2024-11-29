@@ -65,6 +65,14 @@ function App() {
     dispatch(fetchCategories());
   }, []);
 
+  useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location.pathname]);
+
   return (
     <div>
       <ToastContainer />

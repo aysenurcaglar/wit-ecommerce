@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 const CardItem = ({ card, isSelected, onEdit, onDelete }) => (
   <div
     className={`relative p-4 rounded-lg border ${
-      isSelected ? "border-primary" : "border-input"
+      isSelected ? "border-slate-800" : "border-slate-200"
     }`}
   >
     <RadioGroupItem

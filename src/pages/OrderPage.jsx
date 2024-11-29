@@ -21,6 +21,14 @@ const OrderPage = () => {
     dispatch(getCards());
   }, [dispatch]);
 
+  const disabled = () => {
+    if (!shippingAddress || !billingAddress) {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <div className="container max-w-[85vw] md:max-w-75vw mx-auto p-4">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -30,7 +38,11 @@ const OrderPage = () => {
               <TabsTrigger className="h-12" value="address">
                 Address Info
               </TabsTrigger>
-              <TabsTrigger className="h-12" value="payment">
+              <TabsTrigger
+                className="h-12"
+                value="payment"
+                disabled={disabled()}
+              >
                 Payment Info
               </TabsTrigger>
             </TabsList>

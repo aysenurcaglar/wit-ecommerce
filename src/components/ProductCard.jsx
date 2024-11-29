@@ -15,6 +15,7 @@ const ProductCard = ({ product, category }) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log("Clicked product:", product.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     history.push(
       `/shop/${category.gender === "k" ? "kadin" : "erkek"}/${createSlug(
         category.title
@@ -37,7 +38,7 @@ const ProductCard = ({ product, category }) => {
 
   return (
     <Card
-      className="border-slate-200 shadow-none overflow-hidden hover:scale-105 cursor-pointer"
+      className="border-slate-200 shadow-none overflow-hidden transition-all hover:scale-105 cursor-pointer"
       onClick={handleClick}
     >
       <CardContent className="p-0">

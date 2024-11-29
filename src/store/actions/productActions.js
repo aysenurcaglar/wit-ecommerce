@@ -93,20 +93,19 @@ export const fetchProducts =
 
 export const updateFilter = (newFilter) => (dispatch) => {
   dispatch(setFilter(newFilter));
-  dispatch(fetchProducts());
+  dispatch(changePage(1));
 };
 
 export const updateSort = (newSort) => (dispatch, getState) => {
   const { category } = getState().product;
   dispatch(setSort(newSort));
-  dispatch(fetchProducts({ sort: newSort, category }));
+  dispatch(changePage(1));
 };
 
 export const updateCategory = (categoryId) => (dispatch) => {
   dispatch(setCategory(categoryId));
   dispatch(setOffset(0));
-  dispatch(setCurrentPage(1));
-  dispatch(fetchProducts({ category: categoryId }));
+  dispatch(changePage(1));
 };
 
 export const fetchProduct = (productId) => async (dispatch) => {

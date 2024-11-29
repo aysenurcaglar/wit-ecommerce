@@ -27,7 +27,7 @@ const EditorsPick = () => {
       {/* Combined Mobile/Desktop Layout */}
       <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-6 gap-4">
         <div
-          className="relative aspect-square md:aspect-auto md:col-span-2 md:row-span-6 h-full  hover:scale-105 cursor-pointer"
+          className="relative aspect-square md:aspect-auto md:col-span-2 md:row-span-6 h-full transition-all hover:scale-105 cursor-pointer"
           onClick={handleCategoryClick}
         >
           <img
@@ -40,7 +40,7 @@ const EditorsPick = () => {
           </h3>
         </div>
         <div
-          className="relative aspect-square md:aspect-auto md:row-span-6 h-full hover:scale-105  cursor-pointer"
+          className="relative aspect-square md:aspect-auto md:row-span-6 h-full transition-all hover:scale-105 cursor-pointer"
           onClick={handleCategoryClick}
         >
           <img
@@ -53,7 +53,7 @@ const EditorsPick = () => {
           </h3>
         </div>
         <div
-          className="relative aspect-square md:row-span-3 hover:scale-105  cursor-pointer"
+          className="relative aspect-square md:row-span-3 transition-all hover:scale-105 cursor-pointer"
           onClick={handleCategoryClick}
         >
           <img
@@ -66,7 +66,7 @@ const EditorsPick = () => {
           </h3>
         </div>
         <div
-          className="relative aspect-square md:row-span-3 hover:scale-105  cursor-pointer"
+          className="relative aspect-square md:row-span-3 transition-all hover:scale-105 cursor-pointer"
           onClick={handleCategoryClick}
         >
           <img

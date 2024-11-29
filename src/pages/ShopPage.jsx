@@ -25,6 +25,7 @@ import {
   updateCategory,
   setFilter,
   initializeShopPage,
+  setCurrentPage,
 } from "../store/actions/productActions";
 
 import BrandLogos from "../components/BrandLogos";
@@ -96,7 +97,7 @@ const ShopPage = () => {
   const debouncedUpdateFilter = useCallback(
     debounce((newFilter) => {
       dispatch(updateFilter(newFilter));
-    }, 500),
+    }, 1000),
     []
   );
 
@@ -112,11 +113,11 @@ const ShopPage = () => {
     console.log("new sorting criterion: ", value);
   };
 
-  if (fetchState === "FETCHING") {
+  if (fetchState === "FETCHING" && productList.length === 0) {
     return <div>Loading...</div>;
   }
 
-  if (fetchState === "FAILED") {
+  if (fetchState === "FAILED" && productList.length === 0) {
     return <div>Error loading data. Please try again.</div>;
   }
 
@@ -142,7 +143,7 @@ const ShopPage = () => {
                   category.title
                 )
               }
-              className="relative overflow-hidden group cursor-pointer hover:scale-105"
+              className="relative overflow-hidden group cursor-pointer transition-all hover:scale-105"
             >
               <CardContent className="p-0">
                 <div className="aspect-square relative">
