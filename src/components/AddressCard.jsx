@@ -8,7 +8,7 @@ function AddressCard({ address, isSelected, onEdit, onDelete, disabled }) {
   return (
     <div
       className={`relative p-4 rounded-lg border ${
-        isSelected ? "border-primary" : "border-input"
+        isSelected ? "border-slate-800" : "border-slate-200"
       } ${disabled ? "opacity-50" : ""}`}
     >
       <div className="flex items-center space-x-2">
